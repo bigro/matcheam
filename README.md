@@ -7,3 +7,7 @@
 Eclipseにインポート
 
 File->Import->General->Exisiring Project
+
+## Spring Boot のブート
+
+`./gradlew bootRun`
