@@ -9,6 +9,7 @@
 .project
 .settings
 .springBeans
+.DS_Store
 
 ### IntelliJ IDEA ###
 .idea
