@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -19,9 +18,9 @@ public class Game {
 
         private Place place = new Place();
 
-        private LocalDateTime startTime;
+        private StartTime startTime = new StartTime();
 
-        private LocalTime gameTime;
+        private GameTime gameTime = new GameTime();
 
         private Enemy enemy = new Enemy();
 
