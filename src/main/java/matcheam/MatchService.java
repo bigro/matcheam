@@ -22,6 +22,10 @@ public class MatchService {
 
 	}
 
+	public Match findOne(String id) {
+		return matchMap.get(id);
+	}
+
 	public Collection<Match> findAll() {
 		return matchMap.values();
 	}

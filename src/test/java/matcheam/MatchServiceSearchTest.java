@@ -20,15 +20,15 @@ public class MatchServiceSearchTest {
 	public void Before() {
 		matchService.matchMap.clear();
 
-		matchService.register(createMatch("1",Level.LEVEL1));
-		matchService.register(createMatch("2",Level.LEVEL1));
-		matchService.register(createMatch("3",Level.LEVEL3));
-		matchService.register(createMatch("4",Level.LEVEL3));
-		matchService.register(createMatch("5",Level.LEVEL3));
-		matchService.register(createMatch("6",Level.LEVEL4));
+		matchService.register(createMatch("1", Level.LEVEL1));
+		matchService.register(createMatch("2", Level.LEVEL1));
+		matchService.register(createMatch("3", Level.LEVEL3));
+		matchService.register(createMatch("4", Level.LEVEL3));
+		matchService.register(createMatch("5", Level.LEVEL3));
+		matchService.register(createMatch("6", Level.LEVEL4));
 	}
 
-	private Match createMatch(String id,Level level) {
+	private Match createMatch(String id, Level level) {
 		LocalDateTime date = LocalDateTime.now();
 		Duration gameTime = Duration.ofHours(2);
 		Match match = new Match();
@@ -39,6 +39,18 @@ public class MatchServiceSearchTest {
 		match.setMaxPlayers(10);
 		match.setLevel(level);
 		return match;
+	}
+
+	@Test
+	public void 指定したIDで絞り混んだ検索ができること() throws Exception {
+		Match actual = matchService.findOne("4");
+		assertThat(actual.getIdentifier().toString()).isEqualTo("4");
+	}
+
+	@Test
+	public void 指定したIDの募集が存在しない場合nullが返ってくること() throws Exception {
+		Match actual = matchService.findOne("X");
+		assertThat(actual).isNull();
 	}
 
 	@Test
@@ -62,7 +74,8 @@ public class MatchServiceSearchTest {
 	@Test
 	public void 全件検索できること() throws Exception {
 		Collection<Match> actual = matchService.findAll();
-		assertThat(actual).hasSize(6).extracting(Match::getLevel).containsOnly(Level.LEVEL1, Level.LEVEL3, Level.LEVEL4);
+		assertThat(actual).hasSize(6).extracting(Match::getLevel).containsOnly(Level.LEVEL1, Level.LEVEL3,
+				Level.LEVEL4);
 	}
 
 }
