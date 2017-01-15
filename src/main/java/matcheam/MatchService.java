@@ -3,6 +3,7 @@ package matcheam;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,11 @@ public class MatchService {
 		return matchMap.values();
 	}
 
-	public Collection<Match> findByLevel(Level level) {
-		return matchMap.values().stream().filter(m -> m.getLevel() == level).collect(Collectors.toList());
+	public Collection<Match> findByLevel(Level... levels) {
+		return findAll().stream().filter(m -> in(levels, m.getLevel())).collect(Collectors.toList());
+	}
+
+	private boolean in(Level[] levels, Level level) {
+		return Stream.of(levels).anyMatch(lvls -> lvls == level);
 	}
 }

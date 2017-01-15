@@ -25,6 +25,7 @@ public class MatchServiceSearchTest {
 		matchService.register(createMatch("3",Level.LEVEL3));
 		matchService.register(createMatch("4",Level.LEVEL3));
 		matchService.register(createMatch("5",Level.LEVEL3));
+		matchService.register(createMatch("6",Level.LEVEL4));
 	}
 
 	private Match createMatch(String id,Level level) {
@@ -41,9 +42,15 @@ public class MatchServiceSearchTest {
 	}
 
 	@Test
-	public void 指定したレベルで絞り混んだ検索ができること() throws Exception {
+	public void 指定したレベル1つで絞り混んだ検索ができること() throws Exception {
 		Collection<Match> actual = matchService.findByLevel(Level.LEVEL3);
 		assertThat(actual).hasSize(3).extracting(Match::getLevel).containsOnly(Level.LEVEL3);
+	}
+
+	@Test
+	public void 指定したレベル2つで絞り混んだ検索ができること() throws Exception {
+		Collection<Match> actual = matchService.findByLevel(Level.LEVEL3, Level.LEVEL4);
+		assertThat(actual).hasSize(4).extracting(Match::getLevel).containsOnly(Level.LEVEL3, Level.LEVEL4);
 	}
 
 	@Test
@@ -55,7 +62,7 @@ public class MatchServiceSearchTest {
 	@Test
 	public void 全件検索できること() throws Exception {
 		Collection<Match> actual = matchService.findAll();
-		assertThat(actual).hasSize(5).extracting(Match::getLevel).containsOnly(Level.LEVEL1, Level.LEVEL3);
+		assertThat(actual).hasSize(6).extracting(Match::getLevel).containsOnly(Level.LEVEL1, Level.LEVEL3, Level.LEVEL4);
 	}
 
 }
