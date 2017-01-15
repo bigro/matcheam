@@ -20,18 +20,18 @@ public class MatchServiceSearchTest {
 	public void Before() {
 		matchService.matchMap.clear();
 
-		matchService.matchMap.put("1", createMatch(Level.LEVEL1));
-		matchService.matchMap.put("2", createMatch(Level.LEVEL1));
-		matchService.matchMap.put("3", createMatch(Level.LEVEL3));
-		matchService.matchMap.put("4", createMatch(Level.LEVEL3));
-		matchService.matchMap.put("5", createMatch(Level.LEVEL3));
+		matchService.register(createMatch("1",Level.LEVEL1));
+		matchService.register(createMatch("2",Level.LEVEL1));
+		matchService.register(createMatch("3",Level.LEVEL3));
+		matchService.register(createMatch("4",Level.LEVEL3));
+		matchService.register(createMatch("5",Level.LEVEL3));
 	}
 
-	private Match createMatch(Level level) {
+	private Match createMatch(String id,Level level) {
 		LocalDateTime date = LocalDateTime.now();
 		Duration gameTime = Duration.ofHours(2);
 		Match match = new Match();
-		match.setIdentifier(new Identifier("1"));
+		match.setIdentifier(new Identifier(id));
 		match.setPlace("場所");
 		match.setDate(date);
 		match.setGameTime(gameTime);
