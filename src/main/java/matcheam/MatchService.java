@@ -1,8 +1,10 @@
 package matcheam;
 
-import org.springframework.stereotype.Service;
-
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+
+import org.springframework.stereotype.Service;
 
 /**
  * Created by ooguro on 2017/01/07.
@@ -18,4 +20,18 @@ public class MatchService {
         matchMap.put(match.getIdentifier().toString(), match);
 
     }
+    
+    public Collection<Match> findAll(){
+    	return matchMap.values();
+    }
+    
+    public Collection<Match> findByLevel(Level level) {
+    	Collection<Match> result = new ArrayList<>();
+		for (Match match : matchMap.values()) {
+			if (level == match.getLevel()) {
+				result.add(match);	
+			}
+		}
+		return result;
+	}
 }
