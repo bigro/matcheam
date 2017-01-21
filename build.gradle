@@ -29,6 +29,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter')
     compile("org.springframework.boot:spring-boot-starter-web")
     compile('org.thymeleaf:thymeleaf-spring4')
+    compile("com.h2database:h2")
+    compile("org.springframework:spring-jdbc")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
     compile('org.projectlombok:lombok:1.16.12')
