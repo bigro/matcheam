@@ -51,7 +51,7 @@ public class MatchController {
 			Collection<Match> matches = matchService.findAll();
 			model.addAttribute("level", "");
 			model.addAttribute("matches", matches);
-			return "matchsearch";
+			return "match/search";
 		}
 		try {
 			Collection<Match> matches = matchService.findByLevel(Level.valueOf(level));
@@ -61,6 +61,6 @@ public class MatchController {
 			model.addAttribute("level", level);
 			model.addAttribute("matches", new ArrayList<Match>());
 		}
-		return "matchsearch";
+		return "match/search";
 	}
 }
