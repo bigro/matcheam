@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>募集検索</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+	<style type="text/css">
+	body {
+		background-color: white;
+		color: black;
+	}
+	thead {
+		border-top: solid 1px black;
+		border-left: solid 1px black;
+		background-color: lightblue;
+	}
+	tbody {
+		border-top: solid 1px black;
+		border-left: solid 1px black;
+	}
+	td,th {
+		border-bottom: solid 1px black;
+		border-right: solid 1px black;
+	}
+	.text {
+		font-size: 16pt;
+	}
+	.input {
+		font-size: 12pt;
+		border:solid 3px black;
+		color: white;
+		background-color: white;
+		width: 300px;
+		height: 22px;
+	}
+	.submitButton {
+		font-size: 12pt;
+		border: solid 3px white;
+		background-color: lightblue;
+		color: black;
+		width: 160px;
+		height: 30px;
+	}
+	</style>
+</head>
+<body>
+<form th:object="${condition}" action="/match/search" method="POST">
+	<h2>募集検索</h2>
+	<p>
+	レベル
+	<input name="level" type="text" size="40" />
+	</p>
+	<input type="submit" value="検索" class="submitButton" />
+</form>
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>開始日時</th>
+			<th>試合時間</th>
+			<th>レベル</th>
+			<th>最大人数</th>
+			<th>場所</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="match : ${matches}">
+			<td><span th:text="${match.identifier}"></span></td>
+			<td><span th:text="${match.date}"></span></td>
+			<td><span th:text="${match.gameTime}"></span></td>
+			<td><span th:text="${match.level}"></span></td>
+			<td><span th:text="${match.maxPlayers}"></span></td>
+			<td><span th:text="${match.place}"></span></td>
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>
