@@ -8,12 +8,12 @@ import java.time.LocalDateTime;
 @Data
 public class Match {
 
-    Identifier identifier;
+    private Identifier identifier;
 
-    String place;
-    LocalDateTime date;
-    Duration gameTime;
-    Level level;
-    long maxPlayers;
-
+    private String place;
+    private LocalDateTime date;
+    private Duration gameTime;
+    private Level level;
+    private long maxPlayers;
+    
 }
