@@ -1,5 +1,6 @@
 package matcheam;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.stereotype.Controller;
@@ -30,11 +31,14 @@ public class MatchSearchController {
 			model.addAttribute("matches", matches);
 			return "matchsearch";
 		}
-		Level levels = Level.valueOf(level);
-		Collection<Match> matches = matchService.findByLevel(levels);
-		model.addAttribute("level", level);
-		model.addAttribute("matches", matches);
-
+		try {
+			Collection<Match> matches = matchService.findByLevel(Level.valueOf(level));
+			model.addAttribute("level", level);
+			model.addAttribute("matches", matches);
+		} catch (IllegalArgumentException e) {
+			model.addAttribute("level", level);
+			model.addAttribute("matches", new ArrayList<Match>());
+		}
 		return "matchsearch";
 	}
 }
