@@ -34,7 +34,7 @@
 	}
 	.submitButton {
 		font-size: 12pt;
-		border: solid 3px white;
+		border: solid 3px black;
 		background-color: lightblue;
 		color: black;
 		width: 160px;
@@ -49,7 +49,9 @@
 	レベル
 	<input name="level" type="text" size="40" />
 	</p>
+	<p>
 	<input type="submit" value="検索" class="submitButton" />
+	</p>
 </form>
 <table>
 	<thead>
@@ -63,13 +65,13 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr th:each="match : ${matches}">
-			<td><span th:text="${match.identifier}"></span></td>
-			<td><span th:text="${match.date}"></span></td>
-			<td><span th:text="${match.gameTime}"></span></td>
-			<td><span th:text="${match.level}"></span></td>
-			<td><span th:text="${match.maxPlayers}"></span></td>
-			<td><span th:text="${match.place}"></span></td>
+		<tr th:each="match : ${matches}" th:object="${match}">
+			<td><span th:text="*{identifier}"></span></td>
+			<td><span th:text="*{date}"></span></td>
+			<td><span th:text="*{gameTime}"></span></td>
+			<td><span th:text="*{level}"></span></td>
+			<td><span th:text="*{maxPlayers}"></span></td>
+			<td><span th:text="*{place}"></span></td>
 		</tr>
 	</tbody>
 </table>
