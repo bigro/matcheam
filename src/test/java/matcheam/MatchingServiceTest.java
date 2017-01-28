@@ -22,7 +22,9 @@ public class MatchingServiceTest {
         entryUser.setName("名前");
         matchingService.apply(entryUser, match);
 
-        assertThat(matchingService.matchingMap).hasSize(1);
+        Matching actual = matchingService.findOne(match);
+        assertThat(actual.getMatch()).isEqualTo(match);
+        assertThat(actual.getEntryUsers().get(0).getName()).isEqualTo("名前");
     }
 
     private Match match(Identifier identifier) {
