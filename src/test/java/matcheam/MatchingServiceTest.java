@@ -24,7 +24,9 @@ public class MatchingServiceTest {
 
         Matching actual = matchingService.findOne(match);
         assertThat(actual.getMatch()).isEqualTo(match);
-        assertThat(actual.getEntryUsers().get(0).getName()).isEqualTo("名前");
+        assertThat(actual.getEntryUsers())
+                .extracting(EntryUser::getName)
+                .contains("名前");
     }
 
     private Match match(Identifier identifier) {
