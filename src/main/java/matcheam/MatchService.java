@@ -17,6 +17,8 @@ public class MatchService {
 
     // TODO 永続化する
     public HashMap<String, Match> matchMap = new HashMap<>();
+    public HashMap<String, EntryUser> entryUserHashMap = new HashMap<>();
+
 
 	public MatchService() {
 		before();
