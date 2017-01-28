@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<meta charset="utf-8" />
 	<title>募集検索</title>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
 	<style type="text/css">
 	body {
 		background-color: white;
 		color: black;
+		width: 90%;
+		margin: 0 auto;
 	}
 	thead {
 		border-top: solid 1px black;
@@ -16,6 +19,13 @@
 	tbody {
 		border-top: solid 1px black;
 		border-left: solid 1px black;
+	}
+	.clickable {
+		cursor:pointer;
+	}
+	.clickable:hover    {
+		color:#fff;
+		background:#00bfff;
 	}
 	td,th {
 		border-bottom: solid 1px black;
@@ -68,7 +78,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr th:each="match : ${matches}" th:object="${match}">
+		<tr class="memberList" data-href="detail.html" th:each="match : ${matches}" th:object="${match}">
 			<td><span th:text="*{identifier}"></span></td>
 			<td class="date"><span th:text="*{#temporals.format(date, 'yyyy/MM/dd HH:mm:ss')}"></span></td>
 			<td class="number"><span th:text="*{gameTime.toMinutes()}"></span>分</td>
@@ -78,5 +88,22 @@
 		</tr>
 	</tbody>
 </table>
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+	jQuery( function($) {
+		$('tbody tr[data-href]').addClass('clickable').click( function() {
+			window.location = $(this).attr('data-href');
+		}).hover( function() {
+			$(this).parents('tr.memberList').unbind('click');
+		}, function() {
+			$(this).parents('tr').click( function() {
+				window.location = $(this).attr('data-href');
+			});
+		});
+	});
+</script>
 </body>
 </html>
