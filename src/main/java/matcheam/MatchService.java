@@ -50,6 +50,7 @@ public class MatchService {
             }
         }
         matching.entry(entryUser);
+        matchingMap.put(matching.getIdentifier().toString(), matching);
     }
 
     private boolean in(Level[] levels, Level level) {

@@ -1,5 +1,7 @@
 package matcheam;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -7,6 +9,7 @@ import java.util.UUID;
 /**
  * Created by ooguro on 2017/01/28.
  */
+@Getter
 public class Matching {
 
     private Identifier identifier = new Identifier(UUID.randomUUID().toString());
@@ -19,13 +22,5 @@ public class Matching {
 
     public void entry(EntryUser entryUser) {
         entryUsers.add(entryUser);
-    }
-
-    public List<EntryUser> getEntryUsers() {
-        return entryUsers;
-    }
-
-    public Match getMatch() {
-        return match;
     }
 }
