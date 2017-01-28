@@ -18,6 +18,12 @@ public class MatchController {
     @Autowired
     MatchService matchService;
 
+    @Autowired
+    MatchingService matchingService;
+
+    @Autowired
+    EntryUserService entryUserService;
+
     @ModelAttribute("match")
     Match match() {
         return new Match();
@@ -56,5 +62,13 @@ public class MatchController {
             model.addAttribute("matches", new ArrayList<Match>());
         }
         return "match/search";
+    }
+
+    @PostMapping(value = "{id}/matching")
+    public String matching(@ModelAttribute("userName") String name, @PathVariable String id) {
+        Match match = matchService.findOne(id);
+        EntryUser entryUser = new EntryUser(name);
+        matchingService.apply(match, entryUser);
+        return "/match/detail/" + name;
     }
 }

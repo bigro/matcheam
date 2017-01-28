@@ -20,7 +20,7 @@ public class MatchingServiceTest {
         EntryUser entryUser = new EntryUser();
         entryUser.setIdentifier(new Identifier("1"));
         entryUser.setName("名前");
-        matchingService.apply(entryUser, match);
+        matchingService.apply(match, entryUser);
 
         Matching actual = matchingService.findOne(match);
         assertThat(actual.getMatch()).isEqualTo(match);

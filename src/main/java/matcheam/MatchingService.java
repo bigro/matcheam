@@ -14,7 +14,7 @@ public class MatchingService {
     public HashMap<String, Matching> matchingMap = new HashMap<>();
 
 
-    public void apply(EntryUser entryUser, Match match) {
+    public void apply(Match match, EntryUser entryUser) {
         Matching matching = new Matching(match);
         for (Matching m : matchingMap.values()) {
             if (m.getMatch().equals(match)) {
