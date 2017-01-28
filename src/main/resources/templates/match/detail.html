@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<title>detail</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+	<style type="text/css">
+	body {
+		background-color: white;
+		color: black;
+		width: 90%;
+		margin: 0 auto;
+	}
+
+	table {
+		margin-bottom: 35px;
+	}
+	thead {
+		border-top: solid 1px black;
+		border-left: solid 1px black;
+		background-color: lightblue;
+	}
+	tbody {
+		border-top: solid 1px black;
+		border-left: solid 1px black;
+	}
+	th {
+		background-color: lightblue;
+	}
+	td,th {
+		border-bottom: solid 1px black;
+		border-right: solid 1px black;
+	}
+	.number {
+		text-align:right;
+	}
+	.date {
+		text-align:center;
+	}
+	.input {
+		font-size: 12pt;
+		border:solid 3px black;
+		color: white;
+		background-color: white;
+		width: 300px;
+		height: 22px;
+	}
+	.submitButton {
+		font-size: 12pt;
+		border: solid 3px black;
+		background-color: lightblue;
+		color: black;
+		width: 160px;
+		height: 30px;
+	}
+	</style>
+</head>
+<body>
+	<h2>募集詳細</h2>
+<table>
+	<tbody>
+		<!--ここは一覧画面から渡ってきた情報がそのまま入るよー-->
+		<tr>
+			<th>ID</th>
+			<td><span th:text="*{identifier}"></span></td>
+		</tr>
+		<tr>
+			<th>開始日時</th>
+			<td class="date"><span th:text="*{#temporals.format(date, 'yyyy/MM/dd HH:mm:ss')}"></span></td>
+		</tr>
+		<tr>
+			<th>試合時間</th>
+			<td class="number"><span th:text="*{gameTime.toMinutes()}"></span>分</td>
+		</tr>
+		<tr>
+			<th>レベル</th>
+			<td><span th:text="*{level}"></span></td>
+		</tr>
+		<tr>
+			<th>最大人数</th>
+			<td class="number"><span th:text="*{maxPlayers}"></span></td>
+		</tr>
+		<tr>
+			<th>場所</th>
+			<td><span th:text="*{place}"></span></td>
+		</tr>
+	</tbody>
+</table>
+
+<table>
+	<thead>
+		<tr>
+			<th>参加者名</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<!--ここには一覧のIDにひもづく参加者が渡ってくるはず。登録されただけ繰り返すよー-->
+		<tr>
+			<td>ハントルネームとか懐かしい</td>
+		</tr>
+	</tbody>
+
+</table>
+
+<a href="">一覧に戻る</a>
+
+
+</body>
+</html>
