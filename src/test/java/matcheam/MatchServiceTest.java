@@ -6,8 +6,6 @@ import org.junit.Test;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
-
 /**
  * Created by ooguro on 2017/01/07.
  */
@@ -28,17 +26,6 @@ public class MatchServiceTest {
         softAssertions.assertThat(actual.getDate()).isEqualTo(LocalDateTime.of(2017, 01, 25, 1, 0));
         softAssertions.assertThat(actual.getGameTime()).isEqualTo(Duration.ofHours(2));
         softAssertions.assertAll();
-    }
-
-    @Test
-    public void 募集に対して応募できること() throws Exception {
-        Match match = match(new Identifier("1"));
-        EntryUser entryUser = new EntryUser();
-        entryUser.setIdentifier(new Identifier("1"));
-        entryUser.setName("名前");
-        matchService.apply(entryUser, match);
-
-        assertThat(matchService.matchingMap).hasSize(1);
     }
 
     private Match match(Identifier identifier) {

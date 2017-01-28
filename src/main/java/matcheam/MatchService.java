@@ -17,7 +17,6 @@ public class MatchService {
 
     // TODO 永続化する
     public HashMap<String, Match> matchMap = new HashMap<>();
-    public HashMap<String, Matching> matchingMap = new HashMap<>();
 
 
     public MatchService() {
@@ -39,18 +38,6 @@ public class MatchService {
 
     public Collection<Match> findByLevel(Level... levels) {
         return findAll().stream().filter(m -> in(levels, m.getLevel())).collect(Collectors.toList());
-    }
-
-    public void apply(EntryUser entryUser, Match match) {
-        Matching matching = new Matching(match);
-        for (Matching m : matchingMap.values()) {
-            if (m.getMatch().equals(match)) {
-                matching = m;
-                break;
-            }
-        }
-        matching.entry(entryUser);
-        matchingMap.put(matching.getIdentifier().toString(), matching);
     }
 
     private boolean in(Level[] levels, Level level) {
