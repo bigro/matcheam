@@ -15,14 +15,7 @@ public class MatchServiceTest {
 
     @Test
     public void 募集内容を登録できること() throws Exception {
-        LocalDateTime date = LocalDateTime.now();
-        Duration gameTime = Duration.ofHours(2);
-        Match match = new Match();
-        match.setIdentifier(new Identifier("1"));
-        match.setPlace("場所");
-        match.setDate(date);
-        match.setGameTime(gameTime);
-        match.setMaxPlayers(10);
+        Match match = match(new Identifier("1"));
 
         matchService.register(match);
 
@@ -30,8 +23,23 @@ public class MatchServiceTest {
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(actual.getIdentifier().toString()).isEqualTo("1");
         softAssertions.assertThat(actual.getPlace()).isEqualTo("場所");
-        softAssertions.assertThat(actual.getDate()).isEqualTo(date);
-        softAssertions.assertThat(actual.getGameTime()).isEqualTo(gameTime);
+        softAssertions.assertThat(actual.getDate()).isEqualTo(LocalDateTime.of(2017, 01, 25, 1, 0));
+        softAssertions.assertThat(actual.getGameTime()).isEqualTo(Duration.ofHours(2));
         softAssertions.assertAll();
+    }
+
+    @Test
+    public void 募集に対して応募できること() throws Exception {
+        Match match = new Match();
+    }
+
+    private Match match(Identifier identifier) {
+        Match match = new Match();
+        match.setIdentifier(identifier);
+        match.setPlace("場所");
+        match.setDate(LocalDateTime.of(2017, 01, 25, 1, 0));
+        match.setGameTime(Duration.ofHours(2));
+        match.setMaxPlayers(10);
+        return match;
     }
 }

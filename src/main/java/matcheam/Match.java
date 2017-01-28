@@ -1,11 +1,13 @@
 package matcheam;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Data
+@EqualsAndHashCode
 public class Match {
 
     private Identifier identifier;
@@ -15,5 +17,4 @@ public class Match {
     private Duration gameTime;
     private Level level;
     private long maxPlayers;
-    
 }

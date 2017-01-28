@@ -22,6 +22,5 @@ public class EntryUserServiceTest {
         EntryUser actual = entryUserService.entryUserHashMap.get("1");
         assertThat(actual.getName()).isEqualTo("名前");
         assertThat(actual.getIdentifier().toString()).isEqualTo("1");
-
     }
 }
