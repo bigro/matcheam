@@ -20,9 +20,9 @@ public class MatchingServiceTest {
         EntryUser entryUser = new EntryUser();
         entryUser.setIdentifier(new Identifier("1"));
         entryUser.setName("名前");
-        matchingService.apply(match, entryUser);
+        matchingService.matching(match, entryUser);
 
-        Matching actual = matchingService.findOne(match);
+        Matching actual = matchingService.get(match);
         assertThat(actual.getMatch()).isEqualTo(match);
         assertThat(actual.getEntryUsers())
                 .extracting(EntryUser::getName)

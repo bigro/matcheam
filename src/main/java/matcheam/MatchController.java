@@ -69,7 +69,7 @@ public class MatchController {
     public String matching(Model model, @ModelAttribute("entryName") String name, @PathVariable String matchId) {
         Match match = matchService.findOne(matchId);
         EntryUser entryUser = new EntryUser(name);
-        matchingService.apply(match, entryUser);
+        matchingService.matching(match, entryUser);
         detail(model, matchId);
         return "match/detail";
     }
@@ -78,7 +78,7 @@ public class MatchController {
     public String detail(Model model, @PathVariable String matchId) {
         Match match = matchService.findOne(matchId);
         model.addAttribute(match);
-        Matching matching = matchingService.findOne(match);
+        Matching matching = matchingService.get(match);
         if (matching == null) {
             model.addAttribute("entryUsers", Collections.emptyList());
         } else {
