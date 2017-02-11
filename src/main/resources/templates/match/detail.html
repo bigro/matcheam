@@ -96,8 +96,8 @@
 
 	<tbody>
 		<!--ここには一覧のIDにひもづく参加者が渡ってくるはず。登録されただけ繰り返すよー-->
-		<tr>
-			<td>ハンドルネームとか懐かしい</td>
+		<tr th:each="entryUser : ${entryUsers}">
+			<td><span th:test="*{name}">ハンドルネームとか懐かしい</span></td>
 		</tr>
 	</tbody>
 

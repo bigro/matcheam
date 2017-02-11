@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by ooguro on 2017/01/21.
@@ -76,6 +77,12 @@ public class MatchController {
     public String detail(Model model, @PathVariable String matchId) {
         Match match = matchService.findOne(matchId);
         model.addAttribute(match);
+        Matching matching = matchingService.findOne(match);
+        if (matching == null) {
+            model.addAttribute("entryUsers", Collections.emptyList());
+        } else {
+            model.addAttribute("entryUsers", matching.getEntryUsers());
+        }
         return "match/detail";
     }
 }
