@@ -1,7 +1,6 @@
 package matcheam;
 
-import org.jooq.DSLContext;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -16,9 +15,6 @@ import java.util.stream.Stream;
  */
 @Service
 public class MatchService {
-
-    @Autowired
-    DSLContext dsl;
 
     // TODO 永続化する
     public HashMap<String, Match> matchMap = new HashMap<>();
