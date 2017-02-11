@@ -57,8 +57,12 @@
 </head>
 <body>
 	<h2>募集詳細</h2>
+
+<div>
+<form th:object="${match}" th:action="@{/match/matching/__*{identifier}__}" method="GET">
+
 <table>
-	<tbody th:object="${match}">
+	<tbody>
 		<!--ここは一覧画面から渡ってきた情報がそのまま入るよー-->
 		<tr>
 			<th>ID</th>
@@ -87,6 +91,13 @@
 	</tbody>
 </table>
 
+<input type="text" class="" name="entryName" />
+<input type="submit" value="応募する" />
+</form>
+</div>
+
+<hr />
+
 <table>
 	<thead>
 		<tr>
@@ -97,7 +108,7 @@
 	<tbody>
 		<!--ここには一覧のIDにひもづく参加者が渡ってくるはず。登録されただけ繰り返すよー-->
 		<tr th:each="entryUser : ${entryUsers}">
-			<td><span th:test="*{name}">ハンドルネームとか懐かしい</span></td>
+			<td><span th:text="*{name}">ハンドルネームとか懐かしい</span></td>
 		</tr>
 	</tbody>
 

@@ -65,12 +65,13 @@ public class MatchController {
         return "match/search";
     }
 
-    @GetMapping("{matchId}/matching")
-    public String matching(Model model, @ModelAttribute("userName") String name, @PathVariable String matchId) {
+    @GetMapping("matching/{matchId}")
+    public String matching(Model model, @ModelAttribute("entryName") String name, @PathVariable String matchId) {
         Match match = matchService.findOne(matchId);
         EntryUser entryUser = new EntryUser(name);
         matchingService.apply(match, entryUser);
-        return "forward:detail/" + name;
+        detail(model, matchId);
+        return "match/detail";
     }
 
     @GetMapping("detail/{matchId}")
