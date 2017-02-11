@@ -43,8 +43,6 @@ dependencies {
 
     compile group: 'org.jooq', name: 'jooq'
     compile group: 'org.jooq', name: 'jooq-meta'
-
-    runtime group: 'com.h2database', name: 'h2'
 }
 
 jooq {
