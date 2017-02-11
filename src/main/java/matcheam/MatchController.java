@@ -45,7 +45,7 @@ public class MatchController {
      * @param level レベル
      * @return 表示するテンプレート
      */
-    @RequestMapping(value = "/search")
+    @RequestMapping("/search")
     public String search(Model model, @RequestParam(required = false) String level) {
         if (level == null || level.isEmpty()) {
             Collection<Match> matches = matchService.findAll();
@@ -64,11 +64,18 @@ public class MatchController {
         return "match/search";
     }
 
-    @PostMapping(value = "{id}/matching")
-    public String matching(@ModelAttribute("userName") String name, @PathVariable String id) {
-        Match match = matchService.findOne(id);
+    @GetMapping("{matchId}/matching")
+    public String matching(Model model, @ModelAttribute("userName") String name, @PathVariable String matchId) {
+        Match match = matchService.findOne(matchId);
         EntryUser entryUser = new EntryUser(name);
         matchingService.apply(match, entryUser);
-        return "/match/detail/" + name;
+        return "forward:detail/" + name;
+    }
+
+    @GetMapping("detail/{matchId}")
+    public String detail(Model model, @PathVariable String matchId) {
+        Match match = matchService.findOne(matchId);
+        model.addAttribute(match);
+        return "match/detail";
     }
 }

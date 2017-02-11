@@ -78,8 +78,8 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr class="memberList" data-href="detail.html" th:each="match : ${matches}" th:object="${match}">
-			<td><span th:text="*{identifier}"></span></td>
+		<tr class="memberList" data-href="/match/detail/" th:each="match : ${matches}" th:object="${match}">
+			<td><a th:href="@{'/match/detail/' + *{identifier}}"><span th:text="*{identifier}"></span></a></td>
 			<td class="date"><span th:text="*{#temporals.format(date, 'yyyy/MM/dd HH:mm:ss')}"></span></td>
 			<td class="number"><span th:text="*{gameTime.toMinutes()}"></span>分</td>
 			<td><span th:text="*{level}"></span></td>

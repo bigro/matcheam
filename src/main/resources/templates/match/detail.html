@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8" />
-	<title>detail</title>
+	<title>募集詳細</title>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
 	<style type="text/css">
 	body {
@@ -58,7 +58,7 @@
 <body>
 	<h2>募集詳細</h2>
 <table>
-	<tbody>
+	<tbody th:object="${match}">
 		<!--ここは一覧画面から渡ってきた情報がそのまま入るよー-->
 		<tr>
 			<th>ID</th>
