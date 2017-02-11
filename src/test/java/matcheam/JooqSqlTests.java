@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import static nu.studer.sample.tables.Author.AUTHOR;
+import static matcheam.jooq.generate.Tables.PERSON;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,17 +23,16 @@ public class JooqSqlTests {
     public void insertSelect() {
         String userName = "root";
         String password = "";
-        String url = "jdbc:mysql://localhost:3306/library";
+        String url = "jdbc:mysql://localhost:3306/matcheam";
 
         try (Connection conn = DriverManager.getConnection(url, userName, password)) {
             DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
-            Result<Record> result = create.select().from(AUTHOR).fetch();
+            Result<Record> result = create.select().from(PERSON).fetch();
             for (Record r : result) {
-                Integer id = r.getValue(AUTHOR.ID);
-                String firstName = r.getValue(AUTHOR.FIRST_NAME);
-                String lastName = r.getValue(AUTHOR.LAST_NAME);
+                Integer id = r.getValue(PERSON.ID);
+                String name = r.getValue(PERSON.NAME);
 
-                System.out.println("ID: " + id + " first name: " + firstName + " last name: " + lastName);
+                System.out.println("ID: " + id + " name: " + name);
             }
         }
         // For the sake of this tutorial, let's keep exception handling simple
