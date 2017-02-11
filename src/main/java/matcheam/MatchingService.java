@@ -13,7 +13,6 @@ public class MatchingService {
     // TODO 永続化する
     public HashMap<String, Matching> matchingMap = new HashMap<>();
 
-
     public void apply(Match match, EntryUser entryUser) {
         Matching matching = new Matching(match);
         for (Matching m : matchingMap.values()) {
