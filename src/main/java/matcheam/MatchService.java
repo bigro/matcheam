@@ -1,13 +1,24 @@
 package matcheam;
 
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DSL;
 import org.springframework.stereotype.Service;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static matcheam.jooq.generate.tables.Match.MATCH;
 
 /**
  * Created by ooguro on 2017/01/07.
@@ -32,7 +43,31 @@ public class MatchService {
 	}
 
 	public Collection<Match> findAll() {
-		return matchMap.values();
+		String userName = "sa";
+		String password = "";
+		String url = "jdbc:h2:file:./.data/h2/db;";
+
+		try (Connection conn = DriverManager.getConnection(url, userName, password)) {
+			DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
+			Result<Record> records = create.select().from(MATCH).fetch();
+			List<Match> matches = new ArrayList<>();
+			for (Record record : records) {
+				Match match = new Match();
+				match.setIdentifier(new Identifier(record.get(MATCH.IDENTIFIER)));
+				match.setDate(LocalDateTime.now());
+				match.setGameTime(Duration.ofHours(2L));
+				match.setPlace(record.get(MATCH.PLACE));
+				match.setMaxPlayers(record.get(MATCH.MAXPLAYERS));
+				match.setLevel(Level.valueOf(record.get(MATCH.LEVEL)));
+				matches.add(match);
+			}
+			return matches;
+		}
+		// For the sake of this tutorial, let's keep exception handling simple
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public Collection<Match> findByLevel(Level... levels) {
