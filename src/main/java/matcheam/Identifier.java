@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Identifier {
 
-        private String value;
+	private String value;
 
-        @Override
-        public String toString() {
-                return value;
-        }
+	@Override
+	public String toString() {
+		return value;
+	}
 }

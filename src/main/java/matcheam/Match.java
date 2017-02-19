@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 public class Match {
 
-    private Identifier identifier;
+	private Identifier identifier;
 
-    private String place;
-    private LocalDateTime date;
-    private Duration gameTime;
-    private Level level;
-    private long maxPlayers;
+	private String place;
+	private LocalDateTime date;
+	private Duration gameTime;
+	private Level level;
+	private long maxPlayers;
 }

@@ -12,30 +12,30 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class MatchingServiceTest {
 
-    private MatchingService matchingService = new MatchingService();
+	private MatchingService matchingService = new MatchingService();
 
-    @Test
-    public void 募集に対して応募できること() throws Exception {
-        Match match = match(new Identifier("1"));
-        EntryUser entryUser = new EntryUser();
-        entryUser.setIdentifier(new Identifier("1"));
-        entryUser.setName("名前");
-        matchingService.matching(match, entryUser);
+	@Test
+	public void 募集に対して応募できること() throws Exception {
+		Match match = match(new Identifier("1"));
+		EntryUser entryUser = new EntryUser();
+		entryUser.setIdentifier(new Identifier("1"));
+		entryUser.setName("名前");
+		matchingService.matching(match, entryUser);
 
-        Matching actual = matchingService.get(match);
-        assertThat(actual.getMatch()).isEqualTo(match);
-        assertThat(actual.getEntryUsers())
-                .extracting(EntryUser::getName)
-                .contains("名前");
-    }
+		Matching actual = matchingService.get(match);
+		assertThat(actual.getMatch()).isEqualTo(match);
+		assertThat(actual.getEntryUsers())
+			.extracting(EntryUser::getName)
+			.contains("名前");
+	}
 
-    private Match match(Identifier identifier) {
-        Match match = new Match();
-        match.setIdentifier(identifier);
-        match.setPlace("場所");
-        match.setDate(LocalDateTime.of(2017, 01, 25, 1, 0));
-        match.setGameTime(Duration.ofHours(2));
-        match.setMaxPlayers(10);
-        return match;
-    }
+	private Match match(Identifier identifier) {
+		Match match = new Match();
+		match.setIdentifier(identifier);
+		match.setPlace("場所");
+		match.setDate(LocalDateTime.of(2017, 01, 25, 1, 0));
+		match.setGameTime(Duration.ofHours(2));
+		match.setMaxPlayers(10);
+		return match;
+	}
 }

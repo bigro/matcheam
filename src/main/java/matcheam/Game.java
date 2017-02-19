@@ -14,14 +14,14 @@ import java.time.LocalTime;
 @Getter
 public class Game {
 
-        private Identifier identifier = new Identifier();
+	private Identifier identifier = new Identifier();
 
-        private Place place = new Place();
+	private Place place = new Place();
 
-        private StartTime startTime = new StartTime();
+	private StartTime startTime = new StartTime();
 
-        private GameTime gameTime = new GameTime();
+	private GameTime gameTime = new GameTime();
 
-        private Enemy enemy = new Enemy();
+	private Enemy enemy = new Enemy();
 
 }

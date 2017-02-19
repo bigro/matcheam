@@ -19,26 +19,26 @@ import static matcheam.jooq.generate.Tables.PERSON;
 @SpringBootTest
 public class JooqSqlTests {
 
-    @Test
-    public void insertSelect() {
-        String userName = "root";
-        String password = "";
-        String url = "jdbc:mysql://localhost:3306/matcheam";
+	@Test
+	public void insertSelect() {
+		String userName = "root";
+		String password = "";
+		String url = "jdbc:mysql://localhost:3306/matcheam";
 
-        try (Connection conn = DriverManager.getConnection(url, userName, password)) {
-            DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
-            Result<Record> result = create.select().from(PERSON).fetch();
-            for (Record r : result) {
-                Integer id = r.getValue(PERSON.ID);
-                String name = r.getValue(PERSON.NAME);
+		try (Connection conn = DriverManager.getConnection(url, userName, password)) {
+			DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
+			Result<Record> result = create.select().from(PERSON).fetch();
+			for (Record r : result) {
+				Integer id = r.getValue(PERSON.ID);
+				String name = r.getValue(PERSON.NAME);
 
-                System.out.println("ID: " + id + " name: " + name);
-            }
-        }
-        // For the sake of this tutorial, let's keep exception handling simple
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+				System.out.println("ID: " + id + " name: " + name);
+			}
+		}
+		// For the sake of this tutorial, let's keep exception handling simple
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }

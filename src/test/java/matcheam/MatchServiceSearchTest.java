@@ -75,7 +75,7 @@ public class MatchServiceSearchTest {
 	public void 全件検索できること() throws Exception {
 		Collection<Match> actual = matchService.findAll();
 		assertThat(actual).hasSize(6).extracting(Match::getLevel).containsOnly(Level.LEVEL1, Level.LEVEL3,
-				Level.LEVEL4);
+			Level.LEVEL4);
 	}
 
 }
