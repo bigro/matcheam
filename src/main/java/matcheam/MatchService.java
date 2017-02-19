@@ -1,5 +1,6 @@
 package matcheam;
 
+
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -17,7 +18,6 @@ public class MatchService {
 
     // TODO 永続化する
     public HashMap<String, Match> matchMap = new HashMap<>();
-
 
     public MatchService() {
         before();

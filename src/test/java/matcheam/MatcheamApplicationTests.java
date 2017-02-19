@@ -10,9 +10,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class MatcheamApplicationTests {
 
-	@Test
-	@Ignore
-	public void contextLoads() {
-	}
+    @Test
+    @Ignore
+    public void contextLoads() {
+    }
 
 }
