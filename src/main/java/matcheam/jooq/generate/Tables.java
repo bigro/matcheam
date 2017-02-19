@@ -14,7 +14,7 @@ package matcheam.jooq.generate;
 public class Tables {
 
 	/**
-	 * The table matcheam.person
+	 * The table matcheam.match
 	 */
-	public static final matcheam.jooq.generate.tables.Person PERSON = matcheam.jooq.generate.tables.Person.PERSON;
+	public static final matcheam.jooq.generate.tables.Match MATCH = matcheam.jooq.generate.tables.Match.MATCH;
 }
