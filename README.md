@@ -25,3 +25,7 @@ File->Import->General->Exisiring Project
 
 - jooqのコードジェネレーターコマンド
 `./gradlew generateMatcheamJooqSchemaSource`
+
+## タスク管理
+
+https://waffle.io/bigro/matcheam
