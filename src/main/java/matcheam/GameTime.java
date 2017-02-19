@@ -13,5 +13,5 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Getter
 public class GameTime {
-        private LocalTime value;
+	private LocalTime value;
 }

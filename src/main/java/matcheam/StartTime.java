@@ -14,5 +14,5 @@ import java.time.LocalDateTime;
 @Getter
 public class StartTime {
 
-        private LocalDateTime value;
+	private LocalDateTime value;
 }

@@ -18,29 +18,29 @@ import javax.sql.DataSource;
 @Configuration
 public class JooqSpringBootConfiguration {
 
-    @Bean
-    public DataSourceTransactionManager transactionManager(DataSource dataSource) {
-        return new DataSourceTransactionManager(dataSource);
-    }
+	@Bean
+	public DataSourceTransactionManager transactionManager(DataSource dataSource) {
+		return new DataSourceTransactionManager(dataSource);
+	}
 
-    @Bean
-    public DSLContext dsl(org.jooq.Configuration config) {
-        return new DefaultDSLContext(config);
-    }
+	@Bean
+	public DSLContext dsl(org.jooq.Configuration config) {
+		return new DefaultDSLContext(config);
+	}
 
-    @Bean
-    public ConnectionProvider connectionProvider(DataSource dataSource) {
-        return new DataSourceConnectionProvider(new TransactionAwareDataSourceProxy(dataSource));
-    }
+	@Bean
+	public ConnectionProvider connectionProvider(DataSource dataSource) {
+		return new DataSourceConnectionProvider(new TransactionAwareDataSourceProxy(dataSource));
+	}
 
-    @Bean
-    public org.jooq.Configuration jooqConfig(ConnectionProvider connectionProvider,
-                                             TransactionProvider transactionProvider, ExecuteListenerProvider executeListenerProvider) {
+	@Bean
+	public org.jooq.Configuration jooqConfig(ConnectionProvider connectionProvider,
+		TransactionProvider transactionProvider, ExecuteListenerProvider executeListenerProvider) {
 
-        return new DefaultConfiguration() //
-                .derive(connectionProvider) //
-                .derive(transactionProvider) //
-                .derive(executeListenerProvider) //
-                .derive(SQLDialect.H2);
-    }
+		return new DefaultConfiguration() //
+			.derive(connectionProvider) //
+			.derive(transactionProvider) //
+			.derive(executeListenerProvider) //
+			.derive(SQLDialect.H2);
+	}
 }
