@@ -79,6 +79,7 @@ public class MatchController {
         Match match = matchService.findOne(matchId);
         model.addAttribute(match);
         Matching matching = matchingService.get(match);
+        // TODO 永続化できたら null 考慮しないように修正する
         if (matching == null) {
             model.addAttribute("entryUsers", Collections.emptyList());
         } else {
