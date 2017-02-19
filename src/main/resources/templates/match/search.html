@@ -75,21 +75,21 @@
 			<th>レベル</th>
 			<th>最大人数</th>
 			<th>場所</th>
+			<th>&nbsp;</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr class="memberList" data-href="detail.html" th:each="match : ${matches}" th:object="${match}">
+		<tr class="memberList" data-href="/match/detail/" th:each="match : ${matches}" th:object="${match}">
 			<td><span th:text="*{identifier}"></span></td>
 			<td class="date"><span th:text="*{#temporals.format(date, 'yyyy/MM/dd HH:mm:ss')}"></span></td>
 			<td class="number"><span th:text="*{gameTime.toMinutes()}"></span>分</td>
 			<td><span th:text="*{level}"></span></td>
 			<td class="number"><span th:text="*{maxPlayers}"></span></td>
 			<td><span th:text="*{place}"></span></td>
+			<td><a th:href="@{'/match/detail/' + *{identifier}}">詳細へ</a></td>
 		</tr>
 	</tbody>
 </table>
-
-
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script>

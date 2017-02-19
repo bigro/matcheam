@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by ooguro on 2017/01/21.
@@ -45,7 +46,7 @@ public class MatchController {
      * @param level レベル
      * @return 表示するテンプレート
      */
-    @RequestMapping(value = "/search")
+    @RequestMapping("/search")
     public String search(Model model, @RequestParam(required = false) String level) {
         if (level == null || level.isEmpty()) {
             Collection<Match> matches = matchService.findAll();
@@ -64,11 +65,26 @@ public class MatchController {
         return "match/search";
     }
 
-    @PostMapping(value = "{id}/matching")
-    public String matching(@ModelAttribute("userName") String name, @PathVariable String id) {
-        Match match = matchService.findOne(id);
+    @GetMapping("matching/{matchId}")
+    public String matching(Model model, @ModelAttribute("entryName") String name, @PathVariable String matchId) {
+        Match match = matchService.findOne(matchId);
         EntryUser entryUser = new EntryUser(name);
-        matchingService.apply(match, entryUser);
-        return "/match/detail/" + name;
+        matchingService.matching(match, entryUser);
+        detail(model, matchId);
+        return "match/detail";
+    }
+
+    @GetMapping("detail/{matchId}")
+    public String detail(Model model, @PathVariable String matchId) {
+        Match match = matchService.findOne(matchId);
+        model.addAttribute(match);
+        Matching matching = matchingService.get(match);
+        // TODO 永続化できたら null 考慮しないように修正する
+        if (matching == null) {
+            model.addAttribute("entryUsers", Collections.emptyList());
+        } else {
+            model.addAttribute("entryUsers", matching.getEntryUsers());
+        }
+        return "match/detail";
     }
 }

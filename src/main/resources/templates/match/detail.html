@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8" />
-	<title>detail</title>
+	<title>募集詳細</title>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
 	<style type="text/css">
 	body {
@@ -57,6 +57,10 @@
 </head>
 <body>
 	<h2>募集詳細</h2>
+
+<div>
+<form th:object="${match}" th:action="@{/match/matching/__*{identifier}__}" method="GET">
+
 <table>
 	<tbody>
 		<!--ここは一覧画面から渡ってきた情報がそのまま入るよー-->
@@ -87,6 +91,13 @@
 	</tbody>
 </table>
 
+<input type="text" class="" name="entryName" />
+<input type="submit" value="応募する" />
+</form>
+</div>
+
+<hr />
+
 <table>
 	<thead>
 		<tr>
@@ -96,14 +107,14 @@
 
 	<tbody>
 		<!--ここには一覧のIDにひもづく参加者が渡ってくるはず。登録されただけ繰り返すよー-->
-		<tr>
-			<td>ハンドルネームとか懐かしい</td>
+		<tr th:each="entryUser : ${entryUsers}">
+			<td><span th:text="${entryUser.name}">ハンドルネームとか懐かしい</span></td>
 		</tr>
 	</tbody>
 
 </table>
 
-<a href="">一覧に戻る</a>
+<a href="/match/search">一覧に戻る</a>
 
 </body>
 </html>
