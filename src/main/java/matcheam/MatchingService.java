@@ -32,6 +32,8 @@ public class MatchingService {
                 return matching;
             }
         }
-        throw new NoSuchElementException("Matching exists, but match no exists");
+        return null;
+        // TODO こうすべきか？
+        // throw new NoSuchElementException("Matching exists, but match no exists");
     }
 }
