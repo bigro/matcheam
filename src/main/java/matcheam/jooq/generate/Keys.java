@@ -23,7 +23,6 @@ public class Keys {
 	// UNIQUE and PRIMARY KEY definitions
 	// -------------------------------------------------------------------------
 
-	public static final org.jooq.UniqueKey<matcheam.jooq.generate.tables.records.SchemaVersionRecord> KEY_SCHEMA_VERSION_PRIMARY = UniqueKeys0.KEY_SCHEMA_VERSION_PRIMARY;
 
 	// -------------------------------------------------------------------------
 	// FOREIGN KEY definitions
@@ -33,8 +32,4 @@ public class Keys {
 	// -------------------------------------------------------------------------
 	// [#1459] distribute members to avoid static initialisers > 64kb
 	// -------------------------------------------------------------------------
-
-	private static class UniqueKeys0 extends org.jooq.impl.AbstractKeys {
-		public static final org.jooq.UniqueKey<matcheam.jooq.generate.tables.records.SchemaVersionRecord> KEY_SCHEMA_VERSION_PRIMARY = createUniqueKey(matcheam.jooq.generate.tables.SchemaVersion.SCHEMA_VERSION, matcheam.jooq.generate.tables.SchemaVersion.SCHEMA_VERSION.INSTALLED_RANK);
-	}
 }

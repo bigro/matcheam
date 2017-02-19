@@ -11,31 +11,31 @@ package matcheam.jooq.generate.tables.records;
 @java.lang.SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class PersonRecord extends org.jooq.impl.TableRecordImpl<matcheam.jooq.generate.tables.records.PersonRecord> implements org.jooq.Record2<java.lang.Integer, java.lang.String> {
 
-	private static final long serialVersionUID = -567137960;
+	private static final long serialVersionUID = -976119464;
 
 	/**
-	 * Setter for <code>matcheam.PERSON.ID</code>.
+	 * Setter for <code>matcheam.person.id</code>.
 	 */
 	public void setId(java.lang.Integer value) {
 		setValue(0, value);
 	}
 
 	/**
-	 * Getter for <code>matcheam.PERSON.ID</code>.
+	 * Getter for <code>matcheam.person.id</code>.
 	 */
 	public java.lang.Integer getId() {
 		return (java.lang.Integer) getValue(0);
 	}
 
 	/**
-	 * Setter for <code>matcheam.PERSON.NAME</code>.
+	 * Setter for <code>matcheam.person.name</code>.
 	 */
 	public void setName(java.lang.String value) {
 		setValue(1, value);
 	}
 
 	/**
-	 * Getter for <code>matcheam.PERSON.NAME</code>.
+	 * Getter for <code>matcheam.person.name</code>.
 	 */
 	public java.lang.String getName() {
 		return (java.lang.String) getValue(1);

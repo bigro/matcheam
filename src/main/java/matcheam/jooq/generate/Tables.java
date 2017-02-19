@@ -14,12 +14,7 @@ package matcheam.jooq.generate;
 public class Tables {
 
 	/**
-	 * The table matcheam.PERSON
+	 * The table matcheam.person
 	 */
 	public static final matcheam.jooq.generate.tables.Person PERSON = matcheam.jooq.generate.tables.Person.PERSON;
-
-	/**
-	 * The table matcheam.schema_version
-	 */
-	public static final matcheam.jooq.generate.tables.SchemaVersion SCHEMA_VERSION = matcheam.jooq.generate.tables.SchemaVersion.SCHEMA_VERSION;
 }

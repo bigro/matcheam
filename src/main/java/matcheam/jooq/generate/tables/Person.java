@@ -11,10 +11,10 @@ package matcheam.jooq.generate.tables;
 @java.lang.SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Person extends org.jooq.impl.TableImpl<matcheam.jooq.generate.tables.records.PersonRecord> {
 
-	private static final long serialVersionUID = -384812297;
+	private static final long serialVersionUID = -1204899081;
 
 	/**
-	 * The singleton instance of <code>matcheam.PERSON</code>
+	 * The singleton instance of <code>matcheam.person</code>
 	 */
 	public static final matcheam.jooq.generate.tables.Person PERSON = new matcheam.jooq.generate.tables.Person();
 
@@ -27,24 +27,24 @@ public class Person extends org.jooq.impl.TableImpl<matcheam.jooq.generate.table
 	}
 
 	/**
-	 * The column <code>matcheam.PERSON.ID</code>.
+	 * The column <code>matcheam.person.id</code>.
 	 */
-	public final org.jooq.TableField<matcheam.jooq.generate.tables.records.PersonRecord, java.lang.Integer> ID = createField("ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+	public final org.jooq.TableField<matcheam.jooq.generate.tables.records.PersonRecord, java.lang.Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
 	/**
-	 * The column <code>matcheam.PERSON.NAME</code>.
+	 * The column <code>matcheam.person.name</code>.
 	 */
-	public final org.jooq.TableField<matcheam.jooq.generate.tables.records.PersonRecord, java.lang.String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
+	public final org.jooq.TableField<matcheam.jooq.generate.tables.records.PersonRecord, java.lang.String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
 
 	/**
-	 * Create a <code>matcheam.PERSON</code> table reference
+	 * Create a <code>matcheam.person</code> table reference
 	 */
 	public Person() {
-		this("PERSON", null);
+		this("person", null);
 	}
 
 	/**
-	 * Create an aliased <code>matcheam.PERSON</code> table reference
+	 * Create an aliased <code>matcheam.person</code> table reference
 	 */
 	public Person(java.lang.String alias) {
 		this(alias, matcheam.jooq.generate.tables.Person.PERSON);
