@@ -7,6 +7,7 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.time.Duration;
@@ -54,6 +55,7 @@ public class MatchService {
 			for (Record record : records) {
 				Match match = new Match();
 				match.setIdentifier(new Identifier(record.get(MATCH.IDENTIFIER)));
+				//TODO DATE型の取り方わからない
 				match.setDate(LocalDateTime.now());
 				match.setGameTime(Duration.ofHours(2L));
 				match.setPlace(record.get(MATCH.PLACE));
@@ -95,7 +97,7 @@ public class MatchService {
 		match.setPlace("場所");
 		match.setDate(date);
 		match.setGameTime(gameTime);
-		match.setMaxPlayers(10);
+		match.setMaxPlayers(BigDecimal.TEN);
 		match.setLevel(level);
 		return match;
 	}

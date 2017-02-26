@@ -3,6 +3,7 @@ package matcheam;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -16,5 +17,5 @@ public class Match {
 	private LocalDateTime date;
 	private Duration gameTime;
 	private Level level;
-	private long maxPlayers;
+	private BigDecimal maxPlayers;
 }

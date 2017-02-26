@@ -4,5 +4,5 @@ create table matcheam.match (
     date DATETIME　not null,
     gameTime TIME not null,
     level varchar(100) not null,
-    maxPlayers int
+    maxPlayers DECIMAL(100)
 );
