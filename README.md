@@ -29,3 +29,8 @@ File->Import->General->Exisiring Project
 ## タスク管理
 
 https://waffle.io/bigro/matcheam
+
+## waffle.ioの使い方
+
+https://blog.yohei.org/github-kanban-waffle-io/
+https://github.com/waffleio/waffle.io
