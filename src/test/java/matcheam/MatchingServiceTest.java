@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,8 +39,8 @@ public class MatchingServiceTest {
 		Match match = new Match();
 		match.setIdentifier(identifier);
 		match.setPlace("場所");
-		match.setDate(LocalDateTime.of(2017, 01, 25, 1, 0));
-		match.setGameTime(Duration.ofHours(2));
+		match.setDate(LocalDate.of(2017, 1, 25));
+		match.setTime(Duration.ofHours(2));
 		match.setMaxPlayers(BigDecimal.TEN);
 		return match;
 	}

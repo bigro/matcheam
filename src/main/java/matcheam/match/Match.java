@@ -2,15 +2,16 @@ package matcheam.match;
 
 import java.math.BigDecimal;
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Match {
 
     private Identifier identifier;
 
     private String place;
-    private LocalDateTime date;
-    private Duration gameTime;
+    private LocalDate date;
+    private String start;
+    private Duration time;
     private Level level;
     private BigDecimal maxPlayers;
 
@@ -22,12 +23,12 @@ public class Match {
         return place;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public Duration getGameTime() {
-        return gameTime;
+    public Duration getTime() {
+        return time;
     }
 
     public Level getLevel() {
@@ -42,7 +43,7 @@ public class Match {
         this.identifier = identifier;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -50,8 +51,8 @@ public class Match {
         this.place = place;
     }
 
-    public void setGameTime(Duration gameTime) {
-        this.gameTime = gameTime;
+    public void setTime(Duration time) {
+        this.time = time;
     }
 
     public void setLevel(Level level) {
@@ -60,5 +61,13 @@ public class Match {
 
     public void setMaxPlayers(BigDecimal maxPlayers) {
         this.maxPlayers = maxPlayers;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
     }
 }
