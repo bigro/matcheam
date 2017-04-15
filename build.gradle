@@ -48,8 +48,6 @@ dependencies {
     compile("mysql:mysql-connector-java")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
-    compile('org.projectlombok:lombok:1.16.12')
-
     compile group: 'org.jooq', name: 'jooq', version: '3.9.1'
     compile group: 'org.jooq', name: 'jooq-meta', version: '3.9.1'
 

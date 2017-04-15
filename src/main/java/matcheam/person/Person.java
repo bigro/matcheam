@@ -1,22 +1,37 @@
 package matcheam.person;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import matcheam.match.Identifier;
 import sun.security.provider.DSAPublicKeyImpl;
 
 import java.util.UUID;
 
-@Data
-@NoArgsConstructor
 public class Person {
 
-	private Identifier identifier;
+    private Identifier identifier;
 
-	private String name;
+    private String name;
 
-	public Person(String name) {
-		this.identifier = new Identifier(UUID.randomUUID().toString());
-		this.name = name;
-	}
+    public Person() {
+    }
+
+    public Person(String name) {
+        this.identifier = new Identifier(UUID.randomUUID().toString());
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Identifier getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(Identifier identifier) {
+        this.identifier = identifier;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
