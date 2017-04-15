@@ -1,5 +1,10 @@
 package matcheam;
 
+import matcheam.match.Identifier;
+import matcheam.match.Match;
+import matcheam.matching.Matching;
+import matcheam.matching.MatchingService;
+import matcheam.person.Person;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -18,7 +23,7 @@ public class MatchingServiceTest {
 	@Test
 	public void 募集に対して応募できること() throws Exception {
 		Match match = match(new Identifier("1"));
-		EntryUser entryUser = new EntryUser();
+		Person entryUser = new Person();
 		entryUser.setIdentifier(new Identifier("1"));
 		entryUser.setName("名前");
 		matchingService.matching(match, entryUser);
@@ -26,7 +31,7 @@ public class MatchingServiceTest {
 		Matching actual = matchingService.get(match);
 		assertThat(actual.getMatch()).isEqualTo(match);
 		assertThat(actual.getEntryUsers())
-			.extracting(EntryUser::getName)
+			.extracting(Person::getName)
 			.contains("名前");
 	}
 

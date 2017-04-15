@@ -1,4 +1,4 @@
-package matcheam;
+package matcheam.match;
 
 public enum Level {
 	LEVEL1,

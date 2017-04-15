@@ -1,4 +1,4 @@
-package matcheam;
+package matcheam.match;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
  */
 @NoArgsConstructor
 @AllArgsConstructor
-public class Place {
+public class Identifier {
 
 	private String value;
 
@@ -16,5 +16,4 @@ public class Place {
 	public String toString() {
 		return value;
 	}
-
 }

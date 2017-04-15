@@ -1,5 +1,8 @@
-package matcheam;
+package matcheam.match;
 
+import matcheam.match.Identifier;
+import matcheam.match.Level;
+import matcheam.match.Match;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Result;

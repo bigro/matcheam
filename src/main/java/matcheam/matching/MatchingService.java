@@ -1,9 +1,10 @@
-package matcheam;
+package matcheam.matching;
 
+import matcheam.person.Person;
+import matcheam.match.Match;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.NoSuchElementException;
 
 /**
  * Created by ooguro on 2017/01/07.
@@ -14,7 +15,7 @@ public class MatchingService {
 	// TODO 永続化する
 	public HashMap<String, Matching> matchingMap = new HashMap<>();
 
-	public void matching(Match match, EntryUser entryUser) {
+	public void matching(Match match, Person entryUser) {
 		Matching matching = new Matching(match);
 		for (Matching m : matchingMap.values()) {
 			if (m.getMatch().equals(match)) {

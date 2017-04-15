@@ -1,5 +1,9 @@
 package matcheam;
 
+import matcheam.match.Identifier;
+import matcheam.match.Level;
+import matcheam.match.Match;
+import matcheam.match.MatchService;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

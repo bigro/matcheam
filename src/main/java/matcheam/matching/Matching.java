@@ -1,6 +1,9 @@
-package matcheam;
+package matcheam.matching;
 
 import lombok.Getter;
+import matcheam.person.Person;
+import matcheam.match.Identifier;
+import matcheam.match.Match;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,13 +17,13 @@ public class Matching {
 
 	private Identifier identifier = new Identifier(UUID.randomUUID().toString());
 	private Match match;
-	private List<EntryUser> entryUsers = new ArrayList<>();
+	private List<Person> entryUsers = new ArrayList<>();
 
 	public Matching(Match match) {
 		this.match = match;
 	}
 
-	public void entry(EntryUser entryUser) {
+	public void entry(Person entryUser) {
 		entryUsers.add(entryUser);
 	}
 }

@@ -1,5 +1,8 @@
 package matcheam;
 
+import matcheam.match.Identifier;
+import matcheam.match.Match;
+import matcheam.match.MatchService;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 

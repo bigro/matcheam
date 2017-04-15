@@ -1,4 +1,4 @@
-package matcheam;
+package matcheam.match;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
