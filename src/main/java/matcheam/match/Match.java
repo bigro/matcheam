@@ -1,7 +1,8 @@
 package matcheam.match;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.time.LocalDate;
 
 public class Match {
@@ -9,9 +10,10 @@ public class Match {
     private Identifier identifier;
 
     private String place;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
     private String start;
-    private Duration time;
+    private String time;
     private Level level;
     private BigDecimal maxPlayers;
 
@@ -27,7 +29,7 @@ public class Match {
         return date;
     }
 
-    public Duration getTime() {
+    public String getTime() {
         return time;
     }
 
@@ -51,7 +53,7 @@ public class Match {
         this.place = place;
     }
 
-    public void setTime(Duration time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

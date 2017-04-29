@@ -16,6 +16,7 @@
                     <input class="form-control"
                            placeholder="1" th:field="*{identifier}"/>
                 </div>
+                <span th:if="${#fields.hasErrors('identifier')}" class="text-danger" th:errors="*{identifier}">Error</span>
             </div>
         </div>
 
@@ -24,6 +25,7 @@
             <div class="col-xs-3">
                 <input class="form-control" th:field="*{place}"/>
             </div>
+            <span th:if="${#fields.hasErrors('place')}" class="text-danger" th:errors="*{place}">Error</span>
         </div>
 
         <div class="form-group">
@@ -31,12 +33,14 @@
             <div class="col-xs-3">
                 <input type="date" class="form-control" th:field="*{date}"/>
             </div>
+            <span th:if="${#fields.hasErrors('date')}" class="text-danger" th:errors="*{date}">Error</span>
         </div>
         <div class="form-group">
             <label class="col-xs-2 control-label" for="start">開始時間</label>
             <div class="col-xs-3">
                 <input type="text" class="form-control" th:field="*{start}"/>
             </div>
+            <span th:if="${#fields.hasErrors('start')}" class="text-danger" th:errors="*{start}">Error</span>
         </div>
 
         <div class="form-group">
@@ -44,6 +48,7 @@
             <div class="col-xs-3">
                 <input class="form-control" th:field="*{time}"/>
             </div>
+            <span th:if="${#fields.hasErrors('time')}" class="text-danger" th:errors="*{time}">Error</span>
         </div>
 
         <div class="form-group">
@@ -51,6 +56,7 @@
             <div class="col-xs-3">
                 <input class="form-control" th:field="*{level}"/>
             </div>
+            <span th:if="${#fields.hasErrors('level')}" class="text-danger" th:errors="*{level}">Error</span>
         </div>
 
         <div class="form-group">
@@ -58,6 +64,7 @@
             <div class="col-xs-3">
                 <input class="form-control" th:field="*{maxPlayers}"/>
             </div>
+            <span th:if="${#fields.hasErrors('maxPlayers')}" class="text-danger" th:errors="*{maxPlayers}">Error</span>
         </div>
 
         <div class="form-group">
