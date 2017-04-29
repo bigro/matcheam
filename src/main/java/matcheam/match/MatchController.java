@@ -36,11 +36,14 @@ public class MatchController {
 
 	@GetMapping("register")
 	String show() {
-		return "/match/entry";
+		return "/match/register";
 	}
 
 	@PostMapping("result")
 	String execute(@ModelAttribute("match") Match match, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return show();
+		}
 		matchService.register(match);
 		return "/match/result";
 	}
