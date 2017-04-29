@@ -1,5 +1,9 @@
-package matcheam;
+package matcheam.match;
 
+import matcheam.matching.Matching;
+import matcheam.matching.MatchingService;
+import matcheam.person.Person;
+import matcheam.person.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +27,7 @@ public class MatchController {
 	MatchingService matchingService;
 
 	@Autowired
-	EntryUserService entryUserService;
+	PersonService entryUserService;
 
 	@ModelAttribute("match")
 	Match match() {
@@ -37,6 +41,9 @@ public class MatchController {
 
 	@PostMapping("result")
 	String execute(@ModelAttribute("match") Match match, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return show();
+		}
 		matchService.register(match);
 		return "/match/result";
 	}
@@ -68,7 +75,7 @@ public class MatchController {
 	@GetMapping("matching/{matchId}")
 	public String matching(Model model, @ModelAttribute("entryName") String name, @PathVariable String matchId) {
 		Match match = matchService.findOne(matchId);
-		EntryUser entryUser = new EntryUser(name);
+		Person entryUser = new Person(name);
 		matchingService.matching(match, entryUser);
 		detail(model, matchId);
 		return "match/detail";

@@ -1,4 +1,4 @@
-package matcheam;
+package matcheam.match;
 
 /**
  * Created by ooguro on 2017/01/07.

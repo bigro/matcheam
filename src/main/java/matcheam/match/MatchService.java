@@ -1,4 +1,4 @@
-package matcheam;
+package matcheam.match;
 
 import org.jooq.DSLContext;
 import org.jooq.Record;
@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -56,8 +55,8 @@ public class MatchService {
 				Match match = new Match();
 				match.setIdentifier(new Identifier(record.get(MATCH.IDENTIFIER)));
 				//TODO DATE型の取り方わからない
-				match.setDate(LocalDateTime.now());
-				match.setGameTime(Duration.ofHours(2L));
+				match.setDate(LocalDate.now());
+				match.setTime("2時間");
 				match.setPlace(record.get(MATCH.PLACE));
 				match.setMaxPlayers(record.get(MATCH.MAXPLAYERS));
 				match.setLevel(Level.valueOf(record.get(MATCH.LEVEL)));
@@ -90,13 +89,12 @@ public class MatchService {
 	}
 
 	private Match createMatch(String id, Level level) {
-		LocalDateTime date = LocalDateTime.now();
-		Duration gameTime = Duration.ofHours(2);
+		LocalDate date = LocalDate.now();
 		Match match = new Match();
 		match.setIdentifier(new Identifier(id));
 		match.setPlace("場所");
 		match.setDate(date);
-		match.setGameTime(gameTime);
+		match.setTime("2時間");
 		match.setMaxPlayers(BigDecimal.TEN);
 		match.setLevel(level);
 		return match;

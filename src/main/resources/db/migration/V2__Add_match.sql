@@ -1,5 +1,5 @@
 insert into matcheam.match
-(identifier, place, date, gameTime, level, maxPlayers)
+(identifier, place, date, time, level, maxPlayers)
  values
 ('test1', '宝塚CABO', '2017-01-20 21:00:00', '02:00:00', 'LEVEL1', '20'),
 ('test2', 'つかしん', '2017-01-25 21:30:00', '02:00:00', 'LEVEL2', '15'),

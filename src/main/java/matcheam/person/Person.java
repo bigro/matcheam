@@ -1,18 +1,20 @@
-package matcheam;
+package matcheam.person;
+
+import matcheam.match.Identifier;
+import sun.security.provider.DSAPublicKeyImpl;
 
 import java.util.UUID;
 
-
-public class EntryUser {
+public class Person {
 
     private Identifier identifier;
 
-    public EntryUser() {
-    }
-
     private String name;
 
-    EntryUser(String name) {
+    public Person() {
+    }
+
+    public Person(String name) {
         this.identifier = new Identifier(UUID.randomUUID().toString());
         this.name = name;
     }

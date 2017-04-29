@@ -1,12 +1,15 @@
 package matcheam;
 
+import matcheam.match.Identifier;
+import matcheam.match.Level;
+import matcheam.match.Match;
+import matcheam.match.MatchService;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Collection;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,13 +34,12 @@ public class MatchServiceSearchTest {
 	}
 
 	private Match createMatch(String id, Level level) {
-		LocalDateTime date = LocalDateTime.now();
-		Duration gameTime = Duration.ofHours(2);
+		LocalDate date = LocalDate.now();
 		Match match = new Match();
 		match.setIdentifier(new Identifier(id));
 		match.setPlace("場所");
 		match.setDate(date);
-		match.setGameTime(gameTime);
+		match.setTime("2時間");
 		match.setMaxPlayers(BigDecimal.TEN);
 		match.setLevel(level);
 		return match;
