@@ -6,6 +6,13 @@ package matcheam.jooq.generate;
 
 import javax.annotation.Generated;
 
+import matcheam.jooq.generate.tables.Match;
+import matcheam.jooq.generate.tables.records.MatchRecord;
+
+import org.jooq.Identity;
+import org.jooq.UniqueKey;
+import org.jooq.impl.AbstractKeys;
+
 
 /**
  * A class modelling foreign key relationships between tables of the <code>matcheam</code> 
@@ -25,11 +32,13 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
+    public static final Identity<MatchRecord, String> IDENTITY_MATCH = Identities0.IDENTITY_MATCH;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<MatchRecord> CONSTRAINT_4 = UniqueKeys0.CONSTRAINT_4;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -39,4 +48,12 @@ public class Keys {
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
+
+    private static class Identities0 extends AbstractKeys {
+        public static Identity<MatchRecord, String> IDENTITY_MATCH = createIdentity(Match.MATCH, Match.MATCH.IDENTIFIER);
+    }
+
+    private static class UniqueKeys0 extends AbstractKeys {
+        public static final UniqueKey<MatchRecord> CONSTRAINT_4 = createUniqueKey(Match.MATCH, "constraint_4", Match.MATCH.IDENTIFIER);
+    }
 }

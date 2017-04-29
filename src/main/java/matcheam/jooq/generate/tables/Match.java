@@ -5,18 +5,22 @@ package matcheam.jooq.generate.tables;
 
 
 import java.math.BigDecimal;
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.sql.Date;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.Generated;
 
+import matcheam.jooq.generate.Keys;
 import matcheam.jooq.generate.Matcheam;
 import matcheam.jooq.generate.tables.records.MatchRecord;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
+import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
 
 
@@ -33,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Match extends TableImpl<MatchRecord> {
 
-    private static final long serialVersionUID = 1407851259;
+    private static final long serialVersionUID = -1982080800;
 
     /**
      * The reference instance of <code>matcheam.match</code>
@@ -51,27 +55,32 @@ public class Match extends TableImpl<MatchRecord> {
     /**
      * The column <code>matcheam.match.identifier</code>.
      */
-    public final TableField<MatchRecord, String> IDENTIFIER = createField("identifier", org.jooq.impl.SQLDataType.VARCHAR.length(256).nullable(false), this, "");
+    public final TableField<MatchRecord, String> IDENTIFIER = createField("identifier", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false).defaultValue(org.jooq.impl.DSL.field("(NEXT VALUE FOR MATCHEAM.SYSTEM_SEQUENCE_9080C586_8F83_4880_830E_66F629E14A56)", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
      * The column <code>matcheam.match.place</code>.
      */
-    public final TableField<MatchRecord, String> PLACE = createField("place", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
+    public final TableField<MatchRecord, String> PLACE = createField("place", org.jooq.impl.SQLDataType.VARCHAR.length(100), this, "");
 
     /**
      * The column <code>matcheam.match.date</code>.
      */
-    public final TableField<MatchRecord, Timestamp> DATE = createField("date", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "");
+    public final TableField<MatchRecord, Date> DATE = createField("date", org.jooq.impl.SQLDataType.DATE, this, "");
 
     /**
-     * The column <code>matcheam.match.gametime</code>.
+     * The column <code>matcheam.match.start</code>.
      */
-    public final TableField<MatchRecord, Time> GAMETIME = createField("gametime", org.jooq.impl.SQLDataType.TIME.nullable(false), this, "");
+    public final TableField<MatchRecord, String> START = createField("start", org.jooq.impl.SQLDataType.VARCHAR.length(10), this, "");
+
+    /**
+     * The column <code>matcheam.match.time</code>.
+     */
+    public final TableField<MatchRecord, String> TIME = createField("time", org.jooq.impl.SQLDataType.VARCHAR.length(10), this, "");
 
     /**
      * The column <code>matcheam.match.level</code>.
      */
-    public final TableField<MatchRecord, String> LEVEL = createField("level", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
+    public final TableField<MatchRecord, String> LEVEL = createField("level", org.jooq.impl.SQLDataType.VARCHAR.length(30), this, "");
 
     /**
      * The column <code>matcheam.match.maxplayers</code>.
@@ -106,6 +115,30 @@ public class Match extends TableImpl<MatchRecord> {
     @Override
     public Schema getSchema() {
         return Matcheam.MATCHEAM;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<MatchRecord, String> getIdentity() {
+        return Keys.IDENTITY_MATCH;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UniqueKey<MatchRecord> getPrimaryKey() {
+        return Keys.CONSTRAINT_4;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<UniqueKey<MatchRecord>> getKeys() {
+        return Arrays.<UniqueKey<MatchRecord>>asList(Keys.CONSTRAINT_4);
     }
 
     /**
