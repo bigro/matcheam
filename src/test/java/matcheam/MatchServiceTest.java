@@ -7,7 +7,6 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.time.LocalDate;
 
 /**
@@ -28,7 +27,7 @@ public class MatchServiceTest {
 		softAssertions.assertThat(actual.getIdentifier().toString()).isEqualTo("1");
 		softAssertions.assertThat(actual.getPlace()).isEqualTo("場所");
 		softAssertions.assertThat(actual.getDate()).isEqualTo(LocalDate.of(2017, 1, 25));
-		softAssertions.assertThat(actual.getTime()).isEqualTo(Duration.ofHours(2));
+		softAssertions.assertThat(actual.getTime()).isEqualTo("2時間");
 		softAssertions.assertAll();
 	}
 
@@ -37,7 +36,7 @@ public class MatchServiceTest {
 		match.setIdentifier(identifier);
 		match.setPlace("場所");
 		match.setDate(LocalDate.of(2017, 1, 25));
-		match.setTime(Duration.ofHours(2));
+		match.setTime("2時間");
 		match.setMaxPlayers(BigDecimal.TEN);
 		return match;
 	}

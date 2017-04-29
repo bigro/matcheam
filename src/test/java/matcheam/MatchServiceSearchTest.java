@@ -9,7 +9,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Collection;
 
@@ -36,12 +35,11 @@ public class MatchServiceSearchTest {
 
 	private Match createMatch(String id, Level level) {
 		LocalDate date = LocalDate.now();
-		Duration gameTime = Duration.ofHours(2);
 		Match match = new Match();
 		match.setIdentifier(new Identifier(id));
 		match.setPlace("場所");
 		match.setDate(date);
-		match.setTime(gameTime);
+		match.setTime("2時間");
 		match.setMaxPlayers(BigDecimal.TEN);
 		match.setLevel(level);
 		return match;
