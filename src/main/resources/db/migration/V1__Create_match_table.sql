@@ -1,8 +1,11 @@
-create table matcheam.match (
-    identifier varchar(256) not null,
-    place varchar(100) not null,
-    date DATETIME　not null,
-    time TIME not null,
-    level varchar(100) not null,
-    maxPlayers DECIMAL(100)
+CREATE SCHEMA IF NOT EXISTS matcheam;
+
+CREATE TABLE matcheam.match (
+identifier VARCHAR(100) PRIMARY KEY AUTO_INCREMENT,
+place VARCHAR(100),
+date DATE,
+start VARCHAR(10),
+time VARCHAR(10),
+level VARCHAR(30),
+maxPlayers DECIMAL(3)
 );
