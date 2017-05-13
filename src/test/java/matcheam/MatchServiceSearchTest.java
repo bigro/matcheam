@@ -47,13 +47,13 @@ public class MatchServiceSearchTest {
 
 	@Test
 	public void 指定したIDで絞り混んだ検索ができること() throws Exception {
-		Match actual = matchService.findOne("4");
+		Match actual = matchService.findBy("4");
 		assertThat(actual.getIdentifier().toString()).isEqualTo("4");
 	}
 
 	@Test
 	public void 指定したIDの募集が存在しない場合nullが返ってくること() throws Exception {
-		Match actual = matchService.findOne("X");
+		Match actual = matchService.findBy("X");
 		assertThat(actual).isNull();
 	}
 

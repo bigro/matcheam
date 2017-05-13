@@ -74,7 +74,7 @@ public class MatchController {
 
 	@GetMapping("matching/{matchId}")
 	public String matching(Model model, @ModelAttribute("entryName") String name, @PathVariable String matchId) {
-		Match match = matchService.findOne(matchId);
+		Match match = matchService.findBy(matchId);
 		Person entryUser = new Person(name);
 		matchingService.matching(match, entryUser);
 		detail(model, matchId);
@@ -83,7 +83,7 @@ public class MatchController {
 
 	@GetMapping("detail/{matchId}")
 	public String detail(Model model, @PathVariable String matchId) {
-		Match match = matchService.findOne(matchId);
+		Match match = matchService.findBy(matchId);
 		model.addAttribute(match);
 		Matching matching = matchingService.get(match);
 		// TODO 永続化できたら null 考慮しないように修正する

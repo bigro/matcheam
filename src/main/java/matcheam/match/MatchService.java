@@ -1,10 +1,12 @@
 package matcheam.match;
 
+import matcheam.common.exception.SystemException;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -21,25 +23,56 @@ import java.util.stream.Stream;
 import static matcheam.jooq.generate.tables.Match.MATCH;
 
 /**
- * Created by ooguro on 2017/01/07.
+ * 募集サービスです。
+ * @since 1.0
  */
 @Service
 public class MatchService {
 
-	// TODO 永続化する
+	/**
+	 * matchのリポジトリ
+	 */
+	MatchRepository repository;
+
+	// TODO 永続化するまでの仮置き場
 	public HashMap<String, Match> matchMap = new HashMap<>();
 
+	/**
+	 * コンストラクタです。
+	 */
 	public MatchService() {
 		before();
 	}
 
-	public void register(Match match) {
-		// TODO 永続化する
-		matchMap.put(match.getIdentifier().toString(), match);
+	/**
+	 * コンストラクタです。
+	 * @param repository matchのリポジトリ
+	 */
+	@Autowired
+	public MatchService(MatchRepository repository) {
+		this.repository = repository;
 	}
 
-	public Match findOne(String id) {
-		return matchMap.get(id);
+	/**
+	 * １件のmatchを登録します。
+	 * @param match 募集
+	 * @return 登録されたレコードの{@link Identifier}のインスタンス
+	 */
+	public Identifier register(Match match) {
+		try {
+			return repository.register(match);
+		} catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
+	/**
+	 * 主キーで検索します。
+	 * @param identifier 募集の主キー
+	 * @return 募集
+	 */
+	public Match findBy(Identifier identifier) {
+		return repository.findBy(identifier);
 	}
 
 	public Collection<Match> findAll() {
