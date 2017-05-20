@@ -3,19 +3,13 @@ package matcheam.match;
 import matcheam.common.Converter;
 import matcheam.common.SystemContext;
 import matcheam.jooq.generate.tables.records.MatchRecord;
-
 import org.jooq.Condition;
 import org.springframework.stereotype.Repository;
-import static org.jooq.impl.DSL.trueCondition;
 
 import java.sql.Date;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 import static matcheam.jooq.generate.Tables.MATCH;
+import static org.jooq.impl.DSL.trueCondition;
 
 /**
  * matchのリポジトリです。
@@ -33,8 +27,7 @@ public class MatchRepository {
 		try (SystemContext sc = new SystemContext()) {
 			MatchRecord matchRecord = sc.dslContext().insertInto(MATCH)
 				.columns(MATCH.PLACE, MATCH.DATE, MATCH.START, MATCH.TIME, MATCH.LEVEL, MATCH.MAXPLAYERS)
-				//TODO valuesの引数nullを修正
-				.values(match.getPlace(), null, match.getStart(), match.getTime(), match.getLevel().name(),
+				.values(match.getPlace(), Converter.toDate(match.getDate()), match.getStart(), match.getTime(), match.getLevel().name(),
 					match.getMaxPlayers())
 				.returning(MATCH.IDENTIFIER)
 				.fetchOne();

@@ -1,9 +1,6 @@
 package matcheam;
 
-import matcheam.match.Identifier;
-import matcheam.match.Match;
-import matcheam.match.MatchRepository;
-import matcheam.match.MatchService;
+import matcheam.match.*;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
@@ -28,14 +25,18 @@ public class MatchServiceTest {
 		softAssertions.assertThat(actual.getPlace()).isEqualTo("場所");
 		softAssertions.assertThat(actual.getDate()).isEqualTo(LocalDate.of(2017, 1, 25));
 		softAssertions.assertThat(actual.getTime()).isEqualTo("2時間");
+		softAssertions.assertThat(actual.getLevel()).isEqualTo(Level.LEVEL1);
+		softAssertions.assertThat(actual.getStart()).isEqualTo("昼ぐらい");
 		softAssertions.assertAll();
 	}
 
 	private Match match() {
 		Match match = new Match();
 		match.setPlace("場所");
+		match.setStart("昼ぐらい");
 		match.setDate(LocalDate.of(2017, 1, 25));
 		match.setTime("2時間");
+		match.setLevel(Level.LEVEL1);
 		match.setMaxPlayers(BigDecimal.TEN);
 		return match;
 	}

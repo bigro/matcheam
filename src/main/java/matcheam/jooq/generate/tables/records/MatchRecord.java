@@ -4,16 +4,18 @@
 package matcheam.jooq.generate.tables.records;
 
 
+import java.math.BigDecimal;
+import java.sql.Date;
+
+import javax.annotation.Generated;
+
 import matcheam.jooq.generate.tables.Match;
+
 import org.jooq.Field;
 import org.jooq.Record1;
 import org.jooq.Record7;
 import org.jooq.Row7;
 import org.jooq.impl.UpdatableRecordImpl;
-
-import javax.annotation.Generated;
-import java.math.BigDecimal;
-import java.sql.Date;
 
 
 /**
