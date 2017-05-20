@@ -31,7 +31,7 @@ public class SystemContext  implements AutoCloseable {
      * @throws SQLException データアクセスに異常があった場合
      */
     public SystemContext() throws SQLException {
-        Connection connection = getConnect();
+        this.connection = getConnect();
         this.dslContext = getDSLContext(connection);
     }
 

@@ -3,6 +3,7 @@ package matcheam;
 import matcheam.match.Identifier;
 import matcheam.match.Level;
 import matcheam.match.Match;
+import matcheam.match.MatchRepository;
 import matcheam.match.MatchService;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -19,10 +20,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class MatchServiceSearchTest {
 
-	private MatchService matchService = new MatchService();
+	private MatchService matchService;
 
 	@Before
-	public void Before() {
+	public void Before() {		
+		matchService = new MatchService(new MatchRepository());
 		matchService.matchMap.clear();
 
 		matchService.register(createMatch("1", Level.LEVEL1));
@@ -47,13 +49,13 @@ public class MatchServiceSearchTest {
 
 	@Test
 	public void 指定したIDで絞り混んだ検索ができること() throws Exception {
-		Match actual = matchService.findBy("4");
+		Match actual = matchService.findBy(new Identifier("4"));
 		assertThat(actual.getIdentifier().toString()).isEqualTo("4");
 	}
 
 	@Test
 	public void 指定したIDの募集が存在しない場合nullが返ってくること() throws Exception {
-		Match actual = matchService.findBy("X");
+		Match actual = matchService.findBy(new Identifier("X"));
 		assertThat(actual).isNull();
 	}
 

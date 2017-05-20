@@ -72,7 +72,11 @@ public class MatchService {
 	 * @return 募集
 	 */
 	public Match findBy(Identifier identifier) {
-		return repository.findBy(identifier);
+		try {
+			return repository.findBy(identifier);
+		} catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	public Collection<Match> findAll() {
