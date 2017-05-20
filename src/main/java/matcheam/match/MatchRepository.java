@@ -59,18 +59,26 @@ public class MatchRepository {
 			if (record == null) {
 				return null;
 			}
-			Match match = new Match();
-			Date date = record.getValue(MATCH.DATE);
-			LocalDate localDate = Converter.toLocalDate(date);
-			match.setDate(localDate);
-			match.setLevel(Level.valueOf(record.getValue(MATCH.LEVEL)));
-			match.setMaxPlayers(record.getValue(MATCH.MAXPLAYERS));
-			match.setPlace(record.getValue(MATCH.PLACE));
-			match.setStart(record.getValue(MATCH.START));
-			match.setTime(record.getValue(MATCH.TIME));
-			match.setIdentifier(new Identifier(record.getValue(MATCH.IDENTIFIER)));
-			return match;
+			return toMatch(record);
 		}
+	}
+
+	/**
+	 * MatchRecord のインスタンスから Match のインスタンスを生成します。
+	 * @param record　MatchRecord のインスタンス
+	 * @return　Match のインスタンス
+	 */
+	private Match toMatch(MatchRecord record) {
+		Match match = new Match();
+		Date date = record.getValue(MATCH.DATE);
+		match.setDate(Converter.toLocalDate(date));
+		match.setLevel(Level.valueOf(record.getValue(MATCH.LEVEL)));
+		match.setMaxPlayers(record.getValue(MATCH.MAXPLAYERS));
+		match.setPlace(record.getValue(MATCH.PLACE));
+		match.setStart(record.getValue(MATCH.START));
+		match.setTime(record.getValue(MATCH.TIME));
+		match.setIdentifier(new Identifier(record.getValue(MATCH.IDENTIFIER)));
+		return match;
 	}
 
 	
