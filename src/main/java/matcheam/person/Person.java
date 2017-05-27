@@ -1,7 +1,6 @@
 package matcheam.person;
 
 import matcheam.match.Identifier;
-import sun.security.provider.DSAPublicKeyImpl;
 
 import java.util.UUID;
 

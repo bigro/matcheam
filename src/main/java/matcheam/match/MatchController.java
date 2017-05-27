@@ -49,6 +49,7 @@ public class MatchController {
 	}
 
 	/**
+	 * 検索します。
 	 * @param model テンプレートが表示するときに使う情報の設定先
 	 * @param level レベル
 	 * @return 表示するテンプレート
@@ -74,7 +75,7 @@ public class MatchController {
 
 	@GetMapping("matching/{matchId}")
 	public String matching(Model model, @ModelAttribute("entryName") String name, @PathVariable String matchId) {
-		Match match = matchService.findOne(matchId);
+		Match match = matchService.findBy(new Identifier(matchId));
 		Person entryUser = new Person(name);
 		matchingService.matching(match, entryUser);
 		detail(model, matchId);
@@ -83,7 +84,7 @@ public class MatchController {
 
 	@GetMapping("detail/{matchId}")
 	public String detail(Model model, @PathVariable String matchId) {
-		Match match = matchService.findOne(matchId);
+		Match match = matchService.findBy(new Identifier(matchId));
 		model.addAttribute(match);
 		Matching matching = matchingService.get(match);
 		// TODO 永続化できたら null 考慮しないように修正する

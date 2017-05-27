@@ -1,8 +1,6 @@
 package matcheam;
 
-import matcheam.match.Identifier;
-import matcheam.match.Match;
-import matcheam.match.MatchService;
+import matcheam.match.*;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
@@ -14,29 +12,31 @@ import java.time.LocalDate;
  */
 public class MatchServiceTest {
 
-	private MatchService matchService = new MatchService();
+	private MatchService matchService = new MatchService(new MatchRepository());
 
 	@Test
 	public void 募集内容を登録できること() throws Exception {
-		Match match = match(new Identifier("1"));
+		Match match = match();
 
-		matchService.register(match);
+		Identifier identifier = matchService.register(match);
 
-		Match actual = matchService.matchMap.get("1");
+		Match actual = matchService.findBy(identifier);
 		SoftAssertions softAssertions = new SoftAssertions();
-		softAssertions.assertThat(actual.getIdentifier().toString()).isEqualTo("1");
 		softAssertions.assertThat(actual.getPlace()).isEqualTo("場所");
 		softAssertions.assertThat(actual.getDate()).isEqualTo(LocalDate.of(2017, 1, 25));
 		softAssertions.assertThat(actual.getTime()).isEqualTo("2時間");
+		softAssertions.assertThat(actual.getLevel()).isEqualTo(Level.LEVEL1);
+		softAssertions.assertThat(actual.getStart()).isEqualTo("昼ぐらい");
 		softAssertions.assertAll();
 	}
 
-	private Match match(Identifier identifier) {
+	private Match match() {
 		Match match = new Match();
-		match.setIdentifier(identifier);
 		match.setPlace("場所");
+		match.setStart("昼ぐらい");
 		match.setDate(LocalDate.of(2017, 1, 25));
 		match.setTime("2時間");
+		match.setLevel(Level.LEVEL1);
 		match.setMaxPlayers(BigDecimal.TEN);
 		return match;
 	}

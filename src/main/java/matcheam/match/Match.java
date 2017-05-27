@@ -5,6 +5,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/**
+ * 募集です。
+ * @since 1.0
+ */
 public class Match {
 
     private Identifier identifier;
