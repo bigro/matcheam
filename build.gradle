@@ -79,6 +79,9 @@ jooq {
                 packageName = 'matcheam.jooq.generate'
                 directory = 'src/main/java'
             }
+	        generate {
+	        	javaTimeTypes = true
+	        }
         }
     }
 }

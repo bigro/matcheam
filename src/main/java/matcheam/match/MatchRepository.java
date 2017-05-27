@@ -1,15 +1,13 @@
 package matcheam.match;
 
-import matcheam.common.Converter;
-import matcheam.common.SystemContext;
-import matcheam.jooq.generate.tables.records.MatchRecord;
+import static matcheam.jooq.generate.Tables.MATCH;
+import static org.jooq.impl.DSL.trueCondition;
+
 import org.jooq.Condition;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
-
-import static matcheam.jooq.generate.Tables.MATCH;
-import static org.jooq.impl.DSL.trueCondition;
+import matcheam.common.SystemContext;
+import matcheam.jooq.generate.tables.records.MatchRecord;
 
 /**
  * matchのリポジトリです。
@@ -27,7 +25,7 @@ public class MatchRepository {
 		try (SystemContext sc = new SystemContext()) {
 			MatchRecord matchRecord = sc.dslContext().insertInto(MATCH)
 				.columns(MATCH.PLACE, MATCH.DATE, MATCH.START, MATCH.TIME, MATCH.LEVEL, MATCH.MAXPLAYERS)
-				.values(match.getPlace(), Converter.toDate(match.getDate()), match.getStart(), match.getTime(), match.getLevel().name(),
+				.values(match.getPlace(), match.getDate(), match.getStart(), match.getTime(), match.getLevel().name(),
 					match.getMaxPlayers())
 				.returning(MATCH.IDENTIFIER)
 				.fetchOne();
@@ -63,8 +61,7 @@ public class MatchRepository {
 	 */
 	private Match toMatch(MatchRecord record) {
 		Match match = new Match();
-		Date date = record.getValue(MATCH.DATE);
-		match.setDate(Converter.toLocalDate(date));
+		match.setDate(record.getValue(MATCH.DATE));
 		match.setLevel(Level.valueOf(record.getValue(MATCH.LEVEL)));
 		match.setMaxPlayers(record.getValue(MATCH.MAXPLAYERS));
 		match.setPlace(record.getValue(MATCH.PLACE));
@@ -74,5 +71,4 @@ public class MatchRepository {
 		return match;
 	}
 
-	
 }

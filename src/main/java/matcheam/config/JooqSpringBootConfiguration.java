@@ -1,16 +1,19 @@
 package matcheam.config;
 
-import org.jooq.*;
+import javax.sql.DataSource;
+
+import org.jooq.ConnectionProvider;
+import org.jooq.DSLContext;
+import org.jooq.ExecuteListenerProvider;
+import org.jooq.SQLDialect;
+import org.jooq.TransactionProvider;
 import org.jooq.impl.DataSourceConnectionProvider;
 import org.jooq.impl.DefaultConfiguration;
 import org.jooq.impl.DefaultDSLContext;
-import org.jooq.impl.DefaultExecuteListenerProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
-
-import javax.sql.DataSource;
 
 /**
  * Created by ooguro on 2017/02/04.

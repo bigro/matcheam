@@ -1,11 +1,16 @@
 package matcheam;
 
-import matcheam.match.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import matcheam.match.Identifier;
+import matcheam.match.Level;
+import matcheam.match.Match;
+import matcheam.match.MatchRepository;
+import matcheam.match.MatchService;
 
 /**
  * Created by ooguro on 2017/01/07.
