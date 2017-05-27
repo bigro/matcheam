@@ -84,9 +84,8 @@ public class MatchService {
 			for (Record record : records) {
 				Match match = new Match();
 				match.setIdentifier(new Identifier(record.get(MATCH.IDENTIFIER)));
-				//TODO DATE型の取り方わからない
-				match.setDate(LocalDate.now());
-				match.setTime("2時間");
+				match.setDate(record.get(MATCH.DATE));
+				match.setTime(record.get(MATCH.TIME));
 				match.setPlace(record.get(MATCH.PLACE));
 				match.setMaxPlayers(record.get(MATCH.MAXPLAYERS));
 				match.setLevel(Level.valueOf(record.get(MATCH.LEVEL)));
@@ -94,7 +93,6 @@ public class MatchService {
 			}
 			return matches;
 		}
-		// For the sake of this tutorial, let's keep exception handling simple
 		catch (Exception e) {
 			e.printStackTrace();
 			return null;

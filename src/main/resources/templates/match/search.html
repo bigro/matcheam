@@ -81,7 +81,7 @@
 	<tbody>
 		<tr class="memberList" data-href="/match/detail/" th:each="match : ${matches}" th:object="${match}">
 			<td><span th:text="*{identifier}"></span></td>
-			<td class="date"><span th:text="*{#temporals.format(date, 'yyyy/MM/dd')}"></span></td>
+			<td class="date"><span th:text="*{date}==null ? '' : *{#temporals.format(date, 'yyyy/MM/dd')}"></span></td>
 			<td class="number"><span th:text="*{time}"></span>分</td>
 			<td><span th:text="*{level}"></span></td>
 			<td class="number"><span th:text="*{maxPlayers}"></span></td>
