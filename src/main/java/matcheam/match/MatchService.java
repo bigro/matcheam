@@ -1,12 +1,6 @@
 package matcheam.match;
 
-import matcheam.common.SystemContext;
-import matcheam.common.exception.SystemException;
-import org.jooq.DSLContext;
-import org.jooq.Record;
-import org.jooq.Result;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import static matcheam.jooq.generate.tables.Match.MATCH;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,7 +11,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static matcheam.jooq.generate.tables.Match.MATCH;
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import matcheam.common.SystemContext;
+import matcheam.common.exception.SystemException;
 
 /**
  * 募集サービスです。

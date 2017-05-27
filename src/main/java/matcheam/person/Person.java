@@ -1,8 +1,8 @@
 package matcheam.person;
 
-import matcheam.match.Identifier;
-
 import java.util.UUID;
+
+import matcheam.match.Identifier;
 
 public class Person {
 

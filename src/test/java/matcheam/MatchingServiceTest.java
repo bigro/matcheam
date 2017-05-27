@@ -1,16 +1,17 @@
 package matcheam;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+import org.junit.Test;
+
 import matcheam.match.Identifier;
 import matcheam.match.Match;
 import matcheam.matching.Matching;
 import matcheam.matching.MatchingService;
 import matcheam.person.Person;
-import org.junit.Test;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class MatchingServiceTest {
 

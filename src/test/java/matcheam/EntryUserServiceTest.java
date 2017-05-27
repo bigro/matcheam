@@ -1,11 +1,12 @@
 package matcheam;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
+import org.junit.Test;
+
 import matcheam.match.Identifier;
 import matcheam.person.Person;
 import matcheam.person.PersonService;
-import org.junit.Test;
-
-import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * Created by ooguro on 2017/01/07.

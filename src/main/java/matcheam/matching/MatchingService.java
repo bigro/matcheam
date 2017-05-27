@@ -1,10 +1,11 @@
 package matcheam.matching;
 
-import matcheam.person.Person;
-import matcheam.match.Match;
+import java.util.HashMap;
+
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import matcheam.match.Match;
+import matcheam.person.Person;
 
 /**
  * Created by ooguro on 2017/01/07.

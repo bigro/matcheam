@@ -1,19 +1,20 @@
 package matcheam;
 
-import matcheam.match.Identifier;
-import matcheam.match.Level;
-import matcheam.match.Match;
-import matcheam.match.MatchRepository;
-import matcheam.match.MatchService;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import matcheam.match.Identifier;
+import matcheam.match.Level;
+import matcheam.match.Match;
+import matcheam.match.MatchRepository;
+import matcheam.match.MatchService;
 
 /**
  * Created by takata on 2017/01/07.

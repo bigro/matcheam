@@ -1,12 +1,12 @@
 package matcheam.matching;
 
-import matcheam.match.Identifier;
-import matcheam.match.Match;
-import matcheam.person.Person;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import matcheam.match.Identifier;
+import matcheam.match.Match;
+import matcheam.person.Person;
 
 /**
  * Created by ooguro on 2017/01/28.
