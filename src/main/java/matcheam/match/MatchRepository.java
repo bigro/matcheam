@@ -4,6 +4,8 @@ import static matcheam.jooq.generate.Tables.MATCH;
 import static org.jooq.impl.DSL.trueCondition;
 
 import org.jooq.Condition;
+import org.jooq.DSLContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import matcheam.common.SystemContext;
@@ -15,6 +17,10 @@ import matcheam.jooq.generate.tables.records.MatchRecord;
  */
 @Repository
 public class MatchRepository {
+
+	@Autowired
+	DSLContext dsl;
+
 	/**
 	 * １件のmatchを登録します。
 	 * @param match　Matchインスタンス
@@ -22,16 +28,14 @@ public class MatchRepository {
 	 * @throws Exception 登録が失敗した場合
 	 */
 	Identifier register(Match match) throws Exception {
-		try (SystemContext sc = new SystemContext()) {
-			MatchRecord matchRecord = sc.dslContext().insertInto(MATCH)
-				.columns(MATCH.PLACE, MATCH.DATE, MATCH.START, MATCH.TIME, MATCH.LEVEL, MATCH.MAXPLAYERS)
-				.values(match.getPlace(), match.getDate(), match.getStart(), match.getTime(), match.getLevel().name(),
-					match.getMaxPlayers())
-				.returning(MATCH.IDENTIFIER)
-				.fetchOne();
+		MatchRecord matchRecord = dsl.insertInto(MATCH)
+			.columns(MATCH.PLACE, MATCH.DATE, MATCH.START, MATCH.TIME, MATCH.LEVEL, MATCH.MAXPLAYERS)
+			.values(match.getPlace(), match.getDate(), match.getStart(), match.getTime(), match.getLevel().name(),
+				match.getMaxPlayers())
+			.returning(MATCH.IDENTIFIER)
+			.fetchOne();
 
-			return new Identifier(matchRecord.getValue(MATCH.IDENTIFIER));
-		}
+		return new Identifier(matchRecord.getValue(MATCH.IDENTIFIER));
 	}
 
 	/**
@@ -42,16 +46,14 @@ public class MatchRepository {
 	 * @throws Exception 検索が失敗した場合
 	 */
 	Match findBy(Identifier identifier) throws Exception {
-		try (SystemContext sc = new SystemContext()) {
-			Condition condition = trueCondition();
-			MatchRecord record = sc.dslContext().selectFrom(MATCH)
-				.where(condition.and(MATCH.IDENTIFIER.equal(identifier.toString())))
-				.fetchOne();
-			if (record == null) {
-				return null;
-			}
-			return toMatch(record);
+		Condition condition = trueCondition();
+		MatchRecord record = dsl.selectFrom(MATCH)
+			.where(condition.and(MATCH.IDENTIFIER.equal(identifier.toString())))
+			.fetchOne();
+		if (record == null) {
+			return null;
 		}
+		return toMatch(record);
 	}
 
 	/**
