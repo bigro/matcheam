@@ -18,8 +18,11 @@ import matcheam.jooq.generate.tables.records.MatchRecord;
 @Repository
 public class MatchRepository {
 
-	@Autowired
 	DSLContext dsl;
+
+	public MatchRepository(DSLContext dsl) {
+			this.dsl = dsl;
+	}
 
 	/**
 	 * １件のmatchを登録します。

@@ -31,7 +31,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Matcheam extends SchemaImpl {
 
-    private static final long serialVersionUID = -655597306;
+    private static final long serialVersionUID = 1632596580;
 
     /**
      * The reference instance of <code>matcheam</code>
@@ -68,7 +68,7 @@ public class Matcheam extends SchemaImpl {
 
     private final List<Sequence<?>> getSequences0() {
         return Arrays.<Sequence<?>>asList(
-            Sequences.SYSTEM_SEQUENCE_9EF9681C_D859_483F_9451_C37EC57C6180);
+            Sequences.SYSTEM_SEQUENCE_8149B6AE_80F8_4B06_83A2_F9F1A2573CF9);
     }
 
     @Override
