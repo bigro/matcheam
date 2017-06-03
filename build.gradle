@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.4.2.RELEASE'
+        springBootVersion = '1.5.3.RELEASE'
     }
     repositories {
         jcenter()
@@ -40,16 +40,14 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter')
-    compile("org.springframework.boot:spring-boot-starter-web")
+    compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.thymeleaf:thymeleaf-spring4')
+    compile('org.springframework.boot:spring-boot-starter-jooq')
     compile('org.thymeleaf.extras:thymeleaf-extras-java8time')
-    compile("com.h2database:h2")
-    compile("org.springframework:spring-jdbc")
-    compile("mysql:mysql-connector-java")
+    compile('com.h2database:h2')
+    compile('org.springframework:spring-jdbc')
+    compile('mysql:mysql-connector-java')
     testCompile('org.springframework.boot:spring-boot-starter-test')
-
-    compile group: 'org.jooq', name: 'jooq', version: '3.9.1'
-    compile group: 'org.jooq', name: 'jooq-meta', version: '3.9.1'
 
     jooqRuntime 'com.h2database:h2:1.4.193'
 }

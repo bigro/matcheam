@@ -22,6 +22,7 @@ import matcheam.common.exception.SystemException;
 
 /**
  * 募集サービスです。
+ *
  * @since 1.0
  */
 @Service
@@ -31,6 +32,9 @@ public class MatchService {
 	 * matchのリポジトリ
 	 */
 	MatchRepository repository;
+
+	@Autowired
+	DSLContext dsl;
 
 	// TODO 永続化するまでの仮置き場
 	public HashMap<String, Match> matchMap = new HashMap<>();
@@ -44,6 +48,7 @@ public class MatchService {
 
 	/**
 	 * コンストラクタです。
+	 *
 	 * @param repository matchのリポジトリ
 	 */
 	@Autowired
@@ -53,6 +58,7 @@ public class MatchService {
 
 	/**
 	 * １件のmatchを登録します。
+	 *
 	 * @param match 募集
 	 * @return 登録されたレコードの{@link Identifier}のインスタンス
 	 */
@@ -66,6 +72,7 @@ public class MatchService {
 
 	/**
 	 * 主キーで検索します。
+	 *
 	 * @param identifier 募集の主キー
 	 * @return 募集
 	 */
@@ -78,25 +85,19 @@ public class MatchService {
 	}
 
 	public Collection<Match> findAll() {
-		try (DSLContext create = new SystemContext().dslContext()) {
-			Result<Record> records = create.select().from(MATCH).fetch();
-			List<Match> matches = new ArrayList<>();
-			for (Record record : records) {
-				Match match = new Match();
-				match.setIdentifier(new Identifier(record.get(MATCH.IDENTIFIER)));
-				match.setDate(record.get(MATCH.DATE));
-				match.setTime(record.get(MATCH.TIME));
-				match.setPlace(record.get(MATCH.PLACE));
-				match.setMaxPlayers(record.get(MATCH.MAXPLAYERS));
-				match.setLevel(Level.valueOf(record.get(MATCH.LEVEL)));
-				matches.add(match);
-			}
-			return matches;
+		Result<Record> records = dsl.select().from(MATCH).fetch();
+		List<Match> matches = new ArrayList<>();
+		for (Record record : records) {
+			Match match = new Match();
+			match.setIdentifier(new Identifier(record.get(MATCH.IDENTIFIER)));
+			match.setDate(record.get(MATCH.DATE));
+			match.setTime(record.get(MATCH.TIME));
+			match.setPlace(record.get(MATCH.PLACE));
+			match.setMaxPlayers(record.get(MATCH.MAXPLAYERS));
+			match.setLevel(Level.valueOf(record.get(MATCH.LEVEL)));
+			matches.add(match);
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+		return matches;
 	}
 
 	public Collection<Match> findByLevel(Level... levels) {

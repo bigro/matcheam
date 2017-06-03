@@ -3,7 +3,9 @@ package matcheam;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import matcheam.common.SystemContext;
 import org.assertj.core.api.SoftAssertions;
+import org.junit.Before;
 import org.junit.Test;
 
 import matcheam.match.Identifier;
@@ -17,7 +19,12 @@ import matcheam.match.MatchService;
  */
 public class MatchServiceTest {
 
-	private MatchService matchService = new MatchService(new MatchRepository());
+	private MatchService matchService;
+
+	@Before
+	public void setUp() throws Exception {
+		matchService = new MatchService(new MatchRepository(new SystemContext().dslContext()));
+	}
 
 	@Test
 	public void 募集内容を登録できること() throws Exception {

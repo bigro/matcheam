@@ -3,9 +3,11 @@ package matcheam;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Collection;
 
+import matcheam.common.SystemContext;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -24,8 +26,8 @@ public class MatchServiceSearchTest {
 	private MatchService matchService;
 
 	@Before
-	public void Before() {		
-		matchService = new MatchService(new MatchRepository());
+	public void Before() throws SQLException {
+		matchService = new MatchService(new MatchRepository(new SystemContext().dslContext()));
 		matchService.matchMap.clear();
 
 		matchService.register(createMatch("1", Level.LEVEL1));
