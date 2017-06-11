@@ -41,14 +41,15 @@ public class MatchController {
 	}
 
 	@GetMapping("register")
-	String show() {
+	String show(Model model) {
+		model.addAttribute("levels", Level.values());
 		return "/match/register";
 	}
 
 	@PostMapping("result")
-	String execute(@ModelAttribute("match") Match match, BindingResult bindingResult) {
+	String execute(@ModelAttribute("match") Match match, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
-			return show();
+			return show(model);
 		}
 		matchService.register(match);
 		return "/match/result";
@@ -61,18 +62,21 @@ public class MatchController {
 	 * @return 表示するテンプレート
 	 */
 	@RequestMapping("/search")
-	public String search(Model model, @RequestParam(required = false) String level) {
-		if (level == null || level.isEmpty()) {
+	public String search(Model model, @RequestParam(required = false) Level level) {
+		if (level == null) {
 			Collection<Match> matches = matchService.findAll();
+			model.addAttribute("levels", LevelCandidate.values());
 			model.addAttribute("level", "");
 			model.addAttribute("matches", matches);
 			return "match/search";
 		}
 		try {
-			Collection<Match> matches = matchService.findByLevel(Level.valueOf(level));
+			Collection<Match> matches = matchService.findByLevel(level);
+			model.addAttribute("levels", LevelCandidate.values());
 			model.addAttribute("level", level);
 			model.addAttribute("matches", matches);
 		} catch (IllegalArgumentException e) {
+			model.addAttribute("levels", LevelCandidate.values());
 			model.addAttribute("level", level);
 			model.addAttribute("matches", new ArrayList<Match>());
 		}
