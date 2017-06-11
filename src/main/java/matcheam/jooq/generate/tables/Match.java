@@ -37,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Match extends TableImpl<MatchRecord> {
 
-    private static final long serialVersionUID = 551596979;
+    private static final long serialVersionUID = 1572368209;
 
     /**
      * The reference instance of <code>matcheam.match</code>
@@ -55,7 +55,7 @@ public class Match extends TableImpl<MatchRecord> {
     /**
      * The column <code>matcheam.match.identifier</code>.
      */
-    public final TableField<MatchRecord, String> IDENTIFIER = createField("identifier", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false).defaultValue(org.jooq.impl.DSL.field("(NEXT VALUE FOR MATCHEAM.SYSTEM_SEQUENCE_8149B6AE_80F8_4B06_83A2_F9F1A2573CF9)", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
+    public final TableField<MatchRecord, String> IDENTIFIER = createField("identifier", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false).defaultValue(org.jooq.impl.DSL.field("(NEXT VALUE FOR MATCHEAM.SYSTEM_SEQUENCE_9EF9681C_D859_483F_9451_C37EC57C6180)", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
      * The column <code>matcheam.match.place</code>.
