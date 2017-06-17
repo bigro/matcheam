@@ -91,6 +91,7 @@ public class MatchService {
 			Match match = new Match();
 			match.setIdentifier(new Identifier(record.get(MATCH.IDENTIFIER)));
 			match.setDate(record.get(MATCH.DATE));
+			match.setStart(record.get(MATCH.START));
 			match.setTime(record.get(MATCH.TIME));
 			match.setPlace(record.get(MATCH.PLACE));
 			match.setMaxPlayers(record.get(MATCH.MAXPLAYERS));
