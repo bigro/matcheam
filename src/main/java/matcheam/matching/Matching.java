@@ -15,15 +15,15 @@ public class Matching {
 
 	private Identifier identifier = new Identifier(UUID.randomUUID().toString());
 	private Match match;
-	private List<Person> entryUsers = new ArrayList<>();
+	private List<Person> persons = new ArrayList<>();
 
     public Matching(Match match) {
         this.match = match;
     }
 
 
-    public void entry(Person entryUser) {
-		entryUsers.add(entryUser);
+    public void entry(Person person) {
+		persons.add(person);
 	}
 
     public Match getMatch() {
@@ -34,7 +34,7 @@ public class Matching {
         return identifier;
     }
 
-    public List<Person> getEntryUsers() {
-        return entryUsers;
+    public List<Person> getPersons() {
+        return persons;
     }
 }

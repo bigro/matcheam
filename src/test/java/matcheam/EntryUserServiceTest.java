@@ -23,7 +23,7 @@ public class EntryUserServiceTest {
 
 		entryUserService.entry(entryUser);
 
-		Person actual = entryUserService.entryUserHashMap.get("1");
+		Person actual = entryUserService.personHashMap.get("1");
 		assertThat(actual.getName()).isEqualTo("名前");
 		assertThat(actual.getIdentifier().toString()).isEqualTo("1");
 	}

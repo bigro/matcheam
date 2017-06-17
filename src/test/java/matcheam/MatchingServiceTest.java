@@ -27,7 +27,7 @@ public class MatchingServiceTest {
 
 		Matching actual = matchingService.get(match);
 		assertThat(actual.getMatch()).isEqualTo(match);
-		assertThat(actual.getEntryUsers())
+		assertThat(actual.getPersons())
 			.extracting(Person::getName)
 			.contains("名前");
 	}

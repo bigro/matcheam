@@ -16,7 +16,7 @@ public class MatchingService {
 	// TODO 永続化する
 	public HashMap<String, Matching> matchingMap = new HashMap<>();
 
-	public void matching(Match match, Person entryUser) {
+	public void matching(Match match, Person person) {
 		Matching matching = new Matching(match);
 		for (Matching m : matchingMap.values()) {
 			if (m.getMatch().equals(match)) {
@@ -24,7 +24,7 @@ public class MatchingService {
 				break;
 			}
 		}
-		matching.entry(entryUser);
+		matching.entry(person);
 		matchingMap.put(matching.getIdentifier().toString(), matching);
 	}
 
