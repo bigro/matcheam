@@ -74,8 +74,12 @@
 			<td class="date"><span th:text="*{#temporals.format(date, 'yyyy/MM/dd')}"></span></td>
 		</tr>
 		<tr>
+			<th>開始時間</th>
+			<td><span th:text="*{start}"></span></td>
+		</tr>
+		<tr>
 			<th>試合時間</th>
-			<td class="number"><span th:text="*{time}"></span>分</td>
+			<td><span th:text="*{time}"></span></td>
 		</tr>
 		<tr>
 			<th>レベル</th>
