@@ -11,10 +11,6 @@ public class Identifier {
         this.value = value;
     }
 
-    public Identifier() {
-
-    }
-
     @Override
     public String toString() {
         return value;

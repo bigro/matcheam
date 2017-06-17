@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import matcheam.matching.Matching;
 import matcheam.matching.MatchingService;
 import matcheam.person.Person;
-import matcheam.person.PersonService;
 
 /**
  * Created by ooguro on 2017/01/21.
@@ -31,9 +30,6 @@ public class MatchController {
 
 	@Autowired
 	MatchingService matchingService;
-
-	@Autowired
-	PersonService entryUserService;
 
 	@ModelAttribute("match")
 	Match match() {
@@ -86,8 +82,8 @@ public class MatchController {
 	@GetMapping("matching/{matchId}")
 	public String matching(Model model, @ModelAttribute("entryName") String name, @PathVariable String matchId) {
 		Match match = matchService.findBy(new Identifier(matchId));
-		Person entryUser = new Person(name);
-		matchingService.matching(match, entryUser);
+		Person person = new Person(name);
+		matchingService.matching(match, person);
 		detail(model, matchId);
 		return "match/detail";
 	}
@@ -99,9 +95,9 @@ public class MatchController {
 		Matching matching = matchingService.get(match);
 		// TODO 永続化できたら null 考慮しないように修正する
 		if (matching == null) {
-			model.addAttribute("entryUsers", Collections.emptyList());
+			model.addAttribute("persons", Collections.emptyList());
 		} else {
-			model.addAttribute("entryUsers", matching.getEntryUsers());
+			model.addAttribute("persons", matching.getPersons());
 		}
 		return "match/detail";
 	}

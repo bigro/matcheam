@@ -13,15 +13,15 @@ import matcheam.match.Identifier;
 public class PersonService {
 
 	// TODO 永続化する
-	public HashMap<String, Person> entryUserHashMap = new HashMap<>();
+	public HashMap<String, Person> personHashMap = new HashMap<>();
 
-	public void entry(Person entryUser) {
+	public void entry(Person person) {
 		// TODO 永続化する
-		entryUserHashMap.put(entryUser.getIdentifier().toString(), entryUser);
+		personHashMap.put(person.getIdentifier().toString(), person);
 	}
 
 	public Person findOne(Identifier identifier) {
-		return entryUserHashMap.get(identifier.toString());
+		return personHashMap.get(identifier.toString());
 	}
 
 }
