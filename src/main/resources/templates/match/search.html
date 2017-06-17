@@ -85,6 +85,7 @@ td, th {
 			<tr>
 				<th>ID</th>
 				<th>開始日</th>
+				<th>開始時間</th>
 				<th>試合時間</th>
 				<th>レベル</th>
 				<th>最大人数</th>
@@ -98,7 +99,8 @@ td, th {
 				<td><span th:text="*{identifier}"></span></td>
 				<td class="date"><span
 					th:text="*{date}==null ? '' : *{#temporals.format(date, 'yyyy/MM/dd')}"></span></td>
-				<td class="number"><span th:text="*{time}"></span>分</td>
+				<td><span th:text="*{start}"></span></td>
+				<td><span th:text="*{time}"></span></td>
 				<td><span th:text="*{level}"></span></td>
 				<td class="number"><span th:text="*{maxPlayers}"></span></td>
 				<td><span th:text="*{place}"></span></td>
