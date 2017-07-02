@@ -16,6 +16,8 @@ import matcheam.jooq.generate.tables.records.MatchRecord;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * matchのリポジトリです。
@@ -97,5 +99,13 @@ public class MatchRepository {
 			matches.add(match);
 		}
 		return matches;
+	}
+
+	public Collection<Match> findBy(Level... levels) {
+		return findAll().stream().filter(m -> in(levels, m.getLevel())).collect(Collectors.toList());
+	}
+
+	private boolean in(Level[] levels, Level level) {
+		return Stream.of(levels).anyMatch(lvls -> lvls == level);
 	}
 }
