@@ -5,11 +5,17 @@ import static org.jooq.impl.DSL.trueCondition;
 
 import org.jooq.Condition;
 import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import matcheam.common.SystemContext;
 import matcheam.jooq.generate.tables.records.MatchRecord;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * matchのリポジトリです。
@@ -76,4 +82,20 @@ public class MatchRepository {
 		return match;
 	}
 
+	public Collection<Match> findAll() {
+		Result<Record> records = dsl.select().from(matcheam.jooq.generate.tables.Match.MATCH).fetch();
+		List<Match> matches = new ArrayList<>();
+		for (Record record : records) {
+			Match match = new Match();
+			match.setIdentifier(new Identifier(record.get(matcheam.jooq.generate.tables.Match.MATCH.IDENTIFIER)));
+			match.setDate(record.get(matcheam.jooq.generate.tables.Match.MATCH.DATE));
+			match.setStart(record.get(matcheam.jooq.generate.tables.Match.MATCH.START));
+			match.setTime(record.get(matcheam.jooq.generate.tables.Match.MATCH.TIME));
+			match.setPlace(record.get(matcheam.jooq.generate.tables.Match.MATCH.PLACE));
+			match.setMaxPlayers(record.get(matcheam.jooq.generate.tables.Match.MATCH.MAXPLAYERS));
+			match.setLevel(Level.valueOf(record.get(matcheam.jooq.generate.tables.Match.MATCH.LEVEL)));
+			matches.add(match);
+		}
+		return matches;
+	}
 }
