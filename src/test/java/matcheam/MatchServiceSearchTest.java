@@ -62,18 +62,16 @@ public class MatchServiceSearchTest {
 		assertThat(actual).isNull();
 	}
 
-	@Ignore("HashMap前提のテストだからJooqにしたら落ちた")
 	@Test
 	public void 指定したレベル1つで絞り混んだ検索ができること() throws Exception {
 		Collection<Match> actual = matchService.findByLevel(Level.LEVEL3);
-		assertThat(actual).hasSize(3).extracting(Match::getLevel).containsOnly(Level.LEVEL3);
+		assertThat(actual).extracting(Match::getLevel).containsOnly(Level.LEVEL3);
 	}
 
-	@Ignore("HashMap前提のテストだからJooqにしたら落ちた")
 	@Test
 	public void 指定したレベル2つで絞り混んだ検索ができること() throws Exception {
 		Collection<Match> actual = matchService.findByLevel(Level.LEVEL3, Level.LEVEL4);
-		assertThat(actual).hasSize(4).extracting(Match::getLevel).containsOnly(Level.LEVEL3, Level.LEVEL4);
+		assertThat(actual).extracting(Match::getLevel).containsOnly(Level.LEVEL3, Level.LEVEL4);
 	}
 
 	@Ignore("HashMap前提のテストだからJooqにしたら落ちた")
