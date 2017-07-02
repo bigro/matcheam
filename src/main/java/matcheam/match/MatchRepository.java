@@ -64,7 +64,7 @@ public class MatchRepository {
 		if (record == null) {
 			return null;
 		}
-		return toMatch(record);
+		return makeMatch(record);
 	}
 
 	/**
@@ -72,31 +72,27 @@ public class MatchRepository {
 	 * @param record　MatchRecord のインスタンス
 	 * @return　Match のインスタンス
 	 */
-	private Match toMatch(MatchRecord record) {
+	public Match makeMatch(MatchRecord record) {
 		Match match = new Match();
-		match.setDate(record.getValue(MATCH.DATE));
-		match.setLevel(Level.valueOf(record.getValue(MATCH.LEVEL)));
-		match.setMaxPlayers(record.getValue(MATCH.MAXPLAYERS));
-		match.setPlace(record.getValue(MATCH.PLACE));
-		match.setStart(record.getValue(MATCH.START));
-		match.setTime(record.getValue(MATCH.TIME));
-		match.setIdentifier(new Identifier(record.getValue(MATCH.IDENTIFIER)));
+		match.setIdentifier(new Identifier(record.get(MATCH.IDENTIFIER)));
+		match.setDate(record.get(MATCH.DATE));
+		match.setStart(record.get(MATCH.START));
+		match.setTime(record.get(MATCH.TIME));
+		match.setPlace(record.get(MATCH.PLACE));
+		match.setMaxPlayers(record.get(MATCH.MAXPLAYERS));
+		match.setLevel(Level.valueOf(record.get(MATCH.LEVEL)));
 		return match;
 	}
 
 	public Collection<Match> findAll() {
-		Result<Record> records = dsl.select().from(matcheam.jooq.generate.tables.Match.MATCH).fetch();
+		Result<Record> records = dsl.select().from(MATCH).fetch();
+		return makeMatches(records);
+	}
+
+	public List<Match> makeMatches(Result<MatchRecord> records) {
 		List<Match> matches = new ArrayList<>();
-		for (Record record : records) {
-			Match match = new Match();
-			match.setIdentifier(new Identifier(record.get(matcheam.jooq.generate.tables.Match.MATCH.IDENTIFIER)));
-			match.setDate(record.get(matcheam.jooq.generate.tables.Match.MATCH.DATE));
-			match.setStart(record.get(matcheam.jooq.generate.tables.Match.MATCH.START));
-			match.setTime(record.get(matcheam.jooq.generate.tables.Match.MATCH.TIME));
-			match.setPlace(record.get(matcheam.jooq.generate.tables.Match.MATCH.PLACE));
-			match.setMaxPlayers(record.get(matcheam.jooq.generate.tables.Match.MATCH.MAXPLAYERS));
-			match.setLevel(Level.valueOf(record.get(matcheam.jooq.generate.tables.Match.MATCH.LEVEL)));
-			matches.add(match);
+		for (MatchRecord record : records) {
+			matches.add(makeMatch(record));
 		}
 		return matches;
 	}
