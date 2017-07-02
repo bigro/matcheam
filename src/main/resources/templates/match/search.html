@@ -94,7 +94,7 @@ td, th {
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="memberList" data-href="/match/detail/"
+			<tr class="memberList"
 				th:each="match : ${matches}" th:object="${match}">
 				<td><span th:text="*{identifier}"></span></td>
 				<td class="date"><span
@@ -108,21 +108,5 @@ td, th {
 			</tr>
 		</tbody>
 	</table>
-
-	<script
-		src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script>
-		jQuery(function($) {
-			$('tbody tr[data-href]').addClass('clickable').click(function() {
-				window.location = $(this).attr('data-href');
-			}).hover(function() {
-				$(this).parents('tr.memberList').unbind('click');
-			}, function() {
-				$(this).parents('tr').click(function() {
-					window.location = $(this).attr('data-href');
-				});
-			});
-		});
-	</script>
 </body>
 </html>
