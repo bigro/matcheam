@@ -4,8 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,11 +73,7 @@ public class MatchService {
 	}
 
 	public Collection<Match> findByLevel(Level... levels) {
-		return repository.findAll().stream().filter(m -> in(levels, m.getLevel())).collect(Collectors.toList());
-	}
-
-	private boolean in(Level[] levels, Level level) {
-		return Stream.of(levels).anyMatch(lvls -> lvls == level);
+		return repository.findBy(levels);
 	}
 
 	private void before() {
@@ -107,7 +102,7 @@ public class MatchService {
 	 *
 	 * @return 募集一覧
 	 */
-	public Collection<Match> findAll() {
+	public List<Match> findAll() {
 		return repository.findAll();
 	}
 }
