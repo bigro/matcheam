@@ -1,11 +1,15 @@
 package matcheam.match;
 
+import com.ninja_squad.dbsetup.DbSetup;
+import com.ninja_squad.dbsetup.operation.DeleteAll;
+import com.ninja_squad.dbsetup.operation.Operation;
 import matcheam.support.TestContext;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
+import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 
@@ -20,6 +24,9 @@ public class MatchRepositoryTest {
 	public void setUp() throws Exception {
 		TestContext testContext = new TestContext();
 		matchRepository = new MatchRepository(testContext.dslContext());
+		Operation deleteAll = deleteAllFrom("MATCHEAM.MATCH");
+		DbSetup dbSetup = new DbSetup(testContext.driverManagerDestination(), deleteAll);
+		dbSetup.launch();
 	}
 
 	@Test
