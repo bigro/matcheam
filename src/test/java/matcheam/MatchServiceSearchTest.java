@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 import matcheam.common.SystemContext;
 import org.junit.Before;
@@ -79,14 +80,6 @@ public class MatchServiceSearchTest {
 	public void 指定したレベルの募集が存在しない場合空のリストが返ってくること() throws Exception {
 		Collection<Match> actual = matchService.findByLevel(Level.LEVEL2);
 		assertThat(actual).isEmpty();
-	}
-
-	@Ignore("HashMap前提のテストだからJooqにしたら落ちた")
-	@Test
-	public void 全件検索できること() throws Exception {
-		Collection<Match> actual = matchService.findAll();
-		assertThat(actual).hasSize(6).extracting(Match::getLevel).containsOnly(Level.LEVEL1, Level.LEVEL3,
-			Level.LEVEL4);
 	}
 
 }

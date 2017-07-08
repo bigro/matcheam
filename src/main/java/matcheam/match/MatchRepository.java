@@ -7,10 +7,8 @@ import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Result;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import matcheam.common.SystemContext;
 import matcheam.jooq.generate.tables.records.MatchRecord;
 
 import java.util.ArrayList;
@@ -84,12 +82,21 @@ public class MatchRepository {
 		return match;
 	}
 
-	public Collection<Match> findAll() {
-		Result<Record> records = dsl.select().from(MATCH).fetch();
+	/**
+	 * 検索して全件返します。
+	 * @return 募集のリスト
+	 */
+	public List<Match> findAll() {
+		Result<MatchRecord> records = dsl.selectFrom(MATCH).fetch();
 		return makeMatches(records);
 	}
 
-	public List<Match> makeMatches(Result<MatchRecord> records) {
+	/**
+	 * jooqの検索結果から募集のリストを作成します。
+	 * @param records jooqの検索結果
+	 * @return 募集のリスト
+	 */
+	private List<Match> makeMatches(Result<MatchRecord> records) {
 		List<Match> matches = new ArrayList<>();
 		for (MatchRecord record : records) {
 			matches.add(makeMatch(record));
