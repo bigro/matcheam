@@ -51,6 +51,7 @@ public class MatchServiceSearchTest {
 		return match;
 	}
 
+	@Ignore("テストデータ")
 	@Test
 	public void 指定したIDで絞り混んだ検索ができること() throws Exception {
 		Match actual = matchService.findBy(new Identifier("4"));
@@ -61,25 +62,6 @@ public class MatchServiceSearchTest {
 	public void 指定したIDの募集が存在しない場合nullが返ってくること() throws Exception {
 		Match actual = matchService.findBy(new Identifier("X"));
 		assertThat(actual).isNull();
-	}
-
-	@Test
-	public void 指定したレベル1つで絞り混んだ検索ができること() throws Exception {
-		Collection<Match> actual = matchService.findByLevel(Level.LEVEL3);
-		assertThat(actual).extracting(Match::getLevel).containsOnly(Level.LEVEL3);
-	}
-
-	@Test
-	public void 指定したレベル2つで絞り混んだ検索ができること() throws Exception {
-		Collection<Match> actual = matchService.findByLevel(Level.LEVEL3, Level.LEVEL4);
-		assertThat(actual).extracting(Match::getLevel).containsOnly(Level.LEVEL3, Level.LEVEL4);
-	}
-
-	@Ignore("HashMap前提のテストだからJooqにしたら落ちた")
-	@Test
-	public void 指定したレベルの募集が存在しない場合空のリストが返ってくること() throws Exception {
-		Collection<Match> actual = matchService.findByLevel(Level.LEVEL2);
-		assertThat(actual).isEmpty();
 	}
 
 }

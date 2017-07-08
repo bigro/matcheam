@@ -5,14 +5,12 @@ import static org.jooq.impl.DSL.trueCondition;
 
 import org.jooq.Condition;
 import org.jooq.DSLContext;
-import org.jooq.Record;
 import org.jooq.Result;
 import org.springframework.stereotype.Repository;
 
 import matcheam.jooq.generate.tables.records.MatchRecord;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -104,7 +102,7 @@ public class MatchRepository {
 		return matches;
 	}
 
-	public Collection<Match> findBy(Level... levels) {
+	public List<Match> findBy(Level... levels) {
 		return findAll().stream().filter(m -> in(levels, m.getLevel())).collect(Collectors.toList());
 	}
 
