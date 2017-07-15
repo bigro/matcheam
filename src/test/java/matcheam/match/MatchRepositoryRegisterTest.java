@@ -33,17 +33,11 @@ public class MatchRepositoryRegisterTest {
 	@Test
 	public void 募集内容を登録できること() throws Exception {
 		Match match = getRecord();
-
 		Identifier identifier = sut.register(match);
-
 		Match actual = sut.findBy(identifier);
-		SoftAssertions softAssertions = new SoftAssertions();
-		softAssertions.assertThat(actual.getPlace()).isEqualTo("場所");
-		softAssertions.assertThat(actual.getDate()).isEqualTo(LocalDate.of(2017, 1, 25));
-		softAssertions.assertThat(actual.getTime()).isEqualTo("2時間");
-		softAssertions.assertThat(actual.getLevel()).isEqualTo(Level.LEVEL1);
-		softAssertions.assertThat(actual.getStart()).isEqualTo("昼ぐらい");
-		softAssertions.assertAll();
+		assertThat(actual)
+			.extracting("place", "date", "time", "level", "start")
+			.containsOnly("場所", LocalDate.of(2017, 1, 25), "2時間", Level.LEVEL1, "昼ぐらい");
 	}
 
 	private Match getRecord() {
