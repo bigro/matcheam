@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class MatchRepositorySearchTest {
 
-	private MatchRepository matchRepository;
+	private MatchRepository sut;
 	private TestContext testContext;
 
 	@Before
@@ -38,36 +38,36 @@ public class MatchRepositorySearchTest {
 		DbSetup dbSetup = new DbSetup(testContext.driverManagerDestination(), operation);
 		dbSetup.launch();
 
-		matchRepository = new MatchRepository(testContext.dslContext());
+		sut = new MatchRepository(testContext.dslContext());
 	}
 
 	@Test
 	public void 全件検索できること() throws Exception {
-		List<Match> actual = matchRepository.findAll();
+		List<Match> actual = sut.findAll();
 		assertThat(actual).hasSize(3);
 	}
 
 	@Test
 	public void 指定したレベル1つで絞り混んだ検索ができること() throws Exception {
-		List<Match> actual = matchRepository.findBy(Level.LEVEL3);
+		List<Match> actual = sut.findBy(Level.LEVEL3);
 		assertThat(actual).extracting(Match::getLevel).containsOnly(Level.LEVEL3);
 	}
 
 	@Test
 	public void 指定したレベルの募集が存在しない場合空のリストが返ってくること() throws Exception {
-		List<Match> actual = matchRepository.findBy(Level.LEVEL2);
+		List<Match> actual = sut.findBy(Level.LEVEL2);
 		assertThat(actual).isEmpty();
 	}
 
 	@Test
 	public void 指定したIDで絞り混んだ検索ができること() throws Exception {
-		Match actual = matchRepository.findBy(new Identifier("1"));
+		Match actual = sut.findBy(new Identifier("1"));
 		assertThat(actual).isNotNull();
 	}
 
 	@Test
 	public void 指定したIDの募集が存在しない場合nullが返ってくること() throws Exception {
-		Match actual = matchRepository.findBy(new Identifier("X"));
+		Match actual = sut.findBy(new Identifier("X"));
 		assertThat(actual).isNull();
 	}
 }

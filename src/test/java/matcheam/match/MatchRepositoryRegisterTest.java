@@ -1,7 +1,6 @@
 package matcheam.match;
 
 import com.ninja_squad.dbsetup.DbSetup;
-import com.ninja_squad.dbsetup.operation.Insert;
 import com.ninja_squad.dbsetup.operation.Operation;
 import matcheam.support.TestContext;
 import org.assertj.core.api.SoftAssertions;
@@ -10,10 +9,8 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
-import static com.ninja_squad.dbsetup.Operations.insertInto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -21,13 +18,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class MatchRepositoryRegisterTest {
 
-	private MatchRepository matchRepository;
+	private MatchRepository sut;
 	private TestContext testContext;
 
 	@Before
 	public void setUp() throws Exception {
 		testContext = new TestContext();
-		matchRepository = new MatchRepository(testContext.dslContext());
+		sut = new MatchRepository(testContext.dslContext());
 		Operation deleteAll = deleteAllFrom("MATCHEAM.MATCH");
 		DbSetup dbSetup = new DbSetup(testContext.driverManagerDestination(), deleteAll);
 		dbSetup.launch();
@@ -37,9 +34,9 @@ public class MatchRepositoryRegisterTest {
 	public void 募集内容を登録できること() throws Exception {
 		Match match = getRecord();
 
-		Identifier identifier = matchRepository.register(match);
+		Identifier identifier = sut.register(match);
 
-		Match actual = matchRepository.findBy(identifier);
+		Match actual = sut.findBy(identifier);
 		SoftAssertions softAssertions = new SoftAssertions();
 		softAssertions.assertThat(actual.getPlace()).isEqualTo("場所");
 		softAssertions.assertThat(actual.getDate()).isEqualTo(LocalDate.of(2017, 1, 25));
