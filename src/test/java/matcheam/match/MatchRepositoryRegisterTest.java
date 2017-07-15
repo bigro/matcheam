@@ -33,11 +33,8 @@ public class MatchRepositoryRegisterTest {
 	@Test
 	public void 募集内容を登録できること() throws Exception {
 		Match match = getRecord();
-		Identifier identifier = sut.register(match);
-		Match actual = sut.findBy(identifier);
-		assertThat(actual)
-			.extracting("place", "date", "time", "level", "start")
-			.containsOnly("場所", LocalDate.of(2017, 1, 25), "2時間", Level.LEVEL1, "昼ぐらい");
+		Identifier actual = sut.register(match);
+		assertRegister(actual, match);
 	}
 
 	private Match getRecord() {
@@ -49,6 +46,12 @@ public class MatchRepositoryRegisterTest {
 		match.setLevel(Level.LEVEL1);
 		match.setMaxPlayers(BigDecimal.TEN);
 		return match;
+	}
+
+	private void assertRegister(Identifier actual, Match match) throws Exception {
+		assertThat(sut.findBy(actual))
+			.extracting("place", "date", "time", "level", "start")
+			.containsOnly(match.getPlace(), match.getDate(), match.getTime(), match.getLevel(), match.getStart());
 	}
 }
 
