@@ -1,6 +1,7 @@
 package matcheam.match;
 
 import com.ninja_squad.dbsetup.DbSetup;
+import com.ninja_squad.dbsetup.operation.Insert;
 import com.ninja_squad.dbsetup.operation.Operation;
 import matcheam.support.TestContext;
 import org.assertj.core.api.SoftAssertions;
@@ -36,8 +37,7 @@ public class MatchRepositoryTest {
 	@Test
 	public void 全件検索できること() throws Exception {
 		Operation operation =
-			insertInto("MATCHEAM.MATCH")
-				.columns("place", "date", "start", "time", "level", "maxPlayers")
+			insertIntoMatcheam()
 				.values("尼崎", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL1, 12)
 				.values("神戸", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL1, 12)
 				.values("フランス", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL1, 12)
@@ -51,8 +51,7 @@ public class MatchRepositoryTest {
 	@Test
 	public void 指定したレベル1つで絞り混んだ検索ができること() throws Exception {
 		Operation operation =
-			insertInto("MATCHEAM.MATCH")
-				.columns("place", "date", "start", "time", "level", "maxPlayers")
+			insertIntoMatcheam()
 				.values("尼崎", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL1, 12)
 				.values("神戸", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL3, 12)
 				.values("フランス", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL4, 12)
@@ -67,8 +66,7 @@ public class MatchRepositoryTest {
 	@Test
 	public void 指定したレベルの募集が存在しない場合空のリストが返ってくること() throws Exception {
 		Operation operation =
-			insertInto("MATCHEAM.MATCH")
-				.columns("place", "date", "start", "time", "level", "maxPlayers")
+			insertIntoMatcheam()
 				.values("尼崎", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL1, 12)
 				.values("神戸", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL3, 12)
 				.values("フランス", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL4, 12)
@@ -98,6 +96,7 @@ public class MatchRepositoryTest {
 		Match actual = matchRepository.findBy(new Identifier("X"));
 		assertThat(actual).isNull();
 	}
+
 	@Test
 	public void 募集内容を登録できること() throws Exception {
 		Match match = getRecord();
@@ -112,6 +111,11 @@ public class MatchRepositoryTest {
 		softAssertions.assertThat(actual.getLevel()).isEqualTo(Level.LEVEL1);
 		softAssertions.assertThat(actual.getStart()).isEqualTo("昼ぐらい");
 		softAssertions.assertAll();
+	}
+
+	private Insert.Builder insertIntoMatcheam() {
+		return insertInto("MATCHEAM.MATCH")
+			.columns("place", "date", "start", "time", "level", "maxPlayers");
 	}
 
 	private Match getRecord() {
