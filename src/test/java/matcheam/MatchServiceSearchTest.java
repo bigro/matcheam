@@ -1,5 +1,7 @@
 package matcheam;
 
+import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
+import static com.ninja_squad.dbsetup.Operations.insertInto;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
@@ -8,7 +10,10 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
+import com.ninja_squad.dbsetup.DbSetup;
+import com.ninja_squad.dbsetup.operation.Operation;
 import matcheam.common.SystemContext;
+import matcheam.support.TestContext;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -25,12 +30,16 @@ import matcheam.match.MatchService;
 public class MatchServiceSearchTest {
 
 	private MatchService matchService;
+	private TestContext testContext;
 
 	@Before
 	public void Before() throws SQLException {
-		matchService = new MatchService(new MatchRepository(new SystemContext().dslContext()));
-		matchService.matchMap.clear();
+		testContext = new TestContext();
+		Operation deleteAll = deleteAllFrom("MATCHEAM.MATCH");
+		DbSetup dbSetup = new DbSetup(testContext.driverManagerDestination(), deleteAll);
+		dbSetup.launch();
 
+		matchService = new MatchService(new MatchRepository(new SystemContext().dslContext()));
 		matchService.register(createMatch("1", Level.LEVEL1));
 		matchService.register(createMatch("2", Level.LEVEL1));
 		matchService.register(createMatch("3", Level.LEVEL3));
@@ -51,11 +60,19 @@ public class MatchServiceSearchTest {
 		return match;
 	}
 
-	@Ignore("テストデータ")
 	@Test
 	public void 指定したIDで絞り混んだ検索ができること() throws Exception {
-		Match actual = matchService.findBy(new Identifier("4"));
-		assertThat(actual.getIdentifier().toString()).isEqualTo("4");
+
+		Operation operation =
+			insertInto("MATCHEAM.MATCH")
+				.columns("identifier", "place", "date", "start", "time", "level", "maxPlayers")
+				.values(1, "尼崎", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL1, 12)
+				.build();
+		DbSetup dbSetup = new DbSetup(testContext.driverManagerDestination(), operation);
+		dbSetup.launch();
+
+		Match actual = matchService.findBy(new Identifier("1"));
+		assertThat(actual).isNotNull();
 	}
 
 	@Test
