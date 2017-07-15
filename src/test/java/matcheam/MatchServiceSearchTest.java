@@ -62,10 +62,6 @@ public class MatchServiceSearchTest {
 
 
 
-	@Test
-	public void 指定したIDの募集が存在しない場合nullが返ってくること() throws Exception {
-		Match actual = matchService.findBy(new Identifier("X"));
-		assertThat(actual).isNull();
-	}
+
 
 }
