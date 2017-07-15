@@ -65,7 +65,6 @@ public class MatchRepositoryTest {
 		assertThat(actual).extracting(Match::getLevel).containsOnly(Level.LEVEL3);
 	}
 
-
 	@Test
 	public void 指定したレベルの募集が存在しない場合空のリストが返ってくること() throws Exception {
 		Operation operation =
@@ -81,6 +80,19 @@ public class MatchRepositoryTest {
 		assertThat(actual).isEmpty();
 	}
 
+	@Test
+	public void 指定したIDで絞り混んだ検索ができること() throws Exception {
+		Operation operation =
+			insertInto("MATCHEAM.MATCH")
+				.columns("identifier", "place", "date", "start", "time", "level", "maxPlayers")
+				.values(1, "尼崎", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL1, 12)
+				.build();
+		DbSetup dbSetup = new DbSetup(testContext.driverManagerDestination(), operation);
+		dbSetup.launch();
+
+		Match actual = matchRepository.findBy(new Identifier("1"));
+		assertThat(actual).isNotNull();
+	}
 }
 
 

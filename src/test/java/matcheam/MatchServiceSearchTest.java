@@ -60,20 +60,7 @@ public class MatchServiceSearchTest {
 		return match;
 	}
 
-	@Test
-	public void 指定したIDで絞り混んだ検索ができること() throws Exception {
 
-		Operation operation =
-			insertInto("MATCHEAM.MATCH")
-				.columns("identifier", "place", "date", "start", "time", "level", "maxPlayers")
-				.values(1, "尼崎", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL1, 12)
-				.build();
-		DbSetup dbSetup = new DbSetup(testContext.driverManagerDestination(), operation);
-		dbSetup.launch();
-
-		Match actual = matchService.findBy(new Identifier("1"));
-		assertThat(actual).isNotNull();
-	}
 
 	@Test
 	public void 指定したIDの募集が存在しない場合nullが返ってくること() throws Exception {
