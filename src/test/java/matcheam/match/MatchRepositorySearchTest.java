@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by ooguro on 2017/07/08.
  */
-public class MatchRepositoryTest {
+public class MatchRepositorySearchTest {
 
 	private MatchRepository matchRepository;
 	private TestContext testContext;
@@ -97,36 +97,9 @@ public class MatchRepositoryTest {
 		assertThat(actual).isNull();
 	}
 
-	@Test
-	public void 募集内容を登録できること() throws Exception {
-		Match match = getRecord();
-
-		Identifier identifier = matchRepository.register(match);
-
-		Match actual = matchRepository.findBy(identifier);
-		SoftAssertions softAssertions = new SoftAssertions();
-		softAssertions.assertThat(actual.getPlace()).isEqualTo("場所");
-		softAssertions.assertThat(actual.getDate()).isEqualTo(LocalDate.of(2017, 1, 25));
-		softAssertions.assertThat(actual.getTime()).isEqualTo("2時間");
-		softAssertions.assertThat(actual.getLevel()).isEqualTo(Level.LEVEL1);
-		softAssertions.assertThat(actual.getStart()).isEqualTo("昼ぐらい");
-		softAssertions.assertAll();
-	}
-
 	private Insert.Builder insertIntoMatcheam() {
 		return insertInto("MATCHEAM.MATCH")
 			.columns("place", "date", "start", "time", "level", "maxPlayers");
-	}
-
-	private Match getRecord() {
-		Match match = new Match();
-		match.setPlace("場所");
-		match.setStart("昼ぐらい");
-		match.setDate(LocalDate.of(2017, 1, 25));
-		match.setTime("2時間");
-		match.setLevel(Level.LEVEL1);
-		match.setMaxPlayers(BigDecimal.TEN);
-		return match;
 	}
 }
 
