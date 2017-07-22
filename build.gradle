@@ -38,6 +38,8 @@ repositories {
     mavenCentral()
 }
 
+sourceSets.main.java.srcDirs = ['src/main/java','build/generated-sources']
+
 dependencies {
     compile('org.springframework.boot:spring-boot-starter')
     compile('org.springframework.boot:spring-boot-starter-web')
@@ -76,7 +78,7 @@ jooq {
             }
             target {
                 packageName = 'matcheam.jooq.generate'
-                directory = 'src/main/java'
+                directory = 'build/generated-sources'
             }
 	        generate {
 	        	javaTimeTypes = true
