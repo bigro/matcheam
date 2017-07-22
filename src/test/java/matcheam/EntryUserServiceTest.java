@@ -16,7 +16,7 @@ public class EntryUserServiceTest {
 	private PersonService entryUserService = new PersonService();
 
 	@Test
-	public void 登録した申込者を検索できること() throws Exception {
+	public void 登録した申込者を取得できること() throws Exception {
 		Person entryUser = new Person();
 		entryUser.setIdentifier(new Identifier("1"));
 		entryUser.setName("名前");
