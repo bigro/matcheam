@@ -34,7 +34,7 @@ public class Matching {
         return identifier;
     }
 
-    public List<EntryUser> getPersons() {
+    public List<EntryUser> getEntryUserList() {
         return entryUserList;
     }
 }

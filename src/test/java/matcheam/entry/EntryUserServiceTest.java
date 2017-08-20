@@ -5,14 +5,13 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 import org.junit.Test;
 
 import matcheam.match.Identifier;
-import matcheam.person.PersonService;
 
 /**
  * Created by ooguro on 2017/01/07.
  */
 public class EntryUserServiceTest {
 
-	private PersonService entryUserService = new PersonService();
+	private EntryUserService entryUserService = new EntryUserService();
 
 	@Test
 	public void 登録した申込者を取得できること() throws Exception {

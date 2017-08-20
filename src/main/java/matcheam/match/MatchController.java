@@ -95,9 +95,9 @@ public class MatchController {
 		Matching matching = matchingService.get(match);
 		// TODO 永続化できたら null 考慮しないように修正する
 		if (matching == null) {
-			model.addAttribute("persons", Collections.emptyList());
+			model.addAttribute("entryUserList", Collections.emptyList());
 		} else {
-			model.addAttribute("persons", matching.getPersons());
+			model.addAttribute("entryUserList", matching.getEntryUserList());
 		}
 		return "match/detail";
 	}

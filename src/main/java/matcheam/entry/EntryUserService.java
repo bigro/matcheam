@@ -1,4 +1,4 @@
-package matcheam.person;
+package matcheam.entry;
 
 import java.util.HashMap;
 
@@ -11,7 +11,7 @@ import matcheam.match.Identifier;
  * Created by ooguro on 2017/01/07.
  */
 @Service
-public class PersonService {
+public class EntryUserService {
 
 	// TODO 永続化する
 	public HashMap<String, EntryUser> dummy = new HashMap<>();
