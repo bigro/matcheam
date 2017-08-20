@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.stereotype.Service;
 
+import matcheam.entry.EntryUser;
 import matcheam.match.Identifier;
 
 /**
@@ -13,15 +14,15 @@ import matcheam.match.Identifier;
 public class PersonService {
 
 	// TODO 永続化する
-	public HashMap<String, Person> personHashMap = new HashMap<>();
+	public HashMap<String, EntryUser> dummy = new HashMap<>();
 
-	public void entry(Person person) {
+	public void entry(EntryUser entryUser) {
 		// TODO 永続化する
-		personHashMap.put(person.getIdentifier().toString(), person);
+		dummy.put(entryUser.getIdentifier().toString(), entryUser);
 	}
 
-	public Person findOne(Identifier identifier) {
-		return personHashMap.get(identifier.toString());
+	public EntryUser findOne(Identifier identifier) {
+		return dummy.get(identifier.toString());
 	}
 
 }

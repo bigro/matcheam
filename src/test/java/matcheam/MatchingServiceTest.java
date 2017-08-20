@@ -7,11 +7,11 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
+import matcheam.entry.EntryUser;
 import matcheam.match.Identifier;
 import matcheam.match.Match;
 import matcheam.matching.Matching;
 import matcheam.matching.MatchingService;
-import matcheam.person.Person;
 
 public class MatchingServiceTest {
 
@@ -20,15 +20,15 @@ public class MatchingServiceTest {
 	@Test
 	public void 募集に対して応募できること() throws Exception {
 		Match match = match(new Identifier("1"));
-		Person entryUser = new Person();
+		EntryUser entryUser = new EntryUser();
 		entryUser.setIdentifier(new Identifier("1"));
-		entryUser.setName("名前");
+		entryUser.setEntryUserName("名前");
 		matchingService.matching(match, entryUser);
 
 		Matching actual = matchingService.get(match);
 		assertThat(actual.getMatch()).isEqualTo(match);
 		assertThat(actual.getPersons())
-			.extracting(Person::getName)
+			.extracting(EntryUser::getEntryUserName)
 			.contains("名前");
 	}
 

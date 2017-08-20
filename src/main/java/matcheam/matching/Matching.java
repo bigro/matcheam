@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import matcheam.entry.EntryUser;
 import matcheam.match.Identifier;
 import matcheam.match.Match;
-import matcheam.person.Person;
 
 /**
  * Created by ooguro on 2017/01/28.
@@ -15,15 +15,15 @@ public class Matching {
 
 	private Identifier identifier = new Identifier(UUID.randomUUID().toString());
 	private Match match;
-	private List<Person> persons = new ArrayList<>();
+	private List<EntryUser> entryUserList = new ArrayList<>();
 
     public Matching(Match match) {
         this.match = match;
     }
 
 
-    public void entry(Person person) {
-		persons.add(person);
+    public void entry(EntryUser entryUser) {
+		entryUserList.add(entryUser);
 	}
 
     public Match getMatch() {
@@ -34,7 +34,7 @@ public class Matching {
         return identifier;
     }
 
-    public List<Person> getPersons() {
-        return persons;
+    public List<EntryUser> getPersons() {
+        return entryUserList;
     }
 }

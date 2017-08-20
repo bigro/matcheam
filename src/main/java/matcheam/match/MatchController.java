@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import matcheam.entry.EntryUser;
 import matcheam.matching.Matching;
 import matcheam.matching.MatchingService;
-import matcheam.person.Person;
 
 /**
  * Created by ooguro on 2017/01/21.
@@ -82,8 +82,8 @@ public class MatchController {
 	@GetMapping("matching/{matchId}")
 	public String matching(Model model, @ModelAttribute("entryName") String name, @PathVariable String matchId) {
 		Match match = matchService.findBy(new Identifier(matchId));
-		Person person = new Person(name);
-		matchingService.matching(match, person);
+		EntryUser entryUser = new EntryUser(name);
+		matchingService.matching(match, entryUser);
 		detail(model, matchId);
 		return "match/detail";
 	}

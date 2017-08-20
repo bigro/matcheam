@@ -11,6 +11,13 @@ public class EntryUser {
 	private Identifier identifier;
 	private String entryUserName;
 
+	public EntryUser() {
+	}
+
+	public EntryUser(String name) {
+		this.entryUserName = name;
+	}
+
 	public Identifier getIdentifier() {
 		return identifier;
 	}
