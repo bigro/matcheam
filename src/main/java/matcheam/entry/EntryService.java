@@ -13,16 +13,6 @@ import matcheam.match.Identifier;
 @Service
 public class EntryService {
 
-	// TODO 永続化する
-	public HashMap<String, EntryUser> dummy = new HashMap<>();
-
-	public void entry(EntryUser entryUser) {
-		// TODO 永続化する
-		dummy.put(entryUser.getIdentifier().toString(), entryUser);
+	public void entry(Entry entry) {
 	}
-
-	public EntryUser findOne(Identifier identifier) {
-		return dummy.get(identifier.toString());
-	}
-
 }
