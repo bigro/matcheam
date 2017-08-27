@@ -18,8 +18,9 @@ plugins {
     id "org.flywaydb.flyway" version "4.1.0"
 }
 flyway {
-    url = 'jdbc:h2:tcp://localhost:9092/matcheam;MODE=MySQL;INIT=CREATE SCHEMA IF NOT EXISTS matcheam;'
+    url = 'jdbc:h2:tcp://localhost:9092/MATCHEAM;INIT=CREATE SCHEMA IF NOT EXISTS MATCHEAM;'
     user = 'sa'
+    schemas = ['MATCHEAM']
 }
 apply plugin: 'java'
 apply plugin: 'eclipse'

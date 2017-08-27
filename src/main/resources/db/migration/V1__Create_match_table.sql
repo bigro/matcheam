@@ -1,9 +1,9 @@
-CREATE SCHEMA IF NOT EXISTS matcheam;
+CREATE SCHEMA IF NOT EXISTS MATCHEAM;
 
 /*
  * match 募集
  */
-CREATE TABLE matcheam.match (
+CREATE TABLE MATCHEAM."match" (
 identifier VARCHAR(100) PRIMARY KEY AUTO_INCREMENT,
 place VARCHAR(100),
 date DATE,
@@ -16,16 +16,17 @@ maxPlayers DECIMAL(3)
 /*
  * entry 応募
  */
-CREATE TABLE matcheam.entry (
+CREATE TABLE MATCHEAM."entry" (
 identifier VARCHAR(100) PRIMARY KEY AUTO_INCREMENT,
-matchId VARCHAR(100) not null,
-entryUserId VARCHAR(100) not null
+matchId VARCHAR(100) not null
 );
 
 /*
  * entryUser 応募者
  */
-CREATE TABLE matcheam.entryUser (
+CREATE TABLE MATCHEAM."entry_user" (
 identifier VARCHAR(100) PRIMARY KEY AUTO_INCREMENT,
-entryUserName VARCHAR(20)
+entryId VARCHAR(100) not null,
+entryUserName VARCHAR(20),
+FOREIGN KEY (entryId) REFERENCES MATCHEAM."entry" (identifier)
 );
