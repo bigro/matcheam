@@ -9,9 +9,9 @@ import matcheam.match.Identifier;
 /**
  * Created by ooguro on 2017/01/07.
  */
-public class EntryUserServiceTest {
+public class EntryServiceTest {
 
-	private EntryUserService entryUserService = new EntryUserService();
+	private EntryService entryService = new EntryService();
 
 	@Test
 	public void 登録した申込者を取得できること() throws Exception {
@@ -19,9 +19,9 @@ public class EntryUserServiceTest {
 		entryUser.setIdentifier(new Identifier("1"));
 		entryUser.setEntryUserName("名前");
 
-		entryUserService.entry(entryUser);
+		entryService.entry(entryUser);
 
-		EntryUser actual = entryUserService.dummy.get("1");
+		EntryUser actual = entryService.dummy.get("1");
 		assertThat(actual.getEntryUserName()).isEqualTo("名前");
 		assertThat(actual.getIdentifier().toString()).isEqualTo("1");
 	}

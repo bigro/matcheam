@@ -11,7 +11,7 @@ import matcheam.match.Identifier;
  * Created by ooguro on 2017/01/07.
  */
 @Service
-public class EntryUserService {
+public class EntryService {
 
 	// TODO 永続化する
 	public HashMap<String, EntryUser> dummy = new HashMap<>();
