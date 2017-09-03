@@ -18,7 +18,8 @@ maxPlayers DECIMAL(3)
  */
 CREATE TABLE MATCHEAM."entry" (
 identifier VARCHAR(100) PRIMARY KEY AUTO_INCREMENT,
-matchId VARCHAR(100) not null
+matchId VARCHAR(100) not null,
+UNIQUE (matchId)
 );
 
 /*
