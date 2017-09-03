@@ -12,7 +12,7 @@ import matcheam.match.Identifier;
  */
 public class EntryServiceTest {
 
-	private EntryService entryService = new EntryService();
+	private EntryService entryService = new EntryService(new EntryRepository());
 
 	@Test
 	@Ignore("取得サービスがないから書けない")
