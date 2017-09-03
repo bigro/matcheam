@@ -13,7 +13,7 @@ import matcheam.match.Match;
  */
 public class Matching {
 
-	private Identifier identifier = new Identifier(UUID.randomUUID().toString());
+	private Identifier identifier = new Identifier(1);
 	private Match match;
 	private List<EntryUser> entryUserList = new ArrayList<>();
 

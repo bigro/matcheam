@@ -55,7 +55,7 @@ public class MatchRepository {
 	Match findBy(Identifier identifier) throws Exception {
 		Condition condition = trueCondition();
 		MatchRecord record = dsl.selectFrom(MATCH)
-			.where(condition.and(MATCH.IDENTIFIER.equal(identifier.toString())))
+			.where(condition.and(MATCH.IDENTIFIER.equal(identifier.value())))
 			.fetchOne();
 		if (record == null) {
 			return null;

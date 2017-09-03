@@ -5,14 +5,22 @@ package matcheam.match;
  */
 public class Identifier {
 
-    private String value;
+    private int value;
+
+    public Identifier(int value) {
+        this.value = value;
+    }
 
     public Identifier(String value) {
-        this.value = value;
+        this.value = Integer.parseInt(value);
     }
 
     @Override
     public String toString() {
+        return String.valueOf(value);
+    }
+
+    public int value() {
         return value;
     }
 }

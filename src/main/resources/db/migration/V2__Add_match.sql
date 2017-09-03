@@ -1,4 +1,4 @@
-insert into matcheam."match"
+insert into matcheam.match
 (place, date, start, time, level, maxPlayers)
  values
 ('宝塚CABO', '2017-01-20', '昼頃', '2時間', 'LEVEL1', '20'),
