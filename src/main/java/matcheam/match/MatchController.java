@@ -1,9 +1,12 @@
 package matcheam.match;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
+import matcheam.entry.Entry;
+import matcheam.entry.EntryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +33,9 @@ public class MatchController {
 
 	@Autowired
 	MatchingService matchingService;
+
+	@Autowired
+	EntryService entryService;
 
 	@ModelAttribute("match")
 	Match match() {
@@ -80,12 +86,13 @@ public class MatchController {
 	}
 
 	@GetMapping("matching/{matchId}")
-	public String matching(Model model, @ModelAttribute("entryName") String name, @PathVariable String matchId) {
+	public String matching(Model model, @ModelAttribute("entryName") String name, @PathVariable String matchId) throws Exception {
 		Match match = matchService.findBy(new Identifier(matchId));
 		EntryUser entryUser = new EntryUser(name);
-		matchingService.matching(match, entryUser);
-		detail(model, matchId);
-		return "match/detail";
+		Entry entry = new Entry(match, Arrays.asList(entryUser));
+		// TODO:本来はEntryクラスを渡したくはないかも
+		entryService.entry(entry);
+		return "redirect:detail/" + matchId;
 	}
 
 	@GetMapping("detail/{matchId}")

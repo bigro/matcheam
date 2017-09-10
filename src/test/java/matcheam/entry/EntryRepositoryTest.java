@@ -8,6 +8,8 @@ import matcheam.support.TestContext;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
 import static com.ninja_squad.dbsetup.Operations.sequenceOf;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,23 +32,13 @@ public class EntryRepositoryTest {
     }
 
     @Test
-    public void 一件の応募の登録ができること() throws Exception {
-        Match match = new Match();
-        match.setIdentifier(new Identifier(3));
-
-        Entry entry = new Entry();
-        entry.setMatch(match);
-
-        sut.register(entry);
-    }
-
-    @Test
-    public void 応募を検索できること() throws Exception {
+    public void 応募を登録して検索できること() throws Exception {
         Match match = Match.of(Identifier.of(2));
-        Entry param = sut.register(new Entry(null,match,null));
+        Entry param = sut.register(new Entry(null, match, Arrays.asList(new EntryUser("nishida"))));
 
         Entry actual = sut.findBy(param);
 
         assertThat(actual).isNotNull();
+        assertThat(actual.getEntryUserList()).hasSize(1);
     }
 }
