@@ -10,19 +10,6 @@
 			th:object="${match}" th:action="@{/match/result}">
 
 			<div class="form-group">
-				<div>
-					<label class="col-xs-2 control-label" for="identifier">試合ID</label>
-
-					<div class="col-xs-3">
-						<input class="form-control" placeholder="1"
-							th:field="*{identifier}" />
-					</div>
-					<span th:if="${#fields.hasErrors('identifier')}"
-						class="text-danger" th:errors="*{identifier}">Error</span>
-				</div>
-			</div>
-
-			<div class="form-group">
 				<label class="col-xs-2 control-label" for="place">場所</label>
 				<div class="col-xs-3">
 					<input class="form-control" th:field="*{place}" />

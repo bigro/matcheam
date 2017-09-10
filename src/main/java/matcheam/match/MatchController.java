@@ -92,7 +92,7 @@ public class MatchController {
 		Entry entry = new Entry(match, Arrays.asList(entryUser));
 		// TODO:本来はEntryクラスを渡したくはないかも
 		entryService.entry(entry);
-		return "redirect:detail/" + matchId;
+		return "redirect:/match/detail/" + matchId;
 	}
 
 	@GetMapping("detail/{matchId}")
