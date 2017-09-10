@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 import org.springframework.stereotype.Service;
 
+import matcheam.entry.EntryUser;
 import matcheam.match.Match;
-import matcheam.person.Person;
 
 /**
  * Created by ooguro on 2017/01/07.
@@ -16,7 +16,7 @@ public class MatchingService {
 	// TODO 永続化する
 	public HashMap<String, Matching> matchingMap = new HashMap<>();
 
-	public void matching(Match match, Person person) {
+	public void matching(Match match, EntryUser entryUser) {
 		Matching matching = new Matching(match);
 		for (Matching m : matchingMap.values()) {
 			if (m.getMatch().equals(match)) {
@@ -24,7 +24,7 @@ public class MatchingService {
 				break;
 			}
 		}
-		matching.entry(person);
+		matching.entry(entryUser);
 		matchingMap.put(matching.getIdentifier().toString(), matching);
 	}
 

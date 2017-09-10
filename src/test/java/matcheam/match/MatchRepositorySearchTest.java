@@ -67,7 +67,7 @@ public class MatchRepositorySearchTest {
 
 	@Test
 	public void 指定したIDの募集が存在しない場合nullが返ってくること() throws Exception {
-		Match actual = sut.findBy(new Identifier("X"));
+		Match actual = sut.findBy(new Identifier(99999));
 		assertThat(actual).isNull();
 	}
 }

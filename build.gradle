@@ -8,7 +8,6 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath 'com.h2database:h2:1.4.193'
         classpath 'nu.studer:gradle-jooq-plugin:2.0.3'
         classpath 'mysql:mysql-connector-java:5.1.40'
     }
@@ -18,8 +17,10 @@ plugins {
     id "org.flywaydb.flyway" version "4.1.0"
 }
 flyway {
-    url = 'jdbc:h2:tcp://localhost:9092/matcheam;MODE=MySQL;INIT=CREATE SCHEMA IF NOT EXISTS matcheam;'
-    user = 'sa'
+    url = 'jdbc:mysql://localhost:3306/matcheam'
+    user = 'matcheam'
+    password = 'pass'
+    schemas = ['matcheam']
 }
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -46,27 +47,26 @@ dependencies {
     compile('org.thymeleaf:thymeleaf-spring4')
     compile('org.springframework.boot:spring-boot-starter-jooq')
     compile('org.thymeleaf.extras:thymeleaf-extras-java8time')
-    compile('com.h2database:h2')
     compile('org.springframework:spring-jdbc')
     compile('mysql:mysql-connector-java')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('com.ninja-squad:DbSetup:2.1.0')
 
-    jooqRuntime 'com.h2database:h2:1.4.193'
+    jooqRuntime 'mysql:mysql-connector-java:5.1.40'
 }
 
 jooq {
     version = '3.9.1'
     matcheam(sourceSets.main) {
         jdbc {
-            driver = 'org.h2.Driver'
-            url = 'jdbc:h2:tcp://localhost:9092/matcheam;MODE=MySQL;'
-            user = 'sa'
-            password = ''
+            driver = 'com.mysql.jdbc.Driver'
+            url = 'jdbc:mysql://localhost:3306/matcheam'
+            user = 'matcheam'
+            password = 'pass'
         }
         generator {
             database {
-                name = 'org.jooq.util.h2.H2Database'
+                name = 'org.jooq.util.mysql.MySQLDatabase'
                 inputSchema = 'matcheam'
                 forcedTypes {
                     forcedType {

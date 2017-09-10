@@ -10,9 +10,9 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
 public class TestContext implements AutoCloseable {
-	private static final String TEST_DB_URL = "jdbc:h2:tcp://localhost:9092/matcheam;MODE=MySQL;";
-	private static final String TEST_DB_USER = "sa";
-	private static final String TEST_DB_PASSWORD = "";
+	private static final String TEST_DB_URL = "jdbc:mysql://localhost:3306/matcheam";
+	private static final String TEST_DB_USER = "matcheam";
+	private static final String TEST_DB_PASSWORD = "pass";
 	private Connection connection;
 	private DSLContext dslContext;
 

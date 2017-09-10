@@ -14,9 +14,17 @@ File->Import->General->Exisiring Project
 
 ## MySQLの設定
 
-ユーザー：root
-パスワード：なし
+ユーザー：root  
+パスワード：なし  
 スキーマ：matcheam
+
+```
+grant all on *.* to matcheam@localhost; 
+create database matcheam;
+```
+ユーザー：matcheam@localhost  
+パスワード：pass
+
 
 ## jooqのコードジェネレーター
 
