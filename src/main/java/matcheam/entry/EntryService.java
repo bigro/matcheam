@@ -1,6 +1,9 @@
 package matcheam.entry;
 
+import matcheam.match.Match;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 応募サービスです。
@@ -23,5 +26,9 @@ public class EntryService {
 	 */
 	public void entry(Entry entry) throws Exception {
 		repository.register(entry);
+	}
+
+	public List<EntryUser> findEntryUserBy(Match match) {
+		return repository.findEntryUserBy(match);
 	}
 }

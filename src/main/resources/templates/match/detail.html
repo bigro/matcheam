@@ -113,7 +113,7 @@
 	<tbody>
 		<!--ここには一覧のIDにひもづく参加者が渡ってくるはず。登録されただけ繰り返すよー-->
 		<tr th:each="entryUser : ${entryUserList}">
-			<td><span th:text="${entryUser.name}">ハンドルネームとか懐かしい</span></td>
+			<td><span th:text="${entryUser.entryUserName}">ハンドルネームとか懐かしい</span></td>
 		</tr>
 	</tbody>
 
