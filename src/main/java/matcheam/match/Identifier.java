@@ -23,4 +23,8 @@ public class Identifier {
     public int value() {
         return value;
     }
+
+    public static Identifier of(int value) {
+        return new Identifier(value);
+    }
 }

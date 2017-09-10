@@ -13,7 +13,16 @@ import matcheam.match.Match;
 public class Entry {
 	private Identifier identifier;
 	private Match match;
-	private List<EntryUser> entryUserLsit;
+	private List<EntryUser> entryUserList;
+
+	public Entry() {
+	}
+
+	public Entry(Identifier identifier, Match match, List<EntryUser> entryUserList) {
+		this.identifier = identifier;
+		this.match = match;
+		this.entryUserList = entryUserList;
+	}
 
 	public Identifier getIdentifier() {
 		return identifier;
@@ -31,12 +40,12 @@ public class Entry {
 		this.match = match;
 	}
 
-	public List<EntryUser> getEntryUserLsit() {
-		return entryUserLsit;
+	public List<EntryUser> getEntryUserList() {
+		return entryUserList;
 	}
 
-	public void setEntryUserLsit(List<EntryUser> entryUserLsit) {
-		this.entryUserLsit = entryUserLsit;
+	public void setEntryUserList(List<EntryUser> entryUserList) {
+		this.entryUserList = entryUserList;
 	}
 
 }

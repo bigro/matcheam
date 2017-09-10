@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
 import static com.ninja_squad.dbsetup.Operations.sequenceOf;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class EntryRepositoryTest {
     private TestContext testContext;
@@ -39,4 +40,13 @@ public class EntryRepositoryTest {
         sut.register(entry);
     }
 
+    @Test
+    public void 応募を検索できること() throws Exception {
+        Match match = Match.of(Identifier.of(2));
+        Entry param = sut.register(new Entry(null,match,null));
+
+        Entry actual = sut.findBy(param);
+
+        assertThat(actual).isNotNull();
+    }
 }

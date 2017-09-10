@@ -21,6 +21,12 @@ public class Match {
     private Level level;
     private BigDecimal maxPlayers;
 
+    public Match() {}
+
+    public Match(Identifier identifier) {
+        this.identifier = identifier;
+    }
+
     public Identifier getIdentifier() {
         return identifier;
     }
@@ -75,5 +81,9 @@ public class Match {
 
     public void setStart(String start) {
         this.start = start;
+    }
+
+    public static Match of(Identifier identifier) {
+        return new Match(identifier);
     }
 }
