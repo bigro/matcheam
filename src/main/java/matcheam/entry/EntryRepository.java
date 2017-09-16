@@ -34,48 +34,20 @@ public class EntryRepository {
      * @param entry 　Entryインスタンス
      * @throws Exception 登録が失敗した場合
      */
-    Entry register(Entry entry) throws Exception {
-        int entryIdentifier;
-
+    void register(Entry entry) throws Exception {
         //TODO:本当の判断条件を入れる
         if (true) {
-            EntryRecord entryRecord = dsl.insertInto(ENTRY)
-                    .columns(ENTRY.MATCHID)
+            dsl.insertInto(ENTRY)
+                    .columns(ENTRY.MATCH_ID)
                     .values(entry.getMatch().getIdentifier().value())
-                    .returning(ENTRY.IDENTIFIER)
-                    .fetchOne();
-            entryIdentifier = entryRecord.getIdentifier();
+                    .execute();
         }
 
+        Identifier matchIdentifier = entry.getMatch().getIdentifier();
         dsl.insertInto(ENTRY_USER)
-                .columns(ENTRY_USER.ENTRYID, ENTRY_USER.ENTRYUSERNAME)
-                .values(entryIdentifier, entry.getEntryUserList().get(0).getEntryUserName())
+                .columns(ENTRY_USER.MATCH_ID, ENTRY_USER.ENTRY_USER_NAME)
+                .values(matchIdentifier.value(), entry.getUserName())
                 .execute();
-
-        entry.setIdentifier(Identifier.of(entryIdentifier));
-        return entry;
-    }
-
-    /**
-     * 主キーで検索します。
-     * <p>条件に一致しない場合、nullを返します。</p>
-     *
-     * @param entry 募集
-     * @return 募集
-     * @throws Exception 検索が失敗した場合
-     */
-    Entry findBy(Entry entry) throws Exception {
-        Condition condition = trueCondition();
-        EntryRecord record = dsl.selectFrom(ENTRY)
-                .where(condition.and(ENTRY.IDENTIFIER.equal(entry.getIdentifier().value())))
-                .fetchOne();
-        if (record == null) {
-            return null;
-        }
-
-        Result<EntryUserRecord> entryUserRecords = getEntryUsers(entry.getIdentifier().value());
-
-        return makeEntry(record, entryUserRecords);
     }
 
     /**
@@ -89,26 +61,15 @@ public class EntryRepository {
     List<EntryUser> findEntryUserBy(Match match) {
         Condition condition = trueCondition();
         EntryRecord record = dsl.selectFrom(ENTRY)
-                .where(condition.and(ENTRY.MATCHID.equal(match.getIdentifier().value())))
+                .where(condition.and(ENTRY.MATCH_ID.equal(match.getIdentifier().value())))
                 .fetchOne();
 
         if (record == null) {
             return null;
         }
 
-        Result<EntryUserRecord> entryUserRecords = getEntryUsers(record.getIdentifier());
+        Result<EntryUserRecord> entryUserRecords = getEntryUsers(record.getMatchId());
         return makeEntryUserList(entryUserRecords);
-    }
-
-    /**
-     * EntryRecord のインスタンスから Entry のインスタンスを生成します。
-     *
-     * @param record           　EntryRecord のインスタンス
-     * @param entryUserRecords Result<EntryUserRecord> のインスタンス
-     * @return　Entry のインスタンス
-     */
-    private Entry makeEntry(EntryRecord record, Result<EntryUserRecord> entryUserRecords) {
-        return new Entry(Identifier.of(record.getIdentifier()), Match.of(Identifier.of(record.getMatchid())), makeEntryUserList(entryUserRecords));
     }
 
     /**
@@ -120,7 +81,7 @@ public class EntryRepository {
     private List<EntryUser> makeEntryUserList(Result<EntryUserRecord> entryUserRecords) {
         List<EntryUser> entryUserList = new ArrayList<>();
         for (EntryUserRecord entryUserRecord : entryUserRecords) {
-            String entryUserName = entryUserRecord.getEntryusername();
+            String entryUserName = entryUserRecord.getEntryUserName();
             entryUserList.add(new EntryUser(entryUserName));
         }
         return entryUserList;
@@ -129,13 +90,13 @@ public class EntryRepository {
     /**
      * EntryUserの検索結果を取得します。
      *
-     * @param entryId 検索条件となるentryId
+     * @param matchId 検索条件となるmatchId
      * @return EntryUserの検索結果
      */
-    private Result<EntryUserRecord> getEntryUsers(int entryId) {
+    private Result<EntryUserRecord> getEntryUsers(int matchId) {
         Condition condition = trueCondition();
         return dsl.selectFrom(ENTRY_USER)
-                .where(condition.and(ENTRY_USER.ENTRYID.equal(entryId)))
+                .where(condition.and(ENTRY_USER.MATCH_ID.equal(matchId)))
                 .fetch();
     }
 }

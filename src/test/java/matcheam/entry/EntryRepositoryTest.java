@@ -4,11 +4,11 @@ import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.operation.Operation;
 import matcheam.match.Identifier;
 import matcheam.match.Match;
+import matcheam.match.MatchRepository;
+import matcheam.match.MatchService;
 import matcheam.support.TestContext;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Arrays;
 
 import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
 import static com.ninja_squad.dbsetup.Operations.sequenceOf;
@@ -18,11 +18,13 @@ public class EntryRepositoryTest {
     private TestContext testContext;
 
     EntryRepository sut;
+    MatchService matchService;
 
     @Before
     public void setUp() throws Exception {
         testContext = new TestContext();
         sut = new EntryRepository(testContext.dslContext());
+        matchService = new MatchService(new MatchRepository(testContext.dslContext()));
         Operation deleteAll = sequenceOf(
                 deleteAllFrom("MATCHEAM.ENTRY_USER"),
                 deleteAllFrom("MATCHEAM.ENTRY")
@@ -33,12 +35,10 @@ public class EntryRepositoryTest {
 
     @Test
     public void 応募を登録して検索できること() throws Exception {
-        Match match = Match.of(Identifier.of(2));
-        Entry param = sut.register(new Entry(null, match, Arrays.asList(new EntryUser("nishida"))));
+        sut.register(new Entry(Match.of(Identifier.of(2)), "nishida"));
 
-        Entry actual = sut.findBy(param);
-
-        assertThat(actual).isNotNull();
-        assertThat(actual.getEntryUserList()).hasSize(1);
+        Match match = matchService.findBy(Match.of(Identifier.of(2)).getIdentifier());
+        assertThat(match).isNotNull();
+        assertThat(match.getEntryUserList()).hasSize(1);
     }
 }

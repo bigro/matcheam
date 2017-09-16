@@ -13,19 +13,19 @@ import matcheam.match.Match;
 public class Entry {
     private Identifier identifier;
     private Match match;
-    private List<EntryUser> entryUserList;
+    private String userName;
 
     public Entry() {
     }
 
-    public Entry(Identifier identifier, Match match, List<EntryUser> entryUserList) {
+    public Entry(Identifier identifier, Match match, String userName) {
+        this(match, userName);
         this.identifier = identifier;
-        this.match = match;
-        this.entryUserList = entryUserList;
     }
 
-    public Entry(Match match, List<EntryUser> entryUserList) {
-        this(null, match, entryUserList);
+    public Entry(Match match, String userName) {
+        this.match = match;
+        this.userName = userName;
     }
 
     public Identifier getIdentifier() {
@@ -44,12 +44,7 @@ public class Entry {
         this.match = match;
     }
 
-    public List<EntryUser> getEntryUserList() {
-        return entryUserList;
+    public String getUserName() {
+        return userName;
     }
-
-    public void setEntryUserList(List<EntryUser> entryUserList) {
-        this.entryUserList = entryUserList;
-    }
-
 }
