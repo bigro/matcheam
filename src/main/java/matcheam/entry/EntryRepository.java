@@ -17,15 +17,16 @@ import static matcheam.jooq.generate.Tables.ENTRY_USER;
 import static org.jooq.impl.DSL.trueCondition;
 
 /**
- * 応募Repositoryです。
+ * Repositoryです。
  */
 @Repository
 public class EntryRepository {
-    public EntryRepository(DSLContext dsl) {
+
+    private DSLContext dsl;
+
+    EntryRepository(DSLContext dsl) {
         this.dsl = dsl;
     }
-
-    DSLContext dsl;
 
     /**
      * １件のentryを登録します。
@@ -63,7 +64,7 @@ public class EntryRepository {
      * @return 募集
      * @throws Exception 検索が失敗した場合
      */
-    public Entry findBy(Entry entry) throws Exception {
+    Entry findBy(Entry entry) throws Exception {
         Condition condition = trueCondition();
         EntryRecord record = dsl.selectFrom(ENTRY)
                 .where(condition.and(ENTRY.IDENTIFIER.equal(entry.getIdentifier().value())))
@@ -85,7 +86,7 @@ public class EntryRepository {
      * @return 応募者のリスト
      * @throws Exception 検索が失敗した場合
      */
-    public List<EntryUser> findEntryUserBy(Match match) {
+    List<EntryUser> findEntryUserBy(Match match) {
         Condition condition = trueCondition();
         EntryRecord record = dsl.selectFrom(ENTRY)
                 .where(condition.and(ENTRY.MATCHID.equal(match.getIdentifier().value())))
