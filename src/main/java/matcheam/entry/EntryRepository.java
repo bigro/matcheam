@@ -16,6 +16,9 @@ import static matcheam.jooq.generate.Tables.ENTRY;
 import static matcheam.jooq.generate.Tables.ENTRY_USER;
 import static org.jooq.impl.DSL.trueCondition;
 
+/**
+ * 応募Repositoryです。
+ */
 @Repository
 public class EntryRepository {
     public EntryRepository(DSLContext dsl) {
@@ -107,6 +110,12 @@ public class EntryRepository {
         return new Entry(Identifier.of(record.getIdentifier()), Match.of(Identifier.of(record.getMatchid())), makeEntryUserList(entryUserRecords));
     }
 
+    /**
+     * EntryRecord のインスタンスから EntryUserのリスト のインスタンスを生成します。
+     *
+     * @param entryUserRecords Result<EntryUserRecord> のインスタンス
+     * @return EntryUserのリスト
+     */
     private List<EntryUser> makeEntryUserList(Result<EntryUserRecord> entryUserRecords) {
         List<EntryUser> entryUserList = new ArrayList<>();
         for (EntryUserRecord entryUserRecord : entryUserRecords) {
@@ -116,6 +125,12 @@ public class EntryRepository {
         return entryUserList;
     }
 
+    /**
+     * EntryUserの検索結果を取得します。
+     *
+     * @param entryId 検索条件となるentryId
+     * @return EntryUserの検索結果
+     */
     private Result<EntryUserRecord> getEntryUsers(int entryId) {
         Condition condition = trueCondition();
         return dsl.selectFrom(ENTRY_USER)
