@@ -52,7 +52,6 @@ public class EntryRepository {
         return entry;
     }
 
-
     /**
      * 主キーで検索します。
      * <p>条件に一致しない場合、nullを返します。</p>
@@ -75,27 +74,6 @@ public class EntryRepository {
         return makeEntry(record, entryUserRecords);
     }
 
-
-    /**
-     * EntryRecord のインスタンスから Entry のインスタンスを生成します。
-     *
-     * @param record           　EntryRecord のインスタンス
-     * @param entryUserRecords Result<EntryUserRecord> のインスタンス
-     * @return　Entry のインスタンス
-     */
-    private Entry makeEntry(EntryRecord record, Result<EntryUserRecord> entryUserRecords) {
-        return new Entry(Identifier.of(record.getIdentifier()), Match.of(Identifier.of(record.getMatchid())), makeEntryUserList(entryUserRecords));
-    }
-
-    private List<EntryUser> makeEntryUserList(Result<EntryUserRecord> entryUserRecords) {
-        List<EntryUser> entryUserList = new ArrayList<>();
-        for (EntryUserRecord entryUserRecord : entryUserRecords) {
-            String entryUserName = entryUserRecord.getEntryusername();
-            entryUserList.add(new EntryUser(entryUserName));
-        }
-        return entryUserList;
-    }
-
     /**
      * Matchで検索します。
      * <p>条件に一致しない場合、nullを返します。</p>
@@ -116,6 +94,26 @@ public class EntryRepository {
 
         Result<EntryUserRecord> entryUserRecords = getEntryUsers(record.getIdentifier());
         return makeEntryUserList(entryUserRecords);
+    }
+
+    /**
+     * EntryRecord のインスタンスから Entry のインスタンスを生成します。
+     *
+     * @param record           　EntryRecord のインスタンス
+     * @param entryUserRecords Result<EntryUserRecord> のインスタンス
+     * @return　Entry のインスタンス
+     */
+    private Entry makeEntry(EntryRecord record, Result<EntryUserRecord> entryUserRecords) {
+        return new Entry(Identifier.of(record.getIdentifier()), Match.of(Identifier.of(record.getMatchid())), makeEntryUserList(entryUserRecords));
+    }
+
+    private List<EntryUser> makeEntryUserList(Result<EntryUserRecord> entryUserRecords) {
+        List<EntryUser> entryUserList = new ArrayList<>();
+        for (EntryUserRecord entryUserRecord : entryUserRecords) {
+            String entryUserName = entryUserRecord.getEntryusername();
+            entryUserList.add(new EntryUser(entryUserName));
+        }
+        return entryUserList;
     }
 
     private Result<EntryUserRecord> getEntryUsers(int entryId) {
