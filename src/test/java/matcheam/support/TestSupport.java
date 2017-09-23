@@ -6,8 +6,8 @@ import matcheam.match.Match;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class MatchBuilder {
-    public static Match testMatch() {
+public class TestSupport {
+    public static Match newMatch() {
         Match match = new Match();
         match.setPlace("場所");
         match.setStart("昼ぐらい");

@@ -12,15 +12,6 @@ max_players DECIMAL(3)
 );
 
 /*
- * entry 応募
- */
-CREATE TABLE matcheam.entry (
-identifier INTEGER PRIMARY KEY AUTO_INCREMENT,
-match_id INTEGER not null,
-UNIQUE (match_id)
-);
-
-/*
  * entryUser 応募者
  */
 CREATE TABLE matcheam.entry_user (

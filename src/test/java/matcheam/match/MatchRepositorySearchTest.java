@@ -3,7 +3,7 @@ package matcheam.match;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.operation.Operation;
 import matcheam.entry.EntryRepository;
-import matcheam.support.TestContext;
+import matcheam.support.TestDataSource;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,11 +21,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MatchRepositorySearchTest {
 
 	private MatchRepository sut;
-	private TestContext testContext;
+	private TestDataSource testDataSource;
 
 	@Before
 	public void setUp() throws Exception {
-		testContext = new TestContext();
+		testDataSource = new TestDataSource();
 		Operation operation =
 			sequenceOf(
 				deleteAllFrom("MATCHEAM.MATCH"),
@@ -36,11 +36,11 @@ public class MatchRepositorySearchTest {
 					.values(3, "フランス", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL4, 12)
 					.build()
 			);
-		DbSetup dbSetup = new DbSetup(testContext.driverManagerDestination(), operation);
+		DbSetup dbSetup = new DbSetup(testDataSource.driverManagerDestination(), operation);
 		dbSetup.launch();
 
-		EntryRepository entryRepository = new EntryRepository(testContext.dslContext());
-		sut = new MatchRepository(testContext.dslContext(), entryRepository);
+		EntryRepository entryRepository = new EntryRepository(testDataSource.dslContext());
+		sut = new MatchRepository(testDataSource.dslContext(), entryRepository);
 	}
 
 	@Test

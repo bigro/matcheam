@@ -9,7 +9,7 @@ import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
-public class TestContext implements AutoCloseable {
+public class TestDataSource implements AutoCloseable {
 	private static final String TEST_DB_URL = "jdbc:mysql://localhost:3306/matcheam";
 	private static final String TEST_DB_USER = "matcheam";
 	private static final String TEST_DB_PASSWORD = "pass";
@@ -28,7 +28,7 @@ public class TestContext implements AutoCloseable {
 		return new DriverManagerDestination(TEST_DB_URL, TEST_DB_USER, TEST_DB_PASSWORD);
 	}
 
-	public TestContext() throws SQLException {
+	public TestDataSource() throws SQLException {
 		this.connection = getConnect();
 		this.dslContext = getDSLContext(connection);
 	}

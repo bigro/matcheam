@@ -1,6 +1,5 @@
 package matcheam.entry;
 
-import matcheam.jooq.generate.tables.records.EntryRecord;
 import matcheam.jooq.generate.tables.records.EntryUserRecord;
 import matcheam.match.Identifier;
 import matcheam.match.Match;
@@ -12,8 +11,8 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-import static matcheam.jooq.generate.Tables.ENTRY;
 import static matcheam.jooq.generate.Tables.ENTRY_USER;
+import static matcheam.jooq.generate.Tables.MATCH;
 import static org.jooq.impl.DSL.trueCondition;
 
 /**
@@ -35,15 +34,9 @@ public class EntryRepository {
      * @throws Exception 登録が失敗した場合
      */
     void register(Entry entry) throws Exception {
-        //TODO:本当の判断条件を入れる
-        if (true) {
-            dsl.insertInto(ENTRY)
-                    .columns(ENTRY.MATCH_ID)
-                    .values(entry.getMatch().getIdentifier().value())
-                    .execute();
-        }
+        Match match = entry.getMatch();
 
-        Identifier matchIdentifier = entry.getMatch().getIdentifier();
+        Identifier matchIdentifier = match.getIdentifier();
         dsl.insertInto(ENTRY_USER)
                 .columns(ENTRY_USER.MATCH_ID, ENTRY_USER.ENTRY_USER_NAME)
                 .values(matchIdentifier.value(), entry.getUserName())
@@ -60,8 +53,8 @@ public class EntryRepository {
      */
     List<EntryUser> findEntryUserBy(Match match) {
         Condition condition = trueCondition();
-        EntryRecord record = dsl.selectFrom(ENTRY)
-                .where(condition.and(ENTRY.MATCH_ID.equal(match.getIdentifier().value())))
+        EntryUserRecord record = dsl.selectFrom(ENTRY_USER)
+                .where(condition.and(ENTRY_USER.MATCH_ID.equal(match.getIdentifier().value())))
                 .fetchOne();
 
         if (record == null) {
