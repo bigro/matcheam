@@ -30,7 +30,7 @@ public class MatchRepositorySearchTest {
 			sequenceOf(
 				deleteAllFrom("MATCHEAM.MATCH"),
 				insertInto("MATCHEAM.MATCH")
-					.columns("identifier", "place", "date", "start", "time", "level", "maxPlayers")
+					.columns("identifier", "place", "date", "start", "time", "level", "max_players")
 					.values(1, "尼崎", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL1, 12)
 					.values(2, "神戸", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL3, 12)
 					.values(3, "フランス", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL4, 12)

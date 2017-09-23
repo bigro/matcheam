@@ -2,13 +2,14 @@ package matcheam.entry;
 
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.operation.Operation;
-import matcheam.match.Identifier;
-import matcheam.match.Match;
-import matcheam.match.MatchRepository;
-import matcheam.match.MatchService;
+import matcheam.match.*;
+import matcheam.support.MatchBuilder;
 import matcheam.support.TestContext;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
 import static com.ninja_squad.dbsetup.Operations.sequenceOf;
@@ -35,9 +36,11 @@ public class EntryRepositoryTest {
 
     @Test
     public void 応募を登録して検索できること() throws Exception {
-        sut.register(new Entry(Match.of(Identifier.of(2)), "nishida"));
+        Identifier matchId = matchService.register(MatchBuilder.testMatch());
 
-        Match match = matchService.findBy(Match.of(Identifier.of(2)).getIdentifier());
+        sut.register(new Entry(Match.of(matchId), "nishida"));
+
+        Match match = matchService.findBy(Match.of(matchId).getIdentifier());
         assertThat(match).isNotNull();
         assertThat(match.getEntryUserList()).hasSize(1);
     }
