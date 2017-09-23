@@ -24,7 +24,7 @@ public class EntryRepository {
 
     private DSLContext dsl;
 
-    EntryRepository(DSLContext dsl) {
+    public EntryRepository(DSLContext dsl) {
         this.dsl = dsl;
     }
 
@@ -68,7 +68,7 @@ public class EntryRepository {
             return null;
         }
 
-        Result<EntryUserRecord> entryUserRecords = getEntryUsers(record.getMatchId());
+        Result<EntryUserRecord> entryUserRecords = getEntryUsers(new Identifier(record.getMatchId()));
         return makeEntryUserList(entryUserRecords);
     }
 
@@ -93,10 +93,9 @@ public class EntryRepository {
      * @param matchId 検索条件となるmatchId
      * @return EntryUserの検索結果
      */
-    private Result<EntryUserRecord> getEntryUsers(int matchId) {
-        Condition condition = trueCondition();
+    public Result<EntryUserRecord> getEntryUsers(Identifier matchId) {
         return dsl.selectFrom(ENTRY_USER)
-                .where(condition.and(ENTRY_USER.MATCH_ID.equal(matchId)))
+                .where(trueCondition().and(ENTRY_USER.MATCH_ID.equal(matchId.value())))
                 .fetch();
     }
 }

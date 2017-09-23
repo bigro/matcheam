@@ -2,6 +2,7 @@ package matcheam.match;
 
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.operation.Operation;
+import matcheam.entry.EntryRepository;
 import matcheam.support.TestContext;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +39,8 @@ public class MatchRepositorySearchTest {
 		DbSetup dbSetup = new DbSetup(testContext.driverManagerDestination(), operation);
 		dbSetup.launch();
 
-		sut = new MatchRepository(testContext.dslContext());
+		EntryRepository entryRepository = new EntryRepository(testContext.dslContext());
+		sut = new MatchRepository(testContext.dslContext(), entryRepository);
 	}
 
 	@Test

@@ -4,6 +4,7 @@ import static matcheam.jooq.generate.Tables.ENTRY_USER;
 import static matcheam.jooq.generate.Tables.MATCH;
 import static org.jooq.impl.DSL.trueCondition;
 
+import matcheam.entry.EntryRepository;
 import matcheam.entry.EntryUser;
 import matcheam.jooq.generate.tables.records.EntryUserRecord;
 import org.jooq.DSLContext;
@@ -27,8 +28,11 @@ public class MatchRepository {
 
     private DSLContext dsl;
 
-    public MatchRepository(DSLContext dsl) {
+    private EntryRepository entryRepository;
+
+    public MatchRepository(DSLContext dsl, EntryRepository entryRepository) {
         this.dsl = dsl;
+        this.entryRepository = entryRepository;
     }
 
     /**
@@ -64,15 +68,9 @@ public class MatchRepository {
         if (record == null) {
             return null;
         }
-        Result<EntryUserRecord> entryUserRecords = findEntryUserBy(identifier);
+        Result<EntryUserRecord> entryUserRecords = entryRepository.getEntryUsers(identifier);
 
         return makeMatch(record, entryUserRecords);
-    }
-
-    private Result<EntryUserRecord> findEntryUserBy(Identifier matchId) {
-        return dsl.selectFrom(ENTRY_USER)
-                    .where(trueCondition().and(ENTRY_USER.MATCH_ID.equal(matchId.value())))
-                    .fetch();
     }
 
     /**
@@ -125,7 +123,7 @@ public class MatchRepository {
     private List<Match> makeMatches(Result<MatchRecord> records) {
         List<Match> matches = new ArrayList<>();
         for (MatchRecord record : records) {
-            Result<EntryUserRecord> entryUserRecords = findEntryUserBy(new Identifier(record.get(MATCH.IDENTIFIER)));
+            Result<EntryUserRecord> entryUserRecords = entryRepository.getEntryUsers(new Identifier(record.get(MATCH.IDENTIFIER)));
             matches.add(makeMatch(record, entryUserRecords));
         }
         return matches;

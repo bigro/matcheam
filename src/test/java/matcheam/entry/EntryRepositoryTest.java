@@ -24,7 +24,7 @@ public class EntryRepositoryTest {
     public void setUp() throws Exception {
         testContext = new TestContext();
         sut = new EntryRepository(testContext.dslContext());
-        matchService = new MatchService(new MatchRepository(testContext.dslContext()));
+        matchService = new MatchService(new MatchRepository(testContext.dslContext(), sut));
         Operation deleteAll = sequenceOf(
                 deleteAllFrom("MATCHEAM.ENTRY_USER"),
                 deleteAllFrom("MATCHEAM.ENTRY")

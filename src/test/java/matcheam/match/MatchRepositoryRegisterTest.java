@@ -2,6 +2,7 @@ package matcheam.match;
 
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.operation.Operation;
+import matcheam.entry.EntryRepository;
 import matcheam.support.TestContext;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Before;
@@ -24,7 +25,8 @@ public class MatchRepositoryRegisterTest {
 	@Before
 	public void setUp() throws Exception {
 		testContext = new TestContext();
-		sut = new MatchRepository(testContext.dslContext());
+		EntryRepository entryRepository = new EntryRepository(testContext.dslContext());
+		sut = new MatchRepository(testContext.dslContext(), entryRepository);
 		Operation deleteAll = deleteAllFrom("MATCHEAM.MATCH");
 		DbSetup dbSetup = new DbSetup(testContext.driverManagerDestination(), deleteAll);
 		dbSetup.launch();
