@@ -93,4 +93,8 @@ public class Match {
     public List<EntryUser> getEntryUserList() {
         return entryUserList;
     }
+
+    public void setEntryUserList(List<EntryUser> entryUserList) {
+        this.entryUserList = entryUserList;
+    }
 }

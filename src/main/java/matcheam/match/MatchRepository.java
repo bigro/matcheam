@@ -1,9 +1,11 @@
 package matcheam.match;
 
+import static matcheam.jooq.generate.Tables.ENTRY_USER;
 import static matcheam.jooq.generate.Tables.MATCH;
 import static org.jooq.impl.DSL.trueCondition;
 
-import org.jooq.Condition;
+import matcheam.entry.EntryUser;
+import matcheam.jooq.generate.tables.records.EntryUserRecord;
 import org.jooq.DSLContext;
 import org.jooq.Result;
 import org.springframework.stereotype.Repository;
@@ -56,14 +58,21 @@ public class MatchRepository {
      * @throws Exception 検索が失敗した場合
      */
     Match findBy(Identifier identifier) throws Exception {
-        Condition condition = trueCondition();
         MatchRecord record = dsl.selectFrom(MATCH)
-                .where(condition.and(MATCH.IDENTIFIER.equal(identifier.value())))
+                .where(trueCondition().and(MATCH.IDENTIFIER.equal(identifier.value())))
                 .fetchOne();
         if (record == null) {
             return null;
         }
-        return makeMatch(record);
+        Result<EntryUserRecord> entryUserRecords = findEntryUserBy(identifier);
+
+        return makeMatch(record, entryUserRecords);
+    }
+
+    private Result<EntryUserRecord> findEntryUserBy(Identifier matchId) {
+        return dsl.selectFrom(ENTRY_USER)
+                    .where(trueCondition().and(ENTRY_USER.MATCH_ID.equal(matchId.value())))
+                    .fetch();
     }
 
     /**
@@ -84,9 +93,10 @@ public class MatchRepository {
      * MatchRecord のインスタンスから Match のインスタンスを生成します。
      *
      * @param record 　MatchRecord のインスタンス
+     * @param entryUserRecords
      * @return　Match のインスタンス
      */
-    private Match makeMatch(MatchRecord record) {
+    private Match makeMatch(MatchRecord record, Result<EntryUserRecord> entryUserRecords) {
         Match match = new Match();
         match.setIdentifier(new Identifier(record.get(MATCH.IDENTIFIER)));
         match.setDate(record.get(MATCH.DATE));
@@ -95,6 +105,14 @@ public class MatchRepository {
         match.setPlace(record.get(MATCH.PLACE));
         match.setMaxPlayers(record.get(MATCH.MAX_PLAYERS));
         match.setLevel(Level.valueOf(record.get(MATCH.LEVEL)));
+
+        List<EntryUser> entryUsers = new ArrayList<>();
+        for (EntryUserRecord entryUserRecord : entryUserRecords) {
+            EntryUser entryUser = new EntryUser(new Identifier(entryUserRecord.get(ENTRY_USER.IDENTIFIER)),
+                    entryUserRecord.get(ENTRY_USER.ENTRY_USER_NAME));
+            entryUsers.add(entryUser);
+        }
+        match.setEntryUserList(entryUsers);
         return match;
     }
 
@@ -107,7 +125,8 @@ public class MatchRepository {
     private List<Match> makeMatches(Result<MatchRecord> records) {
         List<Match> matches = new ArrayList<>();
         for (MatchRecord record : records) {
-            matches.add(makeMatch(record));
+            Result<EntryUserRecord> entryUserRecords = findEntryUserBy(new Identifier(record.get(MATCH.IDENTIFIER)));
+            matches.add(makeMatch(record, entryUserRecords));
         }
         return matches;
     }
