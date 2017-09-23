@@ -52,17 +52,8 @@ public class EntryRepository {
      * @throws Exception 検索が失敗した場合
      */
     List<EntryUser> findEntryUserBy(Match match) {
-        Condition condition = trueCondition();
-        EntryUserRecord record = dsl.selectFrom(ENTRY_USER)
-                .where(condition.and(ENTRY_USER.MATCH_ID.equal(match.getIdentifier().value())))
-                .fetchOne();
-
-        if (record == null) {
-            return null;
-        }
-
-        Result<EntryUserRecord> entryUserRecords = getEntryUsers(new Identifier(record.getMatchId()));
-        return makeEntryUserList(entryUserRecords);
+        Result<EntryUserRecord> records = getEntryUsers(match.getIdentifier());
+        return makeEntryUserList(records);
     }
 
     /**
@@ -71,7 +62,7 @@ public class EntryRepository {
      * @param entryUserRecords Result<EntryUserRecord> のインスタンス
      * @return EntryUserのリスト
      */
-    private List<EntryUser> makeEntryUserList(Result<EntryUserRecord> entryUserRecords) {
+    public List<EntryUser> makeEntryUserList(Result<EntryUserRecord> entryUserRecords) {
         List<EntryUser> entryUserList = new ArrayList<>();
         for (EntryUserRecord entryUserRecord : entryUserRecords) {
             String entryUserName = entryUserRecord.getEntryUserName();

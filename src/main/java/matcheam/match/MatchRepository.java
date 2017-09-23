@@ -103,14 +103,7 @@ public class MatchRepository {
         match.setPlace(record.get(MATCH.PLACE));
         match.setMaxPlayers(record.get(MATCH.MAX_PLAYERS));
         match.setLevel(Level.valueOf(record.get(MATCH.LEVEL)));
-
-        List<EntryUser> entryUsers = new ArrayList<>();
-        for (EntryUserRecord entryUserRecord : entryUserRecords) {
-            EntryUser entryUser = new EntryUser(new Identifier(entryUserRecord.get(ENTRY_USER.IDENTIFIER)),
-                    entryUserRecord.get(ENTRY_USER.ENTRY_USER_NAME));
-            entryUsers.add(entryUser);
-        }
-        match.setEntryUserList(entryUsers);
+        match.setEntryUserList(entryRepository.makeEntryUserList(entryUserRecords));
         return match;
     }
 
