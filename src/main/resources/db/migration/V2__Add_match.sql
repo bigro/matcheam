@@ -1,5 +1,5 @@
 insert into matcheam.match
-(place, date, start, time, level, maxPlayers)
+(place, date, start, time, level, max_players)
  values
 ('宝塚CABO', '2017-01-20', '昼頃', '2時間', 'LEVEL1', '20'),
 ('つかしん', '2017-01-25', '21時ごろ', '2時間', 'LEVEL2', '15'),

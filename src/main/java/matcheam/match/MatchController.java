@@ -83,11 +83,9 @@ public class MatchController {
     }
 
     @GetMapping("matching/{matchId}")
-    public String matching(Model model, @ModelAttribute("entryName") String name, @PathVariable String matchId) throws Exception {
+    public String matching(Model model, @ModelAttribute("userName") String userName, @PathVariable String matchId) throws Exception {
         Match match = matchService.findBy(new Identifier(matchId));
-        EntryUser entryUser = new EntryUser(name);
-        Entry entry = new Entry(match, Arrays.asList(entryUser));
-        // TODO:本来はEntryクラスを渡したくはないかも
+        Entry entry = new Entry(match, userName);
         entryService.entry(entry);
         return "redirect:/match/detail/" + matchId;
     }

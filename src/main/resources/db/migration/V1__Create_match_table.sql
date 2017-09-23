@@ -8,16 +8,7 @@ date DATE,
 start VARCHAR(10),
 time VARCHAR(10),
 level VARCHAR(30),
-maxPlayers DECIMAL(3)
-);
-
-/*
- * entry 応募
- */
-CREATE TABLE matcheam.entry (
-identifier INTEGER PRIMARY KEY AUTO_INCREMENT,
-matchId INTEGER not null,
-UNIQUE (matchId)
+max_players DECIMAL(3)
 );
 
 /*
@@ -25,7 +16,7 @@ UNIQUE (matchId)
  */
 CREATE TABLE matcheam.entry_user (
 identifier INTEGER PRIMARY KEY AUTO_INCREMENT,
-entryId INTEGER not null,
-entryUserName VARCHAR(20),
-FOREIGN KEY (entryId) REFERENCES matcheam.entry (identifier)
+match_id INTEGER not null,
+entry_user_name VARCHAR(20),
+FOREIGN KEY (match_id) REFERENCES matcheam.match (identifier)
 );

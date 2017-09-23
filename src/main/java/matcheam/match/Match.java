@@ -2,7 +2,9 @@ package matcheam.match;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
+import matcheam.entry.EntryUser;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -20,6 +22,7 @@ public class Match {
     private String time;
     private Level level;
     private BigDecimal maxPlayers;
+    private List<EntryUser> entryUserList;
 
     public Match() {}
 
@@ -85,5 +88,13 @@ public class Match {
 
     public static Match of(Identifier identifier) {
         return new Match(identifier);
+    }
+
+    public List<EntryUser> getEntryUserList() {
+        return entryUserList;
+    }
+
+    public void setEntryUserList(List<EntryUser> entryUserList) {
+        this.entryUserList = entryUserList;
     }
 }

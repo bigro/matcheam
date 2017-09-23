@@ -1,6 +1,5 @@
 package matcheam.entry;
 
-import matcheam.jooq.generate.tables.records.EntryRecord;
 import matcheam.jooq.generate.tables.records.EntryUserRecord;
 import matcheam.match.Identifier;
 import matcheam.match.Match;
@@ -12,17 +11,21 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-import static matcheam.jooq.generate.Tables.ENTRY;
 import static matcheam.jooq.generate.Tables.ENTRY_USER;
+import static matcheam.jooq.generate.Tables.MATCH;
 import static org.jooq.impl.DSL.trueCondition;
 
+/**
+ * Repositoryです。
+ */
 @Repository
 public class EntryRepository {
+
+    private DSLContext dsl;
+
     public EntryRepository(DSLContext dsl) {
         this.dsl = dsl;
     }
-
-    DSLContext dsl;
 
     /**
      * １件のentryを登録します。
@@ -30,70 +33,14 @@ public class EntryRepository {
      * @param entry 　Entryインスタンス
      * @throws Exception 登録が失敗した場合
      */
-    Entry register(Entry entry) throws Exception {
-        int entryIdentifier;
+    void register(Entry entry) throws Exception {
+        Match match = entry.getMatch();
 
-        //TODO:本当の判断条件を入れる
-        if (true) {
-            EntryRecord entryRecord = dsl.insertInto(ENTRY)
-                    .columns(ENTRY.MATCHID)
-                    .values(entry.getMatch().getIdentifier().value())
-                    .returning(ENTRY.IDENTIFIER)
-                    .fetchOne();
-            entryIdentifier = entryRecord.getIdentifier();
-        }
-
+        Identifier matchIdentifier = match.getIdentifier();
         dsl.insertInto(ENTRY_USER)
-                .columns(ENTRY_USER.ENTRYID, ENTRY_USER.ENTRYUSERNAME)
-                .values(entryIdentifier, entry.getEntryUserList().get(0).getEntryUserName())
+                .columns(ENTRY_USER.MATCH_ID, ENTRY_USER.ENTRY_USER_NAME)
+                .values(matchIdentifier.value(), entry.getUserName())
                 .execute();
-
-        entry.setIdentifier(Identifier.of(entryIdentifier));
-        return entry;
-    }
-
-
-    /**
-     * 主キーで検索します。
-     * <p>条件に一致しない場合、nullを返します。</p>
-     *
-     * @param entry 募集
-     * @return 募集
-     * @throws Exception 検索が失敗した場合
-     */
-    public Entry findBy(Entry entry) throws Exception {
-        Condition condition = trueCondition();
-        EntryRecord record = dsl.selectFrom(ENTRY)
-                .where(condition.and(ENTRY.IDENTIFIER.equal(entry.getIdentifier().value())))
-                .fetchOne();
-        if (record == null) {
-            return null;
-        }
-
-        Result<EntryUserRecord> entryUserRecords = getEntryUsers(entry.getIdentifier().value());
-
-        return makeEntry(record, entryUserRecords);
-    }
-
-
-    /**
-     * EntryRecord のインスタンスから Entry のインスタンスを生成します。
-     *
-     * @param record           　EntryRecord のインスタンス
-     * @param entryUserRecords Result<EntryUserRecord> のインスタンス
-     * @return　Entry のインスタンス
-     */
-    private Entry makeEntry(EntryRecord record, Result<EntryUserRecord> entryUserRecords) {
-        return new Entry(Identifier.of(record.getIdentifier()), Match.of(Identifier.of(record.getMatchid())), makeEntryUserList(entryUserRecords));
-    }
-
-    private List<EntryUser> makeEntryUserList(Result<EntryUserRecord> entryUserRecords) {
-        List<EntryUser> entryUserList = new ArrayList<>();
-        for (EntryUserRecord entryUserRecord : entryUserRecords) {
-            String entryUserName = entryUserRecord.getEntryusername();
-            entryUserList.add(new EntryUser(entryUserName));
-        }
-        return entryUserList;
     }
 
     /**
@@ -104,24 +51,35 @@ public class EntryRepository {
      * @return 応募者のリスト
      * @throws Exception 検索が失敗した場合
      */
-    public List<EntryUser> findEntryUserBy(Match match) {
-        Condition condition = trueCondition();
-        EntryRecord record = dsl.selectFrom(ENTRY)
-                .where(condition.and(ENTRY.MATCHID.equal(match.getIdentifier().value())))
-                .fetchOne();
-
-        if (record == null) {
-            return null;
-        }
-
-        Result<EntryUserRecord> entryUserRecords = getEntryUsers(record.getIdentifier());
-        return makeEntryUserList(entryUserRecords);
+    List<EntryUser> findEntryUserBy(Match match) {
+        Result<EntryUserRecord> records = getEntryUsers(match.getIdentifier());
+        return makeEntryUserList(records);
     }
 
-    private Result<EntryUserRecord> getEntryUsers(int entryId) {
-        Condition condition = trueCondition();
+    /**
+     * EntryRecord のインスタンスから EntryUserのリスト のインスタンスを生成します。
+     *
+     * @param entryUserRecords Result<EntryUserRecord> のインスタンス
+     * @return EntryUserのリスト
+     */
+    public List<EntryUser> makeEntryUserList(Result<EntryUserRecord> entryUserRecords) {
+        List<EntryUser> entryUserList = new ArrayList<>();
+        for (EntryUserRecord entryUserRecord : entryUserRecords) {
+            String entryUserName = entryUserRecord.getEntryUserName();
+            entryUserList.add(new EntryUser(entryUserName));
+        }
+        return entryUserList;
+    }
+
+    /**
+     * EntryUserの検索結果を取得します。
+     *
+     * @param matchId 検索条件となるmatchId
+     * @return EntryUserの検索結果
+     */
+    public Result<EntryUserRecord> getEntryUsers(Identifier matchId) {
         return dsl.selectFrom(ENTRY_USER)
-                .where(condition.and(ENTRY_USER.ENTRYID.equal(entryId)))
+                .where(trueCondition().and(ENTRY_USER.MATCH_ID.equal(matchId.value())))
                 .fetch();
     }
 }
