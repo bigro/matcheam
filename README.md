@@ -14,16 +14,37 @@ File->Import->General->Exisiring Project
 
 ## MySQLの設定
 
-ユーザー：root  
-パスワード：なし  
-スキーマ：matcheam
+インストール直後は
 
 ```
-grant all on *.* to matcheam@localhost; 
-create database matcheam;
+$ mysql.server start
 ```
-ユーザー：matcheam@localhost  
-パスワード：pass
+でMySQL起動し、
+
++ ユーザー：root  
++ パスワード：なし  
+
+でログインできます。ログインコマンドはこれ。
+
+```
+$ mysql -uroot
+```
+その後下記のユーザを作成します。
+
++ ユーザー：matcheam@localhost
++ パスワード：pass
+
+コマンドはこれ。
+```
+create user matcheam@localhost identified by 'pass';
+```
+
+databaseを作って、権限付与
+
+```
+create database matcheam;
+grant all on *.* to matcheam@localhost; 
+```
 
 
 ## jooqのコードジェネレーター
