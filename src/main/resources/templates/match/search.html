@@ -1,112 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8" />
-<title>募集検索</title>
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
-	rel="stylesheet" />
-<style type="text/css">
-body {
-	background-color: white;
-	color: black;
-	width: 90%;
-	margin: 0 auto;
-}
-
-thead {
-	border-top: solid 1px black;
-	border-left: solid 1px black;
-	background-color: lightblue;
-}
-
-tbody {
-	border-top: solid 1px black;
-	border-left: solid 1px black;
-}
-
-.clickable {
-	cursor: pointer;
-}
-
-.clickable:hover {
-	color: #fff;
-	background: #00bfff;
-}
-
-td, th {
-	border-bottom: solid 1px black;
-	border-right: solid 1px black;
-}
-
-.number {
-	text-align: right;
-}
-
-.date {
-	text-align: center;
-}
-
-.input {
-	font-size: 12pt;
-	border: solid 3px black;
-	color: white;
-	background-color: white;
-	width: 300px;
-	height: 22px;
-}
-
-.submitButton {
-	font-size: 12pt;
-	border: solid 3px black;
-	background-color: lightblue;
-	color: black;
-	width: 160px;
-	height: 30px;
-}
-</style>
+    <meta charset="utf-8"/>
+    <title>募集検索</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
 </head>
 <body>
-	<div th:replace="/match/pageHeader :: top_link"></div>
-	<form action="/match/search" method="POST">
-		<h2>募集検索</h2>
-		<p>
-			レベル <select id="level" name="level">
-				<option th:each="lv : ${levels}" th:value="${lv}"
-					th:selected="${lv == level}" th:text="${lv}"></option>
-			</select>
-		</p>
-		<p>
-			<input type="submit" value="検索" class="submitButton" />
-		</p>
-	</form>
-	<table>
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>開始日</th>
-				<th>開始時間</th>
-				<th>試合時間</th>
-				<th>レベル</th>
-				<th>最大人数</th>
-				<th>場所</th>
-				<th>&nbsp;</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="memberList"
-				th:each="match : ${matches}" th:object="${match}">
-				<td><span th:text="*{identifier}"></span></td>
-				<td class="date"><span
-					th:text="*{date}==null ? '' : *{#temporals.format(date, 'yyyy/MM/dd')}"></span></td>
-				<td><span th:text="*{start}"></span></td>
-				<td><span th:text="*{time}"></span></td>
-				<td><span th:text="*{level}"></span></td>
-				<td class="number"><span th:text="*{maxPlayers}"></span></td>
-				<td><span th:text="*{place}"></span></td>
-				<td><a th:href="@{'/match/detail/' + *{identifier}}">詳細へ</a></td>
-			</tr>
-		</tbody>
-	</table>
+<div th:replace="/match/pageHeader :: top_link"></div>
+<div class="ui secondary  menu">
+    <a class="item" href="/">
+        TOP
+    </a>
+    <a class="item" href="/match/search">
+        募集検索
+    </a>
+    <a class="item" href="/match/register">
+        試合登録
+    </a>
+    <div class="right menu">
+        <div class="item">
+            <div class="ui icon input">
+                <input type="text" placeholder="Search..."/>
+                <i class="search link icon"></i>
+            </div>
+        </div>
+        <a class="ui item">
+            Logout
+        </a>
+    </div>
+</div>
+<form action="/match/search" method="POST">
+    <h1>募集検索</h1>
+    <p>
+        レベル <select id="level" name="level">
+        <option th:each="lv : ${levels}" th:value="${lv}"
+                th:selected="${lv == level}" th:text="${lv}"></option>
+    </select>
+    </p>
+    <p>
+        <input type="submit" value="検索" class="submitButton"/>
+    </p>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>開始日</th>
+        <th>開始時間</th>
+        <th>試合時間</th>
+        <th>レベル</th>
+        <th>最大人数</th>
+        <th>場所</th>
+        <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="memberList"
+        th:each="match : ${matches}" th:object="${match}">
+        <td><span th:text="*{identifier}"></span></td>
+        <td class="date"><span
+                th:text="*{date}==null ? '' : *{#temporals.format(date, 'yyyy/MM/dd')}"></span></td>
+        <td><span th:text="*{start}"></span></td>
+        <td><span th:text="*{time}"></span></td>
+        <td><span th:text="*{level}"></span></td>
+        <td class="number"><span th:text="*{maxPlayers}"></span></td>
+        <td><span th:text="*{place}"></span></td>
+        <td><a th:href="@{'/match/detail/' + *{identifier}}">詳細へ</a></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

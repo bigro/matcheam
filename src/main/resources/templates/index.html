@@ -3,23 +3,34 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Matcheam</title>
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
-	<style type="text/css">
-	body {
-		background-color: white;
-		color: black;
-		width: 90%;
-		margin: 0 auto;
-	}
-	</style>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
 </head>
 <body>
-	<h2>Matcheam</h2>
-
-	<div>
-		<p><a href="/match/register">試合登録</a></p>
-		<p><a href="/match/search">募集検索</a></p>
+	<div class="ui secondary  menu">
+		<a class="item" href="/">
+			TOP
+		</a>
+		<a class="item" href="/match/search">
+			募集検索
+		</a>
+		<a class="item" href="/match/register">
+			試合登録
+		</a>
+		<div class="right menu">
+			<div class="item">
+				<div class="ui icon input">
+					<input type="text" placeholder="Search..." />
+					<i class="search link icon"></i>
+				</div>
+			</div>
+			<a class="ui item">
+				Logout
+			</a>
+		</div>
 	</div>
-
+	<h1>Matcheam</h1>
+	ここにマッチームのトップページとしての最適な説明を書くよー
 </body>
 </html>
