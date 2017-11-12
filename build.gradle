@@ -24,12 +24,16 @@ def loadProperties() {
     }
     return props
 }
+
 def properties = loadProperties()
+def URL = properties.getProperty("spring.datasource.url")
+def USER = properties.getProperty("spring.datasource.username")
+def PASSWORD = properties.getProperty("spring.datasource.password")
 
 flyway {
-    url = properties.getProperty("spring.datasource.url")
-    user = properties.getProperty("spring.datasource.username")
-    password = properties.getProperty("spring.datasource.password")
+    url = URL
+    user = USER
+    password = PASSWORD
     schemas = ['matcheam']
 }
 apply plugin: 'java'
@@ -73,9 +77,9 @@ jooq {
     matcheam(sourceSets.main) {
         jdbc {
             driver = 'com.mysql.jdbc.Driver'
-            url = properties.getProperty("spring.datasource.url")
-            user = properties.getProperty("spring.datasource.username")
-            password = properties.getProperty("spring.datasource.password")
+            url = URL
+            user = USER
+            password = PASSWORD
 
         }
         generator {
