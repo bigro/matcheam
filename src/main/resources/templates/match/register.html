@@ -1,77 +1,104 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:with="title='試合登録'" />
+<head th:with="title='試合登録'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+</head>
 <body>
-	<div th:replace="/match/pageHeader :: top_link"></div>
-	<div class="container">
-		<h1>試合登録画面</h1>
+<div th:replace="/match/pageHeader :: top_link"></div>
+<div class="ui secondary  menu">
+    <a class="item" href="/">
+        TOP
+    </a>
+    <a class="item" href="/match/search">
+        募集検索
+    </a>
+    <a class="item" href="/match/register">
+        試合登録
+    </a>
+    <div class="right menu">
+        <div class="item">
+            <div class="ui icon input">
+                <input type="text" placeholder="Search..." />
+                <i class="search link icon"></i>
+            </div>
+        </div>
+        <a class="ui item">
+            Logout
+        </a>
+    </div>
+</div>
 
-		<form class="form-horizontal" name="body" method="post"
-			th:object="${match}" th:action="@{/match/result}">
+<div>
+    <h1>試合登録画面</h1>
 
-			<div class="form-group">
-				<label class="col-xs-2 control-label" for="place">場所</label>
-				<div class="col-xs-3">
-					<input class="form-control" th:field="*{place}" />
-				</div>
-				<span th:if="${#fields.hasErrors('place')}" class="text-danger"
-					th:errors="*{place}">Error</span>
-			</div>
+    <form class="form-horizontal" name="body" method="post"
+          th:object="${match}" th:action="@{/match/result}">
 
-			<div class="form-group">
-				<label class="col-xs-2 control-label" for="date">開始日</label>
-				<div class="col-xs-3">
-					<input type="date" class="form-control" th:field="*{date}" />
-				</div>
-				<span th:if="${#fields.hasErrors('date')}" class="text-danger"
-					th:errors="*{date}">Error</span>
-			</div>
-			<div class="form-group">
-				<label class="col-xs-2 control-label" for="start">開始時間</label>
-				<div class="col-xs-3">
-					<input type="text" class="form-control" th:field="*{start}" />
-				</div>
-				<span th:if="${#fields.hasErrors('start')}" class="text-danger"
-					th:errors="*{start}">Error</span>
-			</div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label" for="place">場所</label>
+            <div class="col-xs-3">
+                <input class="form-control" th:field="*{place}"/>
+            </div>
+            <span th:if="${#fields.hasErrors('place')}" class="text-danger"
+                  th:errors="*{place}">Error</span>
+        </div>
 
-			<div class="form-group">
-				<label class="col-xs-2 control-label" for="time">試合時間</label>
-				<div class="col-xs-3">
-					<input class="form-control" th:field="*{time}" />
-				</div>
-				<span th:if="${#fields.hasErrors('time')}" class="text-danger"
-					th:errors="*{time}">Error</span>
-			</div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label" for="date">開始日</label>
+            <div class="col-xs-3">
+                <input type="date" class="form-control" th:field="*{date}"/>
+            </div>
+            <span th:if="${#fields.hasErrors('date')}" class="text-danger"
+                  th:errors="*{date}">Error</span>
+        </div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label" for="start">開始時間</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control" th:field="*{start}"/>
+            </div>
+            <span th:if="${#fields.hasErrors('start')}" class="text-danger"
+                  th:errors="*{start}">Error</span>
+        </div>
 
-			<div class="form-group">
-				<label class="col-xs-2 control-label" for="level">レベル</label>
-				<div class="col-xs-3">
-					<select id="level" name="level">
-						<option th:each="level : ${levels}" th:value="${level.name()}"
-							th:selected="${level == match.level}" th:text="${level.name()}"></option>
-					</select>
-				</div>
-				<span th:if="${#fields.hasErrors('level')}" class="text-danger"
-					th:errors="*{level}">Error</span>
-			</div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label" for="time">試合時間</label>
+            <div class="col-xs-3">
+                <input class="form-control" th:field="*{time}"/>
+            </div>
+            <span th:if="${#fields.hasErrors('time')}" class="text-danger"
+                  th:errors="*{time}">Error</span>
+        </div>
 
-			<div class="form-group">
-				<label class="col-xs-2 control-label" for="maxPlayers">最大人数</label>
-				<div class="col-xs-3">
-					<input class="form-control" th:field="*{maxPlayers}" />
-				</div>
-				<span th:if="${#fields.hasErrors('maxPlayers')}" class="text-danger"
-					th:errors="*{maxPlayers}">Error</span>
-			</div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label" for="level">レベル</label>
+            <div class="col-xs-3">
+                <select id="level" name="level">
+                    <option th:each="level : ${levels}" th:value="${level.name()}"
+                            th:selected="${level == match.level}" th:text="${level.name()}"></option>
+                </select>
+            </div>
+            <span th:if="${#fields.hasErrors('level')}" class="text-danger"
+                  th:errors="*{level}">Error</span>
+        </div>
 
-			<div class="form-group">
-				<div class="col-xs-3 col-xs-push-2">
-					<button class="btn btn-success">登録</button>
-				</div>
-			</div>
-		</form>
-	</div>
+        <div class="form-group">
+            <label class="col-xs-2 control-label" for="maxPlayers">最大人数</label>
+            <div class="col-xs-3">
+                <input class="form-control" th:field="*{maxPlayers}"/>
+            </div>
+            <span th:if="${#fields.hasErrors('maxPlayers')}" class="text-danger"
+                  th:errors="*{maxPlayers}">Error</span>
+        </div>
+
+        <div class="form-group">
+            <div class="col-xs-3 col-xs-push-2">
+                <button class="btn btn-success">登録</button>
+            </div>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>
