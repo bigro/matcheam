@@ -27,7 +27,7 @@ public class EntryRepositoryTest {
                 deleteAllFrom("MATCHEAM.ENTRY_USER"),
                 deleteAllFrom("MATCHEAM.MATCH")
         );
-        DbSetup dbSetup = new DbSetup(testDataSource.driverManagerDestination(), deleteAll);
+        DbSetup dbSetup = new DbSetup(testDataSource, deleteAll);
         dbSetup.launch();
     }
 

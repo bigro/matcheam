@@ -16,10 +16,24 @@ buildscript {
 plugins {
     id "org.flywaydb.flyway" version "4.1.0"
 }
+
+def loadProperties() {
+    def props = new Properties()
+    file("$rootDir/src/main/resources/application-local.properties").withInputStream {
+        props.load(it)
+    }
+    return props
+}
+
+def properties = loadProperties()
+def URL = properties.getProperty("spring.datasource.url")
+def USER = properties.getProperty("spring.datasource.username")
+def PASSWORD = properties.getProperty("spring.datasource.password")
+
 flyway {
-    url = 'jdbc:mysql://localhost:3306/matcheam'
-    user = 'matcheam'
-    password = 'pass'
+    url = URL
+    user = USER
+    password = PASSWORD
     schemas = ['matcheam']
 }
 apply plugin: 'java'
@@ -27,6 +41,9 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'nu.studer.jooq'
 
+bootRun {
+    args = ["--spring.profiles.active=local"]
+}
 
 jar {
     baseName = 'matcheam'
@@ -60,9 +77,10 @@ jooq {
     matcheam(sourceSets.main) {
         jdbc {
             driver = 'com.mysql.jdbc.Driver'
-            url = 'jdbc:mysql://localhost:3306/matcheam'
-            user = 'matcheam'
-            password = 'pass'
+            url = URL
+            user = USER
+            password = PASSWORD
+
         }
         generator {
             database {
