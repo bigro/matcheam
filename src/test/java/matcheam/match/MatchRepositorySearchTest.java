@@ -36,7 +36,7 @@ public class MatchRepositorySearchTest {
 					.values(3, "フランス", LocalDate.of(2017, 7, 7), "12時", "2時間", Level.LEVEL4, 12)
 					.build()
 			);
-		DbSetup dbSetup = new DbSetup(testDataSource.driverManagerDestination(), operation);
+		DbSetup dbSetup = new DbSetup(testDataSource, operation);
 		dbSetup.launch();
 
 		EntryRepository entryRepository = new EntryRepository(testDataSource.dslContext());
