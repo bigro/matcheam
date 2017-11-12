@@ -2,9 +2,11 @@ package matcheam.match;
 
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.operation.Operation;
+import matcheam.AbstractTest;
 import matcheam.entry.EntryRepository;
 import matcheam.support.TestDataSource;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -18,14 +20,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by ooguro on 2017/07/08.
  */
-public class MatchRepositorySearchTest {
-
+public class MatchRepositorySearchTest extends AbstractTest {
 	private MatchRepository sut;
-	private TestDataSource testDataSource;
 
 	@Before
 	public void setUp() throws Exception {
-		testDataSource = new TestDataSource();
 		Operation operation =
 			sequenceOf(
 				deleteAllFrom("MATCHEAM.MATCH"),

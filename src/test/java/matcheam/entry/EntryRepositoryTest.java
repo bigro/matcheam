@@ -2,6 +2,7 @@ package matcheam.entry;
 
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.operation.Operation;
+import matcheam.AbstractTest;
 import matcheam.match.*;
 import matcheam.support.TestSupport;
 import matcheam.support.TestDataSource;
@@ -12,15 +13,12 @@ import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
 import static com.ninja_squad.dbsetup.Operations.sequenceOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class EntryRepositoryTest {
-    private TestDataSource testDataSource;
-
+public class EntryRepositoryTest extends AbstractTest{
     EntryRepository sut;
     MatchService matchService;
 
     @Before
     public void setUp() throws Exception {
-        testDataSource = new TestDataSource();
         sut = new EntryRepository(testDataSource.dslContext());
         matchService = new MatchService(new MatchRepository(testDataSource.dslContext(), sut));
         Operation deleteAll = sequenceOf(
