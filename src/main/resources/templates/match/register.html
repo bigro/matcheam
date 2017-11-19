@@ -6,8 +6,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
 </head>
 <body>
-<div th:replace="/match/pageHeader :: top_link"></div>
-<div class="ui secondary  menu">
+<div th:replace="/match/menu :: menu" class="ui secondary  menu">
     <a class="item" href="/">
         TOP
     </a>
@@ -20,7 +19,7 @@
     <div class="right menu">
         <div class="item">
             <div class="ui icon input">
-                <input type="text" placeholder="Search..." />
+                <input type="text" placeholder="Search..."/>
                 <i class="search link icon"></i>
             </div>
         </div>
