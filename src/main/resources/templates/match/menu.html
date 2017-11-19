@@ -1,0 +1,25 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="menu" class="ui secondary  menu">
+    <a class="item" href="/">
+        TOP
+    </a>
+    <a class="item" href="/match/search">
+        募集検索
+    </a>
+    <a class="item" href="/match/register">
+        試合登録
+    </a>
+    <div class="right menu">
+        <div class="item">
+            <div class="ui icon input">
+                <input type="text" placeholder="Search..."/>
+                <i class="search link icon"></i>
+            </div>
+        </div>
+        <a class="ui item">
+            Logout
+        </a>
+    </div>
+</div>
+</html>
