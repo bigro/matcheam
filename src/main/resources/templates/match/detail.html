@@ -96,14 +96,14 @@
             <input type="submit" value="応募する"/>
         </div>
     </form>
-    <div class="ui three column grid">
-        <div class="column">
+    <div th:remove="all-but-first" class="ui three column grid">
+        <div class="column" th:each="entryUser : ${entryUserList}">
             <div class="ui card">
                 <div class="image">
                     <img src="../../../static/images/steve.jpg">
                 </div>
                 <div class="content">
-                    <div class="header">Steve Jobes</div>
+                    <div class="header" th:text="${entryUser.entryUserName}">Steve Jobes</div>
                 </div>
             </div>
         </div>
