@@ -9,7 +9,7 @@
 
 </head>
 <body>
-<div th:replace="/match/menu :: menu" class="ui secondary  menu">
+<header th:replace="/match/menu :: menu" class="ui secondary  menu">
     <a class="item" href="/">
         TOP
     </a>
@@ -30,70 +30,71 @@
             Logout
         </a>
     </div>
-</div>
-<h1>募集詳細</h1>
+</header>
+<main>
+    <h1>募集詳細</h1>
 
-<hr/>
+    <hr/>
 
-<table>
-    <thead>
-    <tr>
-        <th>参加者名</th>
-    </tr>
-    </thead>
+    <table>
+        <thead>
+        <tr>
+            <th>参加者名</th>
+        </tr>
+        </thead>
 
-    <tbody>
-    <!--ここには一覧のIDにひもづく参加者が渡ってくるはず。登録されただけ繰り返すよー-->
-    <tr th:each="entryUser : ${entryUserList}">
-        <td><span th:text="${entryUser.entryUserName}">ハンドルネームとか懐かしい</span></td>
-    </tr>
-    </tbody>
+        <tbody>
+        <!--ここには一覧のIDにひもづく参加者が渡ってくるはず。登録されただけ繰り返すよー-->
+        <tr th:each="entryUser : ${entryUserList}">
+            <td><span th:text="${entryUser.entryUserName}">ハンドルネームとか懐かしい</span></td>
+        </tr>
+        </tbody>
 
-</table>
+    </table>
 
-<a href="/match/search">一覧に戻る</a>
+    <a href="/match/search">一覧に戻る</a>
 
-<form th:object="${match}" th:action="@{/match/matching/__*{identifier}__}" method="GET">
-    <div>
+    <form th:object="${match}" th:action="@{/match/matching/__*{identifier}__}" method="GET">
+        <div>
 
-        <table>
-            <tbody>
-            <!--ここは一覧画面から渡ってきた情報がそのまま入るよー-->
-            <tr>
-                <th>ID</th>
-                <td><span th:text="*{identifier}"></span></td>
-            </tr>
-            <tr>
-                <th>開始日</th>
-                <td class="date"><span th:text="*{#temporals.format(date, 'yyyy/MM/dd')}"></span></td>
-            </tr>
-            <tr>
-                <th>開始時間</th>
-                <td><span th:text="*{start}"></span></td>
-            </tr>
-            <tr>
-                <th>試合時間</th>
-                <td><span th:text="*{time}"></span></td>
-            </tr>
-            <tr>
-                <th>レベル</th>
-                <td><span th:text="*{level}"></span></td>
-            </tr>
-            <tr>
-                <th>最大人数</th>
-                <td class="number"><span th:text="*{maxPlayers}"></span></td>
-            </tr>
-            <tr>
-                <th>場所</th>
-                <td><span th:text="*{place}"></span></td>
-            </tr>
-            </tbody>
-        </table>
+            <table>
+                <tbody>
+                <!--ここは一覧画面から渡ってきた情報がそのまま入るよー-->
+                <tr>
+                    <th>ID</th>
+                    <td><span th:text="*{identifier}"></span></td>
+                </tr>
+                <tr>
+                    <th>開始日</th>
+                    <td class="date"><span th:text="*{#temporals.format(date, 'yyyy/MM/dd')}"></span></td>
+                </tr>
+                <tr>
+                    <th>開始時間</th>
+                    <td><span th:text="*{start}"></span></td>
+                </tr>
+                <tr>
+                    <th>試合時間</th>
+                    <td><span th:text="*{time}"></span></td>
+                </tr>
+                <tr>
+                    <th>レベル</th>
+                    <td><span th:text="*{level}"></span></td>
+                </tr>
+                <tr>
+                    <th>最大人数</th>
+                    <td class="number"><span th:text="*{maxPlayers}"></span></td>
+                </tr>
+                <tr>
+                    <th>場所</th>
+                    <td><span th:text="*{place}"></span></td>
+                </tr>
+                </tbody>
+            </table>
 
-        <input type="text" class="" name="userName"/>
-        <input type="submit" value="応募する"/>
-    </div>
-</form>
-
+            <input type="text" class="" name="userName"/>
+            <input type="submit" value="応募する"/>
+        </div>
+    </form>
+</main>
 </body>
 </html>

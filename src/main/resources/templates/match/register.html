@@ -7,7 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
 </head>
 <body>
-<div th:replace="/match/menu :: menu" class="ui secondary  menu">
+<header th:replace="/match/menu :: menu" class="ui secondary  menu">
     <a class="item" href="/">
         TOP
     </a>
@@ -28,60 +28,61 @@
             Logout
         </a>
     </div>
-</div>
+</header>
 
-
-<form class="ui form" method="post"
-      th:object="${match}" th:action="@{/match/result}">
-    <h4 class="ui dividing header">試合登録</h4>
-    <div class="field">
-        <label>場所</label>
-        <div class="fields">
-            <div class="twelve wide field">
-                <input type="text" th:field="*{place}" placeholder="場所" />
-                <span th:if="${#fields.hasErrors('place')}" class="text-danger"
-                      th:errors="*{place}">Error</span>
+<main>
+    <form class="ui form" method="post"
+          th:object="${match}" th:action="@{/match/result}">
+        <h4 class="ui dividing header">試合登録</h4>
+        <div class="field">
+            <label>場所</label>
+            <div class="fields">
+                <div class="twelve wide field">
+                    <input type="text" th:field="*{place}" placeholder="場所"/>
+                    <span th:if="${#fields.hasErrors('place')}" class="text-danger"
+                          th:errors="*{place}">Error</span>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="two fields">
-        <div class="twelve wide field">
-            <label>開始日</label>
-            <input type="date" th:field="*{date}" placeholder="開始日" />
-            <span th:if="${#fields.hasErrors('date')}" class="text-danger"
-                  th:errors="*{date}">Error</span>
+        <div class="two fields">
+            <div class="twelve wide field">
+                <label>開始日</label>
+                <input type="date" th:field="*{date}" placeholder="開始日"/>
+                <span th:if="${#fields.hasErrors('date')}" class="text-danger"
+                      th:errors="*{date}">Error</span>
+            </div>
+            <div class="twelve wide field">
+                <label>開始時間</label>
+                <input type="text" th:field="*{start}" placeholder="開始時間"/>
+                <span th:if="${#fields.hasErrors('start')}" class="text-danger"
+                      th:errors="*{start}">Error</span>
+            </div>
+            <div class="twelve wide field">
+                <label>試合時間</label>
+                <input type="text" th:field="*{time}" placeholder="試合時間"/>
+                <span th:if="${#fields.hasErrors('time')}" class="text-danger"
+                      th:errors="*{time}">Error</span>
+            </div>
         </div>
-        <div class="twelve wide field">
-            <label>開始時間</label>
-            <input type="text" th:field="*{start}" placeholder="開始時間" />
-            <span th:if="${#fields.hasErrors('start')}" class="text-danger"
-                  th:errors="*{start}">Error</span>
+        <div class="two fields">
+            <div class="field">
+                <label>LEVEL</label>
+                <select class="ui fluid dropdown" id="level" name="level">
+                    <option th:each="level : ${levels}" th:value="${level.name()}"
+                            th:selected="${level == match.level}" th:text="${level.name()}"></option>
+                </select>
+                <span th:if="${#fields.hasErrors('level')}" class="text-danger"
+                      th:errors="*{level}">Error</span>
+            </div>
+            <div class="field">
+                <label>最大人数</label>
+                <input type="text" th:field="*{maxPlayers}" placeholder="最大人数"/>
+                <span th:if="${#fields.hasErrors('maxPlayers')}" class="text-danger"
+                      th:errors="*{maxPlayers}">Error</span>
+            </div>
         </div>
-        <div class="twelve wide field">
-            <label>試合時間</label>
-            <input type="text" th:field="*{time}" placeholder="試合時間" />
-            <span th:if="${#fields.hasErrors('time')}" class="text-danger"
-                  th:errors="*{time}">Error</span>
-        </div>
-    </div>
-    <div class="two fields">
-        <div class="field">
-            <label>LEVEL</label>
-            <select class="ui fluid dropdown" id="level" name="level">
-                <option th:each="level : ${levels}" th:value="${level.name()}"
-                        th:selected="${level == match.level}" th:text="${level.name()}"></option>
-            </select>
-            <span th:if="${#fields.hasErrors('level')}" class="text-danger"
-                  th:errors="*{level}">Error</span>
-        </div>
-        <div class="field">
-            <label>最大人数</label>
-            <input type="text" th:field="*{maxPlayers}" placeholder="最大人数" />
-            <span th:if="${#fields.hasErrors('maxPlayers')}" class="text-danger"
-                  th:errors="*{maxPlayers}">Error</span>
-        </div>
-    </div>
-    <button class="ui button" tabindex="0">登録</button>
-</form>
+        <button class="ui button" tabindex="0">登録</button>
+    </form>
+</main>
 </body>
 </html>

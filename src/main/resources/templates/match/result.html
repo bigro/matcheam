@@ -6,7 +6,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
 </head>
 <body>
-<div th:replace="/match/menu :: menu" class="ui secondary  menu">
+<header th:replace="/match/menu :: menu" class="ui secondary  menu">
     <a class="item" href="/">
         TOP
     </a>
@@ -27,11 +27,12 @@
             Logout
         </a>
     </div>
-</div>
-
-<div>
-    <h1>試合登録完了</h1>
-    <p>試合を登録しました。</p><br/>
-</div>
+</header>
+<main>
+    <div>
+        <h1>試合登録完了</h1>
+        <p>試合を登録しました。</p><br/>
+    </div>
+</main>
 </body>
 </html>
