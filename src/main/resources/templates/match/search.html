@@ -30,7 +30,7 @@
         </a>
     </div>
 </header>
-<main>
+<main class="ui raised very padded container segment">
     <form action="/match/search" method="POST">
         <h1>募集検索</h1>
         <p>
@@ -61,12 +61,12 @@
             th:each="match : ${matches}" th:object="${match}">
             <td><span th:text="*{identifier}"></span></td>
             <td class="date"><span
-                    th:text="*{date}==null ? '' : *{#temporals.format(date, 'yyyy/MM/dd')}"></span></td>
-            <td><span th:text="*{start}"></span></td>
-            <td><span th:text="*{time}"></span></td>
-            <td><span th:text="*{level}"></span></td>
+                    th:text="*{date}==null ? '' : *{#temporals.format(date, 'yyyy/MM/dd')}">1999/05/05</span></td>
+            <td><span th:text="*{start}">今から</span></td>
+            <td><span th:text="*{time}">朝まで</span></td>
+            <td><span th:text="*{level}">LEVEL3</span></td>
             <td class="number"><span th:text="*{maxPlayers}"></span></td>
-            <td><span th:text="*{place}"></span></td>
+            <td><span th:text="*{place}">山の上に登って降りて来たところ</span></td>
             <td><a th:href="@{'/match/detail/' + *{identifier}}">詳細へ</a></td>
         </tr>
         </tbody>
