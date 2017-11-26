@@ -43,6 +43,7 @@
         </tr>
         </thead>
 
+
         <tbody>
         <!--ここには一覧のIDにひもづく参加者が渡ってくるはず。登録されただけ繰り返すよー-->
         <tr th:each="entryUser : ${entryUserList}">
@@ -95,6 +96,48 @@
             <input type="submit" value="応募する"/>
         </div>
     </form>
+    <div class="ui three column grid">
+        <div class="column">
+            <div class="ui card">
+                <div class="image">
+                    <img src="../../../static/images/steve.jpg">
+                </div>
+                <div class="content">
+                    <div class="header">Steve Jobes</div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui card">
+                <div class="image">
+                    <img src="../../../static/images/steve.jpg">
+                </div>
+                <div class="content">
+                    <div class="header">Steve Jobes</div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui card">
+                <div class="image">
+                    <img src="../../../static/images/steve.jpg">
+                </div>
+                <div class="content">
+                    <div class="header">Steve Jobes</div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui card">
+                <div class="image">
+                    <img src="../../../static/images/steve.jpg">
+                </div>
+                <div class="content">
+                    <div class="header">Steve Jobes</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 </body>
 </html>
