@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:with="title='試合登録'">
+    <meta charset="utf-8"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
@@ -29,75 +30,58 @@
     </div>
 </div>
 
-<div>
-    <h1>試合登録画面</h1>
 
-    <form class="form-horizontal" name="body" method="post"
-          th:object="${match}" th:action="@{/match/result}">
-
-        <div class="form-group">
-            <label class="col-xs-2 control-label" for="place">場所</label>
-            <div class="col-xs-3">
-                <input class="form-control" th:field="*{place}"/>
+<form class="ui form" method="post"
+      th:object="${match}" th:action="@{/match/result}">
+    <h4 class="ui dividing header">試合登録</h4>
+    <div class="field">
+        <label>場所</label>
+        <div class="fields">
+            <div class="twelve wide field">
+                <input type="text" th:field="*{place}" placeholder="場所" />
+                <span th:if="${#fields.hasErrors('place')}" class="text-danger"
+                      th:errors="*{place}">Error</span>
             </div>
-            <span th:if="${#fields.hasErrors('place')}" class="text-danger"
-                  th:errors="*{place}">Error</span>
         </div>
-
-        <div class="form-group">
-            <label class="col-xs-2 control-label" for="date">開始日</label>
-            <div class="col-xs-3">
-                <input type="date" class="form-control" th:field="*{date}"/>
-            </div>
+    </div>
+    <div class="two fields">
+        <div class="twelve wide field">
+            <label>開始日</label>
+            <input type="date" th:field="*{date}" placeholder="開始日" />
             <span th:if="${#fields.hasErrors('date')}" class="text-danger"
                   th:errors="*{date}">Error</span>
         </div>
-        <div class="form-group">
-            <label class="col-xs-2 control-label" for="start">開始時間</label>
-            <div class="col-xs-3">
-                <input type="text" class="form-control" th:field="*{start}"/>
-            </div>
+        <div class="twelve wide field">
+            <label>開始時間</label>
+            <input type="text" th:field="*{start}" placeholder="開始時間" />
             <span th:if="${#fields.hasErrors('start')}" class="text-danger"
                   th:errors="*{start}">Error</span>
         </div>
-
-        <div class="form-group">
-            <label class="col-xs-2 control-label" for="time">試合時間</label>
-            <div class="col-xs-3">
-                <input class="form-control" th:field="*{time}"/>
-            </div>
+        <div class="twelve wide field">
+            <label>試合時間</label>
+            <input type="text" th:field="*{time}" placeholder="試合時間" />
             <span th:if="${#fields.hasErrors('time')}" class="text-danger"
                   th:errors="*{time}">Error</span>
         </div>
-
-        <div class="form-group">
-            <label class="col-xs-2 control-label" for="level">レベル</label>
-            <div class="col-xs-3">
-                <select id="level" name="level">
-                    <option th:each="level : ${levels}" th:value="${level.name()}"
-                            th:selected="${level == match.level}" th:text="${level.name()}"></option>
-                </select>
-            </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            <label>LEVEL</label>
+            <select class="ui fluid dropdown" id="level" name="level">
+                <option th:each="level : ${levels}" th:value="${level.name()}"
+                        th:selected="${level == match.level}" th:text="${level.name()}"></option>
+            </select>
             <span th:if="${#fields.hasErrors('level')}" class="text-danger"
                   th:errors="*{level}">Error</span>
         </div>
-
-        <div class="form-group">
-            <label class="col-xs-2 control-label" for="maxPlayers">最大人数</label>
-            <div class="col-xs-3">
-                <input class="form-control" th:field="*{maxPlayers}"/>
-            </div>
+        <div class="field">
+            <label>最大人数</label>
+            <input type="text" th:field="*{maxPlayers}" placeholder="最大人数" />
             <span th:if="${#fields.hasErrors('maxPlayers')}" class="text-danger"
                   th:errors="*{maxPlayers}">Error</span>
         </div>
-
-        <div class="form-group">
-            <div class="col-xs-3 col-xs-push-2">
-                <button class="btn btn-success">登録</button>
-            </div>
-        </div>
-    </form>
-</div>
-
+    </div>
+    <button class="ui button" tabindex="0">登録</button>
+</form>
 </body>
 </html>
