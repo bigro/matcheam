@@ -1,22 +1,19 @@
 package matcheam.match;
 
-import java.util.*;
-
 import matcheam.entry.Entry;
 import matcheam.entry.EntryService;
+import matcheam.entry.EntryUser;
+import matcheam.matching.MatchingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import matcheam.entry.EntryUser;
-import matcheam.matching.MatchingService;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by ooguro on 2017/01/21.
@@ -83,7 +80,11 @@ public class MatchController {
     }
 
     @GetMapping("matching/{matchId}")
-    public String matching(Model model, @ModelAttribute("userName") String userName, @PathVariable String matchId) throws Exception {
+    public String matching(RedirectAttributes attributes, @ModelAttribute("userName") String userName, @PathVariable String matchId) throws Exception {
+        if (userName == null || userName.isEmpty()) {
+            attributes.addFlashAttribute("hasError", true);
+            return "redirect:/match/detail/" + matchId;
+        }
         Match match = matchService.findBy(new Identifier(matchId));
         Entry entry = new Entry(match, userName);
         entryService.entry(entry);
