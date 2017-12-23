@@ -125,9 +125,13 @@
         </div>
     </div>
     <form th:object="${match}" th:action="@{/match/matching/__*{identifier}__}" method="GET">
-        <div class="ui fluid action input">
+        <div class="ui fluid action input" th:classappend="${hasError} ? 'field error'">
             <input type="text" name="userName" placeholder="名前を入力してください" />
             <button class="ui button" type="submit">応募する</button>
+        </div>
+        <div class="ui error message" th:if="${hasError}">
+            <div class="header">入力エラー</div>
+            <p>入力してください</p>
         </div>
     </form>
 </main>
