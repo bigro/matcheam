@@ -34,110 +34,102 @@
 <main class="ui raised very padded container segment">
     <h1>募集詳細</h1>
 
-    <hr/>
-
-    <table>
-        <thead>
-        <tr>
-            <th>参加者名</th>
-        </tr>
-        </thead>
-
-
-        <tbody>
-        <!--ここには一覧のIDにひもづく参加者が渡ってくるはず。登録されただけ繰り返すよー-->
-        <tr th:each="entryUser : ${entryUserList}">
-            <td><span th:text="${entryUser.entryUserName}">ハンドルネームとか懐かしい</span></td>
-        </tr>
-        </tbody>
-
-    </table>
-
-    <a href="/match/search">一覧に戻る</a>
-
-    <form th:object="${match}" th:action="@{/match/matching/__*{identifier}__}" method="GET">
-        <div>
-
-            <table>
-                <tbody>
-                <!--ここは一覧画面から渡ってきた情報がそのまま入るよー-->
-                <tr>
-                    <th>ID</th>
-                    <td><span th:text="*{identifier}"></span></td>
-                </tr>
-                <tr>
-                    <th>開始日</th>
-                    <td class="date"><span th:text="*{#temporals.format(date, 'yyyy/MM/dd')}"></span></td>
-                </tr>
-                <tr>
-                    <th>開始時間</th>
-                    <td><span th:text="*{start}"></span></td>
-                </tr>
-                <tr>
-                    <th>試合時間</th>
-                    <td><span th:text="*{time}"></span></td>
-                </tr>
-                <tr>
-                    <th>レベル</th>
-                    <td><span th:text="*{level}"></span></td>
-                </tr>
-                <tr>
-                    <th>最大人数</th>
-                    <td class="number"><span th:text="*{maxPlayers}"></span></td>
-                </tr>
-                <tr>
-                    <th>場所</th>
-                    <td><span th:text="*{place}"></span></td>
-                </tr>
-                </tbody>
-            </table>
-
-            <input type="text" class="" name="userName"/>
-            <input type="submit" value="応募する"/>
+    <div class="ui grid form" th:object="${match}">
+        <div class="field">
+            <label>開始日</label>
+            <span th:text="*{#temporals.format(date, 'yyyy/MM/dd')}">2017/12/31</span>
         </div>
-    </form>
-    <div th:remove="all-but-first" class="ui three column grid">
-        <div class="column" th:each="entryUser : ${entryUserList}">
-            <div class="ui card">
-                <div class="image">
-                    <img src="../../../static/images/steve.jpg">
-                </div>
-                <div class="content">
-                    <div class="header" th:text="${entryUser.entryUserName}">Steve Jobes</div>
+        <div class="field">
+            <label>開始時間</label>
+            <span th:text="*{start}">0時</span>
+        </div>
+        <div class="field">
+            <label>試合時間</label>
+            <span th:text="*{time}">４時間</span>
+        </div>
+        <div class="field">
+            <label>レベル</label>
+            <span th:text="*{level}">LEVEL1</span>
+        </div>
+        <div class="field">
+            <label>最大人数</label>
+            <span th:text="*{maxPlayers}">15</span>
+        </div>
+        <div class="field">
+            <label>場所</label>
+            <span th:text="*{place}">尼崎</span>
+        </div>
+    </div>
+    <div class="ui segment">
+        <div th:remove="all-but-first" class="ui five column grid">
+            <div class="column" th:each="entryUser : ${entryUserList}">
+                <div class="ui card">
+                    <div class="image">
+                        <img th:src="@{/images/unknown.jpg}" src="../../../static/images/steve.jpg" />
+                    </div>
+                    <div class="content">
+                        <div class="header" th:text="${entryUser.entryUserName}">Steve Jobes</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="column">
-            <div class="ui card">
-                <div class="image">
-                    <img src="../../../static/images/steve.jpg">
-                </div>
-                <div class="content">
-                    <div class="header">Steve Jobes</div>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="ui card">
-                <div class="image">
-                    <img src="../../../static/images/steve.jpg">
-                </div>
-                <div class="content">
-                    <div class="header">Steve Jobes</div>
+            <div class="column">
+                <div class="ui card">
+                    <div class="image">
+                        <img src="../../../static/images/steve.jpg" />
+                    </div>
+                    <div class="content">
+                        <div class="header">Steve Jobes</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="column">
-            <div class="ui card">
-                <div class="image">
-                    <img src="../../../static/images/steve.jpg">
+            <div class="column">
+                <div class="ui card">
+                    <div class="image">
+                        <img src="../../../static/images/steve.jpg" />
+                    </div>
+                    <div class="content">
+                        <div class="header">Steve Jobes</div>
+                    </div>
                 </div>
-                <div class="content">
-                    <div class="header">Steve Jobes</div>
+            </div>
+            <div class="column">
+                <div class="ui card">
+                    <div class="image">
+                        <img src="../../../static/images/steve.jpg" />
+                    </div>
+                    <div class="content">
+                        <div class="header">Steve Jobes</div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui card">
+                    <div class="image">
+                        <img src="../../../static/images/steve.jpg" />
+                    </div>
+                    <div class="content">
+                        <div class="header">Steve Jobes</div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui card">
+                    <div class="image">
+                        <img src="../../../static/images/steve.jpg" />
+                    </div>
+                    <div class="content">
+                        <div class="header">Steve Jobes</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <form th:object="${match}" th:action="@{/match/matching/__*{identifier}__}" method="GET">
+        <div class="ui fluid action input">
+            <input type="text" name="userName" placeholder="名前を入力してください" />
+            <button class="ui button" type="submit">応募する</button>
+        </div>
+    </form>
 </main>
 </body>
 </html>
