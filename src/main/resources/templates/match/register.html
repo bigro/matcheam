@@ -35,33 +35,33 @@
           th:object="${match}" th:action="@{/match/result}">
         <h4 class="ui dividing header">試合登録</h4>
         <div class="field">
-            <label>場所あほ</label>
+            <label>場所</label>
             <div class="fields">
                 <div class="twelve wide field" th:classappend="${#fields.hasErrors('place')} ? 'error'">
                     <input type="text" th:field="*{place}" placeholder="場所"/>
                     <div th:if="${#fields.hasErrors('place')}" class="ui basic red pointing prompt label transition visible"
-                          th:errors="*{place}">入力してください</div>
+                          th:errors="*{place}">Error</div>
                 </div>
             </div>
         </div>
         <div class="two fields">
-            <div class="twelve wide field">
+            <div class="twelve wide field" th:classappend="${#fields.hasErrors('date')} ? 'error'">
                 <label>開始日</label>
                 <input type="date" th:field="*{date}" placeholder="開始日"/>
-                <span th:if="${#fields.hasErrors('date')}" class="text-danger"
-                      th:errors="*{date}">Error</span>
+                <div th:if="${#fields.hasErrors('date')}" class="ui basic red pointing prompt label transition visible"
+                     th:errors="*{date}">Error</div>
             </div>
-            <div class="twelve wide field">
+            <div class="twelve wide field" th:classappend="${#fields.hasErrors('start')} ? 'error'">
                 <label>開始時間</label>
                 <input type="text" th:field="*{start}" placeholder="開始時間"/>
-                <span th:if="${#fields.hasErrors('start')}" class="text-danger"
-                      th:errors="*{start}">Error</span>
+                <div th:if="${#fields.hasErrors('start')}" class="ui basic red pointing prompt label transition visible"
+                     th:errors="*{start}">Error</div>
             </div>
-            <div class="twelve wide field">
+            <div class="twelve wide field" th:classappend="${#fields.hasErrors('time')} ? 'error'">
                 <label>試合時間</label>
                 <input type="text" th:field="*{time}" placeholder="試合時間"/>
-                <span th:if="${#fields.hasErrors('time')}" class="text-danger"
-                      th:errors="*{time}">Error</span>
+                <div th:if="${#fields.hasErrors('time')}" class="ui basic red pointing prompt label transition visible"
+                     th:errors="*{time}">Error</div>
             </div>
         </div>
         <div class="two fields">
@@ -74,11 +74,11 @@
                 <span th:if="${#fields.hasErrors('level')}" class="text-danger"
                       th:errors="*{level}">Error</span>
             </div>
-            <div class="field">
+            <div class="field" th:classappend="${#fields.hasErrors('maxPlayers')} ? 'error'">
                 <label>最大人数</label>
                 <input type="text" th:field="*{maxPlayers}" placeholder="最大人数"/>
-                <span th:if="${#fields.hasErrors('maxPlayers')}" class="text-danger"
-                      th:errors="*{maxPlayers}">Error</span>
+                <div th:if="${#fields.hasErrors('maxPlayers')}" class="ui basic red pointing prompt label transition visible"
+                     th:errors="*{maxPlayers}">Error</div>
             </div>
         </div>
         <button class="ui button" tabindex="0">登録</button>

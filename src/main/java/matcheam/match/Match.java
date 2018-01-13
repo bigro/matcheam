@@ -19,17 +19,18 @@ public class Match {
 
     private Identifier identifier;
 
-    @NotEmpty
+    @NotEmpty(message = "入力してください")
     private String place;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "入力してください")
     private LocalDate date;
-    @NotEmpty
+    @NotEmpty(message = "入力してください")
     private String start;
-    @NotEmpty
+    @NotEmpty(message = "入力してください")
     private String time;
     private Level level;
-    @DecimalMax("99") //一旦99人までにする
-    @NotNull
+    @DecimalMax(value = "99", message = "99人以下で入力してください") //一旦99人までにする
+    @NotNull(message = "入力してください")
     private BigDecimal maxPlayers;
     private List<EntryUser> entryUserList;
 
