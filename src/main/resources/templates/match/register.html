@@ -42,6 +42,10 @@
                     <span th:if="${#fields.hasErrors('place')}" class="text-danger"
                           th:errors="*{place}">Error</span>
                 </div>
+                <div class="ui error message" th:if="${#fields.hasErrors('place')}">
+                    <div class="header">入力エラー</div>
+                    <p th:errors="*{place}">入力してください</p>
+                </div>
             </div>
         </div>
         <div class="two fields">
