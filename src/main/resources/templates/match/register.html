@@ -35,16 +35,12 @@
           th:object="${match}" th:action="@{/match/result}">
         <h4 class="ui dividing header">試合登録</h4>
         <div class="field">
-            <label>場所</label>
+            <label>場所あほ</label>
             <div class="fields">
-                <div class="twelve wide field">
+                <div class="twelve wide field" th:classappend="${#fields.hasErrors('place')} ? 'error'">
                     <input type="text" th:field="*{place}" placeholder="場所"/>
-                    <span th:if="${#fields.hasErrors('place')}" class="text-danger"
-                          th:errors="*{place}">Error</span>
-                </div>
-                <div class="ui error message" th:if="${#fields.hasErrors('place')}">
-                    <div class="header">入力エラー</div>
-                    <p th:errors="*{place}">入力してください</p>
+                    <div th:if="${#fields.hasErrors('place')}" class="ui basic red pointing prompt label transition visible"
+                          th:errors="*{place}">入力してください</div>
                 </div>
             </div>
         </div>
