@@ -1,30 +1,41 @@
 package matcheam.match;
 
+import matcheam.entry.EntryUser;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-import matcheam.entry.EntryUser;
-import org.springframework.format.annotation.DateTimeFormat;
-
 /**
  * 募集です。
+ *
  * @since 1.0
  */
 public class Match {
 
     private Identifier identifier;
 
+    @NotEmpty(message = "入力してください")
     private String place;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "入力してください")
     private LocalDate date;
+    @NotEmpty(message = "入力してください")
     private String start;
+    @NotEmpty(message = "入力してください")
     private String time;
     private Level level;
+    @DecimalMax(value = "99", message = "99人以下で入力してください") //一旦99人までにする
+    @NotNull(message = "入力してください")
     private BigDecimal maxPlayers;
     private List<EntryUser> entryUserList;
 
-    public Match() {}
+    public Match() {
+    }
 
     public Match(Identifier identifier) {
         this.identifier = identifier;
