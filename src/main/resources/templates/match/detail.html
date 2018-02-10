@@ -52,8 +52,8 @@
             <span th:text="*{level}">LEVEL1</span>
         </div>
         <div class="field">
-            <label>最大人数</label>
-            <span th:text="*{maxPlayers}">15</span>
+            <label>人数</label>
+            <span th:text="| *{entryUserCount} / *{maxPlayers}|">15</span>
         </div>
         <div class="field">
             <label>場所</label>
