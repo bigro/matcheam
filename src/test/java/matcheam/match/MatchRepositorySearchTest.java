@@ -44,7 +44,7 @@ public class MatchRepositorySearchTest extends AbstractTest {
 
 	@Test
 	public void 全件検索できること() throws Exception {
-		List<Match> actual = sut.findAll();
+		List<Match> actual = sut.findActivateDate();
 		assertThat(actual).hasSize(3);
 	}
 

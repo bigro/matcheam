@@ -103,6 +103,6 @@ public class MatchService {
 	 * @return 募集一覧
 	 */
 	public List<Match> findAll() {
-		return repository.findAll();
+		return repository.findActivateDate();
 	}
 }

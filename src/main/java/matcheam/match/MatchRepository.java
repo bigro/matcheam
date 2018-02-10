@@ -1,22 +1,21 @@
 package matcheam.match;
 
-import static matcheam.jooq.generate.Tables.ENTRY_USER;
 import static matcheam.jooq.generate.Tables.MATCH;
 import static org.jooq.impl.DSL.trueCondition;
-
-import matcheam.entry.EntryRepository;
-import matcheam.entry.EntryUser;
-import matcheam.jooq.generate.tables.records.EntryUserRecord;
-import org.jooq.DSLContext;
-import org.jooq.Result;
-import org.springframework.stereotype.Repository;
-
-import matcheam.jooq.generate.tables.records.MatchRecord;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.jooq.DSLContext;
+import org.jooq.Result;
+import org.jooq.impl.DSL;
+import org.springframework.stereotype.Repository;
+
+import matcheam.entry.EntryRepository;
+import matcheam.jooq.generate.tables.records.EntryUserRecord;
+import matcheam.jooq.generate.tables.records.MatchRecord;
 
 /**
  * matchのリポジトリです。
@@ -74,17 +73,20 @@ public class MatchRepository {
     }
 
     /**
-     * 検索して全件返します。
-     *
+     * 検索して現在日付以降が開始日となっている募集を全件返します。
+     * 
      * @return 募集のリスト
      */
-    List<Match> findAll() {
-        Result<MatchRecord> records = dsl.selectFrom(MATCH).fetch();
+    List<Match> findActivateDate() {
+        Result<MatchRecord> records = dsl.selectFrom(MATCH)
+        	.where(trueCondition().and(MATCH.DATE.greaterOrEqual(DSL.currentLocalDate())))
+        	.orderBy(MATCH.DATE.asc())
+        	.fetch();
         return makeMatches(records);
     }
 
     List<Match> findBy(Level... levels) {
-        return findAll().stream().filter(m -> in(levels, m.getLevel())).collect(Collectors.toList());
+        return findActivateDate().stream().filter(m -> in(levels, m.getLevel())).collect(Collectors.toList());
     }
 
     /**
