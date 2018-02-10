@@ -50,7 +50,7 @@
             <th>開始時間</th>
             <th>試合時間</th>
             <th>レベル</th>
-            <th>最大人数</th>
+            <th>人数</th>
             <th>場所</th>
             <th>&nbsp;</th>
         </tr>
@@ -63,7 +63,7 @@
             <td><span th:text="*{start}">今から</span></td>
             <td><span th:text="*{time}">朝まで</span></td>
             <td><span th:text="*{level}">LEVEL3</span></td>
-            <td class="number"><span th:text="*{maxPlayers}"></span></td>
+            <td class="number"><span th:text="| *{entryUserCount} / *{maxPlayers}|"></span></td>
             <td><span th:text="*{place}">山の上に登って降りて来たところ</span></td>
             <td><a th:href="@{'/match/detail/' + *{identifier}}">詳細へ</a></td>
         </tr>

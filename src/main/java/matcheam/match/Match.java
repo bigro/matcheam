@@ -108,4 +108,8 @@ public class Match {
     public void setEntryUserList(List<EntryUser> entryUserList) {
         this.entryUserList = entryUserList;
     }
+   
+    public int getEntryUserCount(){
+    	return this.entryUserList.size();
+    }
 }
