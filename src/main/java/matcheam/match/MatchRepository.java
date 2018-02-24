@@ -43,9 +43,9 @@ public class MatchRepository {
      */
     Identifier register(Match match) throws Exception {
         MatchRecord matchRecord = dsl.insertInto(MATCH)
-                .columns(MATCH.PLACE, MATCH.DATE, MATCH.START, MATCH.TIME, MATCH.LEVEL, MATCH.MAX_PLAYERS)
+                .columns(MATCH.PLACE, MATCH.DATE, MATCH.START, MATCH.TIME, MATCH.LEVEL, MATCH.MAX_PLAYERS, MATCH.REMARKS)
                 .values(match.getPlace(), match.getDate(), match.getStart(), match.getTime(), match.getLevel().name(),
-                        match.getMaxPlayers())
+                        match.getMaxPlayers(),match.getRemarks())
                 .returning(MATCH.IDENTIFIER)
                 .fetchOne();
 
@@ -105,6 +105,7 @@ public class MatchRepository {
         match.setPlace(record.get(MATCH.PLACE));
         match.setMaxPlayers(record.get(MATCH.MAX_PLAYERS));
         match.setLevel(Level.valueOf(record.get(MATCH.LEVEL)));
+        match.setRemarks(record.get(MATCH.REMARKS));
         match.setEntryUserList(entryRepository.makeEntryUserList(entryUserRecords));
         return match;
     }
