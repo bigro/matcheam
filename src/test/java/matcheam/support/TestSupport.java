@@ -15,6 +15,7 @@ public class TestSupport {
         match.setTime("2時間");
         match.setLevel(Level.LEVEL1);
         match.setMaxPlayers(BigDecimal.TEN);
+        match.setRemarks("雨天中止");
         return match;
     }
 }

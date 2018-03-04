@@ -61,6 +61,10 @@
         </div>
     </div>
     <div class="ui segment">
+        <pre th:text="${match.remarks}">スタバ前
+        集合</pre>
+    </div>
+    <div class="ui segment">
         <div th:remove="all-but-first" class="ui five column grid">
             <div class="column" th:each="entryUser : ${entryUserList}">
                 <div class="ui card">

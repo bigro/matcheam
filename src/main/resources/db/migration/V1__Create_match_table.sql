@@ -8,7 +8,8 @@ date DATE,
 start VARCHAR(10),
 time VARCHAR(10),
 level VARCHAR(30),
-max_players DECIMAL(3)
+max_players DECIMAL(3),
+remarks TEXT
 );
 
 /*

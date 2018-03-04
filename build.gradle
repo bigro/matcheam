@@ -73,7 +73,7 @@ dependencies {
 }
 
 jooq {
-    version = '3.10.4'
+    version = '3.9.1'
     matcheam(sourceSets.main) {
         jdbc {
             driver = 'com.mysql.jdbc.Driver'

@@ -33,6 +33,7 @@ public class Match {
     @NotNull(message = "入力してください")
     private BigDecimal maxPlayers;
     private List<EntryUser> entryUserList;
+    private String remarks;
 
     public Match() {
     }
@@ -108,8 +109,16 @@ public class Match {
     public void setEntryUserList(List<EntryUser> entryUserList) {
         this.entryUserList = entryUserList;
     }
-   
-    public int getEntryUserCount(){
-    	return this.entryUserList.size();
+
+    public int getEntryUserCount() {
+        return this.entryUserList.size();
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public String getRemarks() {
+        return remarks;
     }
 }

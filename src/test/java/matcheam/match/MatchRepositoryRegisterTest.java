@@ -42,8 +42,8 @@ public class MatchRepositoryRegisterTest extends AbstractTest {
 
     private void assertRegister(Identifier actual, Match match) throws Exception {
         assertThat(sut.findBy(actual))
-                .extracting("place", "date", "time", "level", "start")
-                .containsOnly(match.getPlace(), match.getDate(), match.getTime(), match.getLevel(), match.getStart());
+                .extracting("place", "date", "time", "level", "start", "remarks")
+                .containsOnly(match.getPlace(), match.getDate(), match.getTime(), match.getLevel(), match.getStart(), match.getRemarks());
     }
 }
 
