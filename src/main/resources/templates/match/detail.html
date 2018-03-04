@@ -61,7 +61,8 @@
         </div>
     </div>
     <div class="ui segment">
-        <p><span th:text="*{remarks}">スタバ前集合</span></p>
+        <pre th:text="${match.remarks}">スタバ前
+        集合</pre>
     </div>
     <div class="ui segment">
         <div th:remove="all-but-first" class="ui five column grid">
