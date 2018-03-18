@@ -47,7 +47,7 @@
         <div class="two fields">
             <div class="twelve wide field" th:classappend="${#fields.hasErrors('date')} ? 'error'">
                 <label>開始日</label>
-                <input type="date" th:field="*{date}" placeholder="開始日"/>
+                <input type="date" min="2018-03-04" th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" th:field="*{date}" placeholder="開始日"/>
                 <div th:if="${#fields.hasErrors('date')}" class="ui basic red pointing prompt label transition visible"
                      th:errors="*{date}">Error</div>
             </div>
